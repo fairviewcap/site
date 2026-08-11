@@ -50,7 +50,7 @@ export default async function TeamRail() {
               <p className="m-0 font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-fg)]">
                 {member.name}
               </p>
-              <p className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] tabular-nums">
+              <p className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] fv-nums">
                 {tenureCaption(member)}
               </p>
             </figcaption>

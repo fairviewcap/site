@@ -4,48 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import LedgerFigure from "@/components/LedgerFigure";
-import { FIGURES, type MeasuredFigure } from "@/lib/figures";
+import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
-
-type MenuKey = "work" | "firm";
-
-const MENUS: Record<
-  MenuKey,
-  {
-    figure: MeasuredFigure | null;
-    items: { href: string; label: string }[];
-  }
-> = {
-  work: {
-    figure: null,
-    items: [
-      { href: "/work/wealth-management", label: "Wealth Management" },
-      {
-        href: "/work/investment-management",
-        label: "Investment Management",
-      },
-    ],
-  },
-  firm: {
-    figure: FIGURES.established,
-    items: [
-      { href: "/firm/why-fairview", label: "Why Fairview" },
-      { href: "/team", label: "Team" },
-      { href: "/firm/fees", label: "Fees" },
-      { href: "/firm/answers", label: "Straight Answers" },
-      { href: "/firm/privacy", label: "Privacy" },
-      { href: "/firm/technology", label: "Technology" },
-      { href: "/firm/community", label: "Community" },
-    ],
-  },
-};
+import { MENUS, PRIMARY_LINKS, type MenuKey } from "@/lib/nav";
 
 const SCROLL_PX = 16;
 
 /**
- * Clear on load. On scroll: slim full-width frosted white bar.
- * Work/Firm open as quiet cream panels over the page.
- * Right rail: Let’s talk (prospects) + quieter Log in (clients).
+ * Clear on load. On scroll: slim frosted bar.
+ * Work/Firm open as quiet panels (desktop ≥900px, if this chrome is shown).
+ * Under the ledger shell, this component is mobile-only (<900px).
  */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -135,9 +103,9 @@ export default function Navbar() {
         onMouseEnter={clearCloseTimer}
       >
         <div className="fv-menu">
-          {menu.figure ? (
+          {key === "firm" ? (
             <div className="fv-menu__head">
-              <LedgerFigure figure={menu.figure} variant="eyebrow" />
+              <LedgerFigure figure={FIGURES.established} variant="eyebrow" />
             </div>
           ) : null}
           <ul className="fv-menu__list">
@@ -201,7 +169,7 @@ export default function Navbar() {
         </Link>
 
         <nav
-          className="hidden md:flex items-center gap-3 ml-3"
+          className="fv-nav-desktop hidden min-[900px]:flex items-center gap-3 ml-3"
           aria-label="Primary"
         >
           <div
@@ -248,26 +216,19 @@ export default function Navbar() {
             {renderMenu("firm")}
           </div>
 
-          <Link
-            href="/team"
-            className={linkClass()}
-            onMouseEnter={() => {
-              clearCloseTimer();
-              setOpenMenu(null);
-            }}
-          >
-            Team
-          </Link>
-          <Link
-            href="/learn"
-            className={linkClass()}
-            onMouseEnter={() => {
-              clearCloseTimer();
-              setOpenMenu(null);
-            }}
-          >
-            Learn
-          </Link>
+          {PRIMARY_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={linkClass()}
+              onMouseEnter={() => {
+                clearCloseTimer();
+                setOpenMenu(null);
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="ml-auto flex items-center gap-3 sm:gap-4">
@@ -279,13 +240,13 @@ export default function Navbar() {
           </Link>
           <Link
             href="/login"
-            className="hidden md:inline-flex font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-muted)] hover:text-[var(--fv-fg)] transition-colors"
+            className="hidden min-[900px]:inline-flex font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-muted)] hover:text-[var(--fv-fg)] transition-colors"
           >
             Log in
           </Link>
           <button
             type="button"
-            className="md:hidden relative w-8 h-8 flex items-center justify-center text-[var(--fv-fg)]"
+            className="min-[900px]:hidden relative w-8 h-8 flex items-center justify-center text-[var(--fv-fg)]"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => {
@@ -308,7 +269,7 @@ export default function Navbar() {
       {/* Mobile sheet */}
       <div
         className={`
-          pointer-events-auto md:hidden grid overflow-hidden
+          pointer-events-auto min-[900px]:hidden grid overflow-hidden
           transition-[grid-template-rows,opacity] duration-300 ease-out
           ${mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
         `}
@@ -342,9 +303,9 @@ export default function Navbar() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      {menu.figure ? (
+                      {key === "firm" ? (
                         <LedgerFigure
-                          figure={menu.figure}
+                          figure={FIGURES.established}
                           variant="eyebrow"
                           className="mb-1.5"
                         />
@@ -370,20 +331,16 @@ export default function Navbar() {
                 </div>
               );
             })}
-            <Link
-              href="/team"
-              onClick={() => setMobileOpen(false)}
-              className="block py-2.5 font-sans text-[13px] font-medium text-[var(--fv-fg)] border-b border-[var(--fv-rule)]"
-            >
-              Team
-            </Link>
-            <Link
-              href="/learn"
-              onClick={() => setMobileOpen(false)}
-              className="block py-2.5 font-sans text-[13px] font-medium text-[var(--fv-fg)] border-b border-[var(--fv-rule)]"
-            >
-              Learn
-            </Link>
+            {PRIMARY_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="block py-2.5 font-sans text-[13px] font-medium text-[var(--fv-fg)] border-b border-[var(--fv-rule)]"
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
               href={FIRM.contactHref}
               onClick={() => setMobileOpen(false)}

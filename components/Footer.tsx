@@ -1,17 +1,15 @@
 import Link from "next/link";
-import { FIGURES, formatAsOf } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
 
 /**
  * Quiet ledger footer — contact & disclosures as line items.
- * Prospectus cues: small-cap labels, tabular figures, CRD, as-of.
+ * Prospectus cues: small-cap labels, tabular figures, CRD.
  */
 export default function Footer() {
   const year = new Date().getFullYear();
-  const aumAsOf = FIGURES.aum.asOf ? formatAsOf(FIGURES.aum.asOf) : null;
 
   return (
-    <footer className="fv-footer mt-auto bg-[var(--fv-bg)] pt-8 pb-8 sm:pt-10 sm:pb-10">
+    <footer className="fv-footer bg-[var(--fv-bg)] pt-8 pb-8 sm:pt-10 sm:pb-10">
       <div className="fv-frame">
         <div className="max-w-3xl">
           <span className="fv-footer__rule" aria-hidden />
@@ -86,13 +84,6 @@ export default function Footer() {
           </p>
 
           <p className="fv-footer__copy mt-4 m-0">
-            <span className="fv-footer__nums">
-              {FIGURES.aum.value} under management
-              {aumAsOf ? ` · ${aumAsOf}` : null}
-            </span>
-            <span className="fv-footer__sep" aria-hidden>
-              ·
-            </span>
             © {year} {FIRM.legalName}
           </p>
         </div>

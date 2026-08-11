@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import ContinueBar from "@/components/ContinueBar";
 import { allAnswerItems, ANSWER_CATEGORIES } from "@/lib/answers";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
   title: "Straight Answers | Fairview Capital",
   description:
-    "The questions we hear most — getting started, how we work, trust & safety, philosophy, and technology — in plain English.",
+    "There's no such thing as a dumb question. There's such a thing as a bad answer. So we try not to give any.",
 };
 
 export default function AnswersPage() {
@@ -38,8 +38,27 @@ export default function AnswersPage() {
 
       <div className="fv-answers">
         <header className="fv-answers__intro">
-          <h1 className="fv-answers__title">Straight Answers.</h1>
-          <p className="fv-answers__lede">In plain English.</p>
+          <p className="fv-answers__eyebrow">Straight Answers</p>
+          <h1 className="fv-answers__title">
+            There&apos;s no such thing as a dumb question. There&apos;s such a
+            thing as a bad answer.
+          </h1>
+          <p className="fv-answers__lede">So we try not to give any.</p>
+
+          <nav className="fv-answers__jump" aria-label="Jump to section">
+            <ul className="fv-answers__jump-list">
+              {ANSWER_CATEGORIES.map((category) => (
+                <li key={category.id}>
+                  <a
+                    className="fv-answers__jump-chip"
+                    href={`#answers-${category.id}`}
+                  >
+                    {category.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </header>
 
         <div className="fv-answers__schedule">
@@ -79,12 +98,22 @@ export default function AnswersPage() {
           ))}
         </div>
 
-        <p className="fv-answers__close">
-          Still wondering something?{" "}
-          <Link href={FIRM.contactHref} className="fv-answers__cta">
-            Let&apos;s talk
-          </Link>
-        </p>
+        <ContinueBar
+          items={[
+            {
+              href: "/firm/fees",
+              prompt: "Want the fee schedule in plain numbers?",
+            },
+            {
+              href: "/work/wealth-management",
+              prompt: "Curious how the day-to-day work actually runs?",
+            },
+            {
+              href: FIRM.contactHref,
+              prompt: "Still wondering something we didn’t cover?",
+            },
+          ]}
+        />
       </div>
     </main>
   );

@@ -1,186 +1,246 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ContinueBar from "@/components/ContinueBar";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
   title: "Wealth Management | Fairview Capital",
   description:
-    "We manage legacies, not just ledgers — planning, portfolios, and coordination for families.",
+    "Wealth used to mean well-being. Somewhere along the way, Wall Street redefined it to mean their casino. Managing wealth isn't a series of bets.",
 };
 
 const PILLARS = [
   {
     index: "01",
     title: "Your Plan",
-    body: "Every client’s situation is unique. We take the time to understand your family, your needs, and your goals, then build a dynamic plan that adapts as life changes — assets, liabilities, cash flow, insurance, estate, retirement, education, and giving as needed.",
+    body: "We start with your actual arithmetic: what you own, what you owe, what comes in, what goes out, what you give away, and what you intend to leave behind. That covers insurance, account titling, retirement, and education funding along the way — not separate projects, just part of the same picture. We don't use cookie-cutter templates. We build a practical blueprint, and we adjust it as your life changes.",
   },
   {
     index: "02",
     title: "Your Portfolio",
-    body: "Your plan guides your portfolio. We build and adjust asset allocation to match your goals and timeline — tax-sensitive from the first trade, carefully researched, and reviewed as a team.",
+    body: "The plan comes first; the portfolio follows — a mix of stocks, bonds, alternative investments, and cash built around your plan, not a model. Every trade we make accounts for taxes, every company or fund we select is researched by our own team, and every account is reviewed by real people—never left on autopilot.",
   },
   {
     index: "03",
     title: "Your World",
-    body: "We coordinate with your other trusted advisors — accountants, estate attorneys, trustees, and philanthropic consultants — so everything works together. We serve the whole family across generations.",
+    body: "Your tax accountant, your estate lawyer, your trustee, and your philanthropic advisors shouldn't be operating in isolation. We coordinate directly with the professionals you already trust, so nothing falls through the cracks between them.",
   },
 ] as const;
 
+function WmMedia({
+  label,
+  hint,
+  ratio = "wide",
+}: {
+  label: string;
+  hint: string;
+  ratio?: "wide" | "tall";
+}) {
+  return (
+    <figure className={`fv-wm__media fv-wm__media--${ratio}`}>
+      <div
+        className="fv-wm__media-plane"
+        role="img"
+        aria-label={`${label}. ${hint}`}
+      />
+      <figcaption className="fv-wm__media-cap">
+        <span className="fv-wm__media-label">{label}</span>
+        <span className="fv-wm__media-hint">{hint}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function WealthManagementPage() {
   return (
-    <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
-      <article className="fv-wm">
-        <header className="fv-wm__intro">
+    <main className="bg-[var(--fv-bg)] pt-0">
+      <header className="fv-wm-hero">
+        <div className="fv-wm-hero__mast">
           <p className="fv-wm__eyebrow">Wealth Management</p>
           <h1 className="fv-wm__title">
-            We manage legacies,
-            <br />
-            not just ledgers.
+            Wealth used to mean well-being. Somewhere along the way, Wall Street
+            redefined it to mean their casino.
           </h1>
           <p className="fv-wm__lede">
-            We&apos;re here to help families live well today and tomorrow.
+            Managing wealth isn&apos;t a series of bets. It&apos;s your entire
+            financial life—your business, your taxes, your family, and your
+            philanthropic legacy—all pulling in the same direction.
           </p>
-        </header>
+        </div>
 
-        <div className="fv-wm__plane" aria-hidden />
+        <figure className="fv-wm-hero__media">
+          <div
+            className="fv-wm-hero__plane"
+            role="img"
+            aria-label="Hero. Family life in the Bay Area — well-being, not a trading floor"
+          />
+          <figcaption className="fv-wm__media-cap">
+            <span className="fv-wm__media-label">Hero</span>
+            <span className="fv-wm__media-hint">
+              Family life / well-being — not a trading-floor stock shot
+            </span>
+          </figcaption>
+        </figure>
+      </header>
 
-        <p className="fv-wm__lead">
-          We help you manage your wealth in a way that reflects your goals, your
-          family, and your future. That means more than investments — it&apos;s
-          planning, portfolios, and coordination.
-        </p>
+      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
+        <article className="fv-wm">
+          <section
+            className="fv-wm__section fv-wm__section--first"
+            aria-labelledby="wm-pillars"
+          >
+            <h2 id="wm-pillars" className="fv-wm__section-title">
+              A balance sheet is a snapshot. We turn it into a plan.
+            </h2>
 
-        <section className="fv-wm__pillars" aria-labelledby="wm-pillars-heading">
-          <h2 id="wm-pillars-heading" className="fv-wm__section-title">
-            Wealth management as it should feel.
-          </h2>
+            <ol className="fv-wm__schedule">
+              {PILLARS.map((pillar) => (
+                <li key={pillar.index} className="fv-wm__row">
+                  <span className="fv-wm__index" aria-hidden>
+                    {pillar.index}
+                  </span>
+                  <span className="fv-wm__rule" aria-hidden />
+                  <div className="fv-wm__row-body">
+                    <h3 className="fv-wm__pillar-title">{pillar.title}</h3>
+                    <p className="fv-wm__pillar-body">{pillar.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
 
-          <ol className="fv-wm__schedule">
-            {PILLARS.map((pillar) => (
-              <li key={pillar.index} className="fv-wm__row">
-                <span className="fv-wm__index" aria-hidden>
-                  {pillar.index}
-                </span>
-                <span className="fv-wm__rule" aria-hidden />
-                <div className="fv-wm__row-body">
-                  <h3 className="fv-wm__pillar-title">{pillar.title}</h3>
-                  <p className="fv-wm__pillar-body">{pillar.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
+          <section
+            className="fv-wm__section"
+            aria-labelledby="wm-relationship"
+          >
+            <h2 id="wm-relationship" className="fv-wm__section-title">
+              The heavy lifting happens upfront. The judgment happens over
+              decades.
+            </h2>
+            <div className="fv-wm__prose">
+              <p>
+                When you join Fairview, we take the paperwork, account
+                transfers, and administrative mess off your plate first. If you
+                arrive with existing holdings, we audit them carefully—unwinding
+                positions over time so you aren&apos;t hit with an unnecessary
+                tax bill. Our job is to give you immediate clarity, not another
+                chore to manage.
+              </p>
+              <p>
+                After that, our job is staying close. As markets fluctuate,
+                families grow, and priorities shift, we keep track of the
+                details so you don&apos;t have to. We work with multiple
+                generations of your family — inheritance decisions, tax
+                strategy, a piece of real estate nobody wants to be the one to
+                sell — to ensure smooth transitions across decades. Sometimes
+                that means months of quiet research; sometimes it&apos;s a
+                five-minute phone call. Either way, you&apos;ll always know
+                where you stand.
+              </p>
+            </div>
 
-        <section className="fv-wm__block" aria-labelledby="wm-proactive">
-          <h2 id="wm-proactive" className="fv-wm__section-title">
-            Always proactive.
-            <br />
-            Always personal.
-            <br />
-            Always on your side.
-          </h2>
-          <div className="fv-wm__prose">
-            <p>
-              The start is simple. We take on the heavy lifting — paperwork,
-              transfers, coordination — so you get clarity, not complexity. Then
-              your plan takes shape, built around your goals and ready to adapt
-              as life does.
-            </p>
-            <p>
-              The real story is what happens after. Markets shift. Families grow.
-              Priorities change. And we stay close through it all — checking in,
-              adjusting, guiding. Sometimes it&apos;s deep research. Sometimes
-              it&apos;s a quick call.
-            </p>
-          </div>
-        </section>
+            <WmMedia
+              label="Relationship"
+              hint="Kitchen table / real conversation — judgment over decades"
+              ratio="wide"
+            />
+          </section>
 
-        <section className="fv-wm__block" aria-labelledby="wm-clarity">
-          <h2 id="wm-clarity" className="fv-wm__section-title">
-            See it all, clearly.
-          </h2>
-          <div className="fv-wm__prose">
-            <p>
-              We use financial planning software to model realistic scenarios,
-              stress-test assumptions, and give you a clear view of your complete
-              financial picture — all your assets, not just what we manage.
-              Through your secure client portal, you can see everything in one
-              place.
-            </p>
-            <p>
-              Some clients like to dive into every detail. Others prefer the big
-              picture. Either way, you&apos;ll have the clarity you need, and
-              we&apos;ll stay in close communication.
-            </p>
-            <p>
-              For more on how we use technology — and where we don&apos;t — see{" "}
-              <Link href="/firm/technology">our Technology philosophy</Link>.
-            </p>
-          </div>
-        </section>
+          <section className="fv-wm__section" aria-labelledby="wm-tech">
+            <h2 id="wm-tech" className="fv-wm__section-title">
+              Computers draw straight lines into the future. Real markets
+              don&apos;t.
+            </h2>
+            <div className="fv-wm__prose">
+              <p>
+                We use software to stress-test your plan against bad markets,
+                rising taxes, and unexpected events—not to draw straight lines
+                pointing upward. Through a secure portal, you can view — and
+                update — your entire financial picture in real time, including
+                the assets we don&apos;t manage.
+              </p>
+              <p>
+                Some of our clients like to inspect every line item and stress
+                test. Others just want the summary. We design your reporting
+                around what you actually want to see.
+              </p>
+              <p>
+                <Link href="/firm/technology">
+                  More on how we use technology →
+                </Link>
+              </p>
+            </div>
+          </section>
 
-        <section className="fv-wm__block" aria-labelledby="wm-assets">
-          <h2 id="wm-assets" className="fv-wm__section-title">
-            All your assets, one plan.
-          </h2>
-          <div className="fv-wm__prose">
-            <p>
-              If you own holdings we don&apos;t directly manage — real estate,
-              concentrated stock, or outside investments — we&apos;ll still
-              advise on how best to integrate them into your overall strategy,
-              and we consider them in planning without a separate charge.
-            </p>
-          </div>
-        </section>
+          <section className="fv-wm__section" aria-labelledby="wm-outside">
+            <h2 id="wm-outside" className="fv-wm__section-title">
+              If it affects your financial life, we advise on it—whether we bill
+              on it or not.
+            </h2>
+            <div className="fv-wm__prose">
+              <p>
+                Real estate, a concentrated business stake, an old 401(k),
+                private holdings, or a racehorse—if you own assets outside of
+                Fairview, we include them in your overall plan at no extra
+                charge. You have one financial life; you shouldn&apos;t have six
+                disconnected plans.
+              </p>
+            </div>
+          </section>
 
-        <section className="fv-wm__block" aria-labelledby="wm-reach">
-          <h2 id="wm-reach" className="fv-wm__section-title">
-            Always within reach.
-          </h2>
-          <div className="fv-wm__prose">
-            <p>
-              We review portfolios regularly, adjust as needed, and stay
-              accessible however you prefer — face-to-face, phone, email, or
-              video. Many of our best conversations happen outside the office:
-              over lunch, around a kitchen table, or where families actually
-              live and work.
-            </p>
-          </div>
-        </section>
+          <section className="fv-wm__section" aria-labelledby="wm-reach">
+            <h2 id="wm-reach" className="fv-wm__section-title">
+              We meet on your terms, not ours.
+            </h2>
+            <div className="fv-wm__prose">
+              <p>
+                We review your progress regularly, but we are available whenever
+                life happens—by phone, email, video, or in person. Some of our
+                most productive conversations happen over lunch or at a kitchen
+                table, not across a corporate boardroom. If it&apos;s easier for
+                you, we&apos;ll come to you.
+              </p>
+            </div>
+          </section>
 
-        <section className="fv-wm__close-block" aria-labelledby="wm-close">
-          <h2 id="wm-close" className="fv-wm__section-title">
-            Because wealth isn&apos;t just money.
-          </h2>
-          <div className="fv-wm__prose">
-            <p>
-              It&apos;s how you live today — and the story you carry forward.
-              Right now, it means making better decisions, cutting through the
-              noise, and finding clarity in big moments. Cash flow. Tax strategy.
-              Real estate. We take away the stress so you can focus on what
-              matters most.
-            </p>
-            <p>
-              And tomorrow, it means more than preserving assets. It means
-              preserving values. Preparing heirs. Creating clarity in change.
-              Making sure your wealth reflects what matters most to your family.
-            </p>
-            <p className="fv-wm__close">
-              Because in the end, wealth is personal — and so is our work with
-              you.
-            </p>
-          </div>
-        </section>
+          <section
+            className="fv-wm__section fv-wm__section--close"
+            aria-labelledby="wm-close"
+          >
+            <h2 id="wm-close" className="fv-wm__section-title">
+              Life doesn&apos;t follow a five-year projection. Your plan
+              shouldn&apos;t either.
+            </h2>
+            <div className="fv-wm__prose">
+              <p>
+                Cash flow needs this year. Estate planning the next. A business
+                sale, a move, or a child stepping into the family business.
+                Whatever changes, your plan adapts with it—and so do we.
+              </p>
+            </div>
+            <Link href={FIRM.contactHref} className="fv-wm__cta">
+              Let&apos;s talk
+            </Link>
+          </section>
 
-        <nav className="fv-wm__next" aria-label="Related">
-          <Link href="/work/investment-management">Investment Management</Link>
-          <Link href="/firm/fees">Fees</Link>
-          <Link href="/firm/why-fairview">Why Fairview</Link>
-          <Link href={FIRM.contactHref} className="fv-wm__cta">
-            Let&apos;s talk
-          </Link>
-        </nav>
-      </article>
+          <ContinueBar
+            items={[
+              {
+                href: "/firm/fees",
+                prompt: "Curious what this costs in plain numbers?",
+              },
+              {
+                href: "/work/investment-management",
+                prompt: "Want to see how we manage portfolios in-house?",
+              },
+              {
+                href: FIRM.contactHref,
+                prompt: "Ready to talk through your family's situation?",
+              },
+            ]}
+          />
+        </article>
+      </div>
     </main>
   );
 }

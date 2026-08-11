@@ -1,61 +1,81 @@
-import Link from "next/link";
+import Image from "next/image";
+import ContinueBar from "@/components/ContinueBar";
 import TeamRail from "@/components/TeamRail";
-import { FIGURES, formatAsOf } from "@/lib/figures";
+import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
 
 /**
- * Centered mast → wide plane → centered prose → team rail.
+ * Home — mast → plane → directory → team rail.
  */
 export default function Home() {
   return (
     <main className="bg-[var(--fv-bg)] pt-0">
       <section className="fv-hero">
         <div className="fv-hero__mast">
-          <h1 className="fv-hero__title">Wealth, Originally.</h1>
+          <h1 className="fv-hero__title">
+            Most firms answer to a board, a bank, or a buyer. Ours answers to
+            the phone ringing.
+          </h1>
           <p className="fv-hero__sub">
-            Before it meant money, &ldquo;wealth&rdquo; meant well-being — from
-            the Old English <em>weal</em>, the same root as commonwealth. We
-            never redefined it.
+            When a firm serves outside owners, they have two mouths to feed:
+            their shareholders and you. Guess who gets fed first. We built
+            Fairview so we only have one boss. You.
           </p>
-          <Link href={FIRM.contactHref} className="fv-hero__cta">
-            Let&apos;s talk
-          </Link>
+          <p className="fv-hero__proof">
+            We started Fairview in{" "}
+            <span className="fv-nums">{FIGURES.established.value}</span>.
+            Thirty-one years later, the people who run the firm own all of it.{" "}
+            <span className="fv-nums">{FIGURES.aum.value}</span> under
+            management, as of March 2026.
+          </p>
         </div>
 
-        <div className="fv-hero__media" aria-hidden />
+        <div className="fv-hero__media">
+          <Image
+            src="/home/hero-grand-with-kids.jpg"
+            alt="A grandmother sharing a quiet moment with children across a wooden ledge."
+            fill
+            priority
+            sizes="(max-width: 767px) 100vw, (max-width: 1099px) 92vw, 1200px"
+            className="fv-hero__img"
+          />
+        </div>
       </section>
 
-      <div className="fv-frame">
-        <section className="fv-home-prose">
-          <p>
-            Independently owned since{" "}
-            <span className="tabular-nums">{FIGURES.established.value}</span>{" "}
-            — and, as of{" "}
-            <span className="tabular-nums">{FIGURES.partnerOwned.value}</span>,
-            owned outright by the partners who run it, not a buyer.{" "}
-            <span className="tabular-nums">{FIGURES.aum.value}</span> under
-            management
-            {FIGURES.aum.asOf ? (
-              <span className="fv-home-prose__meta">
-                {" "}
-                · {formatAsOf(FIGURES.aum.asOf)}
-              </span>
-            ) : null}
-            .
-          </p>
+      <div className="fv-frame pb-20 sm:pb-28">
+        <div className="fv-home-dir">
+          <ContinueBar
+            label="Start here"
+            items={[
+              {
+                href: "/firm/why-fairview",
+                prompt: "Why Fairview",
+              },
+              {
+                href: "/firm/fees",
+                prompt: "What you pay, in plain numbers",
+              },
+              {
+                href: "/work/wealth-management",
+                prompt: "How we actually manage your money",
+              },
+              {
+                href: "/firm/answers",
+                prompt: "Questions, answered straight",
+              },
+              {
+                href: "/team",
+                prompt: "Who picks up",
+              },
+              {
+                href: FIRM.contactHref,
+                prompt: "When you're ready, we're easy to reach",
+              },
+            ]}
+          />
+        </div>
 
-          <p>
-            Learn about the{" "}
-            <Link href="/firm/why-fairview">firm</Link>, how{" "}
-            <Link href="/firm/fees">fees</Link> work, answers to{" "}
-            <Link href="/firm/answers">common questions</Link>, and the{" "}
-            <Link href="/team">people</Link> you&apos;ll work with. When
-            you&apos;re ready, <Link href={FIRM.contactHref}>get in touch</Link>
-            .
-          </p>
-        </section>
-
-        <div className="mt-14 sm:mt-16 pb-20 sm:pb-28">
+        <div className="fv-home-rail">
           <TeamRail />
         </div>
       </div>
