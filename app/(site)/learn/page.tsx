@@ -37,49 +37,53 @@ export default function LearnPage() {
   };
 
   return (
-    <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
+    <main className="bg-[var(--fv-bg)] pt-0">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="fv-learn">
-        <header className="fv-learn__intro">
+      <header className="fv-learn-hero">
+        <div className="fv-learn-hero__mast">
           <p className="fv-learn__eyebrow">Learn</p>
-          <div className="fv-learn__mast">
-            <h1 className="fv-learn__title">What We Think.</h1>
-            <p className="fv-learn__lede">
-              Not content. Not noise. Just thoughtful reporting on wealth,
-              markets, and life.
-            </p>
-          </div>
-        </header>
+          <h1 className="fv-learn__title">What We Think.</h1>
+          <p className="fv-learn__lede">
+            Not content. Not noise. Just thoughtful reporting on wealth,
+            markets, and life.
+          </p>
+        </div>
+      </header>
 
-        <ol className="fv-learn__channels">
-          {LEARN_CHANNELS.map((channel, i) => (
-            <li
-              key={channel.slug}
-              className={`fv-learn__channel fv-learn__channel--${channel.tone}`}
-            >
-              <Link
-                href={`/learn/${channel.slug}`}
-                className="fv-learn__channel-link"
+      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
+        <div className="fv-learn">
+          <ol className="fv-learn__channels">
+            {LEARN_CHANNELS.map((channel, i) => (
+              <li
+                key={channel.slug}
+                className={`fv-learn__channel fv-learn__channel--${channel.tone}`}
               >
-                <div className="fv-learn__channel-copy">
-                  <span className="fv-learn__channel-index" aria-hidden>
-                    {INDEX[i]}
-                  </span>
-                  <div>
-                    <h2 className="fv-learn__channel-title">{channel.title}</h2>
-                    <p className="fv-learn__channel-dek">{channel.dek}</p>
-                    <span className="fv-learn__channel-cta">Explore</span>
+                <Link
+                  href={`/learn/${channel.slug}`}
+                  className="fv-learn__channel-link"
+                >
+                  <div className="fv-learn__channel-copy">
+                    <span className="fv-learn__channel-index" aria-hidden>
+                      {INDEX[i]}
+                    </span>
+                    <div>
+                      <h2 className="fv-learn__channel-title">
+                        {channel.title}
+                      </h2>
+                      <p className="fv-learn__channel-dek">{channel.dek}</p>
+                      <span className="fv-learn__channel-cta">Explore</span>
+                    </div>
                   </div>
-                </div>
-                <div className="fv-learn__channel-plate" aria-hidden />
-              </Link>
-            </li>
-          ))}
-        </ol>
+                  <div className="fv-learn__channel-plate" aria-hidden />
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </main>
   );

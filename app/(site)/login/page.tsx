@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LinkArrow from "@/components/LinkArrow";
 import { PORTALS } from "@/lib/portals";
 
 export const metadata: Metadata = {
@@ -13,96 +14,92 @@ export default function LoginPage() {
       <div className="fv-portals">
         <header className="fv-portals__intro">
           <p className="fv-portals__eyebrow">Client access</p>
-          <h1 className="fv-portals__title">Your portals.</h1>
+          <h1 className="fv-portals__title">
+            Three doors.
+            <br />
+            Pick one.
+          </h1>
           <p className="fv-portals__lede">
             Planning, investments, and custodian records — each in its own
             secure place.
           </p>
         </header>
 
-        <ol className="fv-portals__schedule" aria-label="Client portals">
-          <li className="fv-portals__row">
-            <span className="fv-portals__index" aria-hidden>
-              01
+        <nav className="fv-portals__doors" aria-label="Client portals">
+          <a
+            href={PORTALS.planning.href}
+            className="fv-portals__door"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="fv-portals__door-main">
+              <span className="fv-portals__door-name">
+                {PORTALS.planning.label}
+              </span>
+              <span className="fv-portals__door-desc">
+                {PORTALS.planning.description}
+              </span>
+              <span className="fv-portals__door-meta">
+                Powered by {PORTALS.planning.poweredBy}
+              </span>
             </span>
-            <span className="fv-portals__rule" aria-hidden />
-            <div className="fv-portals__body">
-              <div className="fv-portals__copy">
-                <h2 className="fv-portals__name">{PORTALS.planning.label}</h2>
-                <p className="fv-portals__desc">
-                  {PORTALS.planning.description}
-                </p>
-                <p className="fv-portals__powered">
-                  Powered by {PORTALS.planning.poweredBy}
-                </p>
-              </div>
-              <a
-                href={PORTALS.planning.href}
-                className="fv-portals__btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Log in
-              </a>
-            </div>
-          </li>
-
-          <li className="fv-portals__row">
-            <span className="fv-portals__index" aria-hidden>
-              02
+            <span className="fv-portals__door-go">
+              <span>Log in</span>
+              <LinkArrow size={16} />
             </span>
-            <span className="fv-portals__rule" aria-hidden />
-            <div className="fv-portals__body">
-              <div className="fv-portals__copy">
-                <h2 className="fv-portals__name">{PORTALS.investments.label}</h2>
-                <p className="fv-portals__desc">
-                  {PORTALS.investments.description}
-                </p>
-              </div>
-              <a
-                href={PORTALS.investments.href}
-                className="fv-portals__btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Log in
-              </a>
-            </div>
-          </li>
+          </a>
 
-          <li className="fv-portals__row fv-portals__row--compact">
-            <span className="fv-portals__index" aria-hidden>
-              03
+          <a
+            href={PORTALS.investments.href}
+            className="fv-portals__door"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="fv-portals__door-main">
+              <span className="fv-portals__door-name">
+                {PORTALS.investments.label}
+              </span>
+              <span className="fv-portals__door-desc">
+                {PORTALS.investments.description}
+              </span>
             </span>
-            <span className="fv-portals__rule" aria-hidden />
-            <div className="fv-portals__body">
-              <div className="fv-portals__copy">
-                <h2 className="fv-portals__name">{PORTALS.custodians.label}</h2>
-                <p className="fv-portals__desc">
-                  {PORTALS.custodians.description}
-                </p>
-              </div>
-              <div className="fv-portals__actions">
-                {PORTALS.custodians.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="fv-portals__btn fv-portals__btn--secondary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </li>
-        </ol>
+            <span className="fv-portals__door-go">
+              <span>Log in</span>
+              <LinkArrow size={16} />
+            </span>
+          </a>
+        </nav>
 
-        <p className="fv-portals__note">
-          Custodian links leave the Fairview site. Schwab and Fidelity are
-          independent of Fairview Capital and are not affiliated with us.
-        </p>
+        <section
+          className="fv-portals__custodians"
+          aria-labelledby="portals-custodians"
+        >
+          <h2 id="portals-custodians" className="fv-portals__custodians-title">
+            {PORTALS.custodians.label}
+          </h2>
+          <p className="fv-portals__custodians-desc">
+            {PORTALS.custodians.description}
+          </p>
+          <ul className="fv-portals__custodian-list">
+            {PORTALS.custodians.links.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="fv-portals__custodian-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                  <LinkArrow />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="fv-portals__note">
+            Custodian links leave the Fairview site. Schwab and Fidelity are
+            independent of Fairview Capital and are not affiliated with us.
+          </p>
+        </section>
       </div>
     </main>
   );

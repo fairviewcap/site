@@ -10,6 +10,8 @@ export type WhyFigure = {
 export type WhyTimelineEntry = {
   when: string;
   what: string;
+  /** Optional cultural beat under the year — keep short. */
+  era?: string;
 };
 
 /** Instrument readout — omit unverified retention until confirmed. */
@@ -41,19 +43,22 @@ export const WHY_FIGURES: WhyFigure[] = [
   },
 ];
 
-/** Strongest cycle markers — full archive lives in the copy draft if needed. */
+/** Cycle markers — years stacked left for skimming. */
 export const WHY_TIMELINE: WhyTimelineEntry[] = [
   {
     when: "1995",
-    what: "Fairview founded, Marin County",
+    era: "Marin County",
+    what: "Fairview founded",
   },
   {
     when: "2000–02",
-    what: "Dot-com crash — hit Bay Area wealth harder than almost anywhere",
+    era: "Dot-com",
+    what: "Crash hit Bay Area wealth harder than almost anywhere",
   },
   {
     when: "2007–09",
-    what: "Global Financial Crisis, Lehman Brothers collapse",
+    era: "Lehman",
+    what: "Global Financial Crisis",
   },
   {
     when: "2011",
@@ -61,15 +66,16 @@ export const WHY_TIMELINE: WhyTimelineEntry[] = [
   },
   {
     when: "2020",
-    what: "COVID crash — the fastest bear market on record, then the fastest recovery",
+    era: "COVID",
+    what: "Fastest bear market on record — then the fastest recovery",
   },
   {
     when: "2023",
-    what: "Silicon Valley Bank collapses, a few miles from our own office",
+    what: "Silicon Valley Bank collapses, a few miles from our office",
   },
   {
     when: "2023–25",
-    what: "Private equity buys up independent RIAs nationwide. Fairview doesn’t sell",
+    what: "Private equity buys up independent RIAs. Fairview doesn’t sell",
   },
   {
     when: "2026",

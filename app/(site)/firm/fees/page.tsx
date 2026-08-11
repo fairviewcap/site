@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContinueBar from "@/components/ContinueBar";
+import FeeEstimator from "@/components/FeeEstimator";
 import { FEE_INCLUDES, FEE_SCHEDULE, type FeeTier } from "@/lib/fees";
 import { FIRM } from "@/lib/firm";
 
@@ -103,6 +104,8 @@ export default function FeesPage() {
           commissions. No separate planning fees. We are a Registered Investment
           Advisor and act as a fiduciary.
         </p>
+
+        <FeeEstimator />
 
         <ContinueBar
           items={[

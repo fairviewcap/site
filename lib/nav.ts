@@ -24,10 +24,10 @@ export const MENUS: Record<
     items: [
       { href: "/firm/why-fairview", label: "Why Fairview", short: "Why" },
       { href: "/team", label: "Team" },
+      { href: "/firm/answers", label: "Questions", short: "Questions" },
       { href: "/firm/fees", label: "Fees" },
-      { href: "/firm/answers", label: "Straight Answers", short: "Answers" },
-      { href: "/firm/privacy", label: "Privacy" },
-      { href: "/firm/technology", label: "Technology", short: "Tech" },
+      { href: "/firm/privacy", label: "Confidentiality" },
+      { href: "/firm/technology", label: "Technology" },
       { href: "/firm/community", label: "Community" },
     ],
   },

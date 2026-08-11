@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
+import HeroPhoto from "@/components/HeroPhoto";
+import LinkArrow from "@/components/LinkArrow";
+import OwnershipDiagram from "@/components/OwnershipDiagram";
 import { FIRM } from "@/lib/firm";
+import type { HeroId } from "@/lib/heroes";
 import { WHY_FIGURES, WHY_TIMELINE } from "@/lib/why-fairview";
 
 export const metadata: Metadata = {
@@ -12,56 +16,27 @@ export const metadata: Metadata = {
 
 type MediaRatio = "wide" | "tall" | "square";
 
-/** Labeled image plane — swap for real photography later. */
 function WhyMedia({
+  hero,
   label,
-  hint,
   ratio = "wide",
 }: {
+  hero: HeroId;
   label: string;
-  hint: string;
   ratio?: MediaRatio;
 }) {
   return (
     <figure className={`fv-why__media fv-why__media--${ratio}`}>
-      <div
-        className="fv-why__media-plane"
-        role="img"
-        aria-label={`${label}. ${hint}`}
-      />
+      <div className="fv-why__media-plane">
+        <HeroPhoto
+          id={hero}
+          variant={ratio === "tall" ? "tall" : "wide"}
+          imgClassName="fv-hero-photo"
+        />
+      </div>
       <figcaption className="fv-why__media-cap">
         <span className="fv-why__media-label">{label}</span>
-        <span className="fv-why__media-hint">{hint}</span>
       </figcaption>
-    </figure>
-  );
-}
-
-/** Minimal Rams-style schematic: one mouth to feed vs two. */
-function OwnershipDiagram() {
-  return (
-    <figure className="fv-why__diagram" aria-label="Ownership comparison">
-      <div className="fv-why__diagram-col">
-        <p className="fv-why__diagram-label">Typical firm</p>
-        <div className="fv-why__diagram-stack">
-          <span className="fv-why__diagram-node fv-why__diagram-node--split">
-            Shareholders
-          </span>
-          <span className="fv-why__diagram-node fv-why__diagram-node--split">
-            Client
-          </span>
-        </div>
-        <figcaption className="fv-why__diagram-cap">Two mouths to feed</figcaption>
-      </div>
-      <div className="fv-why__diagram-col">
-        <p className="fv-why__diagram-label">Fairview</p>
-        <div className="fv-why__diagram-stack">
-          <span className="fv-why__diagram-node fv-why__diagram-node--solo">
-            Client
-          </span>
-        </div>
-        <figcaption className="fv-why__diagram-cap">One boss</figcaption>
-      </div>
     </figure>
   );
 }
@@ -114,22 +89,14 @@ export default function WhyFairviewPage() {
           </p>
           <a className="fv-why__readon" href="#letter">
             Read on
-            <span aria-hidden> ↓</span>
+            <LinkArrow direction="down" size={14} />
           </a>
         </div>
 
         <figure className="fv-why-hero__media">
-          <div
-            className="fv-why-hero__plane"
-            role="img"
-            aria-label="Hero. Quiet desk + phone, Bay Area light — not a skyline stock shot"
-          />
-          <figcaption className="fv-why__media-cap">
-            <span className="fv-why__media-label">Hero</span>
-            <span className="fv-why__media-hint">
-              Quiet desk + phone, Bay Area light — not a skyline stock shot
-            </span>
-          </figcaption>
+          <div className="fv-why-hero__plane">
+            <HeroPhoto id="ballet" priority imgClassName="fv-hero-photo" />
+          </div>
         </figure>
       </header>
 
@@ -145,11 +112,7 @@ export default function WhyFairviewPage() {
           </h2>
 
           <div className="fv-why__letter">
-            <WhyMedia
-              label="Founder"
-              hint="Andrew F. Mathieson — candid portrait, not a posed headshot"
-              ratio="tall"
-            />
+            <WhyMedia hero="firsthome" label="Starting out" ratio="tall" />
             <div className="fv-why__prose">
               <p>
                 In March 1995, with young children, a big mortgage, and a
@@ -224,11 +187,7 @@ export default function WhyFairviewPage() {
             Most wealth managers don&apos;t know what they own. We do.
           </h2>
 
-          <WhyMedia
-            label="Research"
-            hint="In-house work: filings, notes, screens — people studying businesses"
-            ratio="wide"
-          />
+          <WhyMedia hero="piano" label="In-house research" ratio="wide" />
 
           <div className="fv-why__research">
             <div className="fv-why__prose">
@@ -294,14 +253,26 @@ export default function WhyFairviewPage() {
           <p className="fv-why__timeline-lede">
             Markets move, headlines change, and Wall Street invents new ways to
             charge fees. Our principles have remained identical through every
-            cycle:
+            cycle.
           </p>
+
+          <figure className="fv-why__media fv-why__media--full">
+            <div className="fv-why__media-plane" aria-hidden />
+          </figure>
 
           <ol className="fv-why__timeline">
             {WHY_TIMELINE.map((entry) => (
               <li key={entry.when} className="fv-why__time">
-                <span className="fv-why__time-when fv-nums">{entry.when}</span>
-                <span className="fv-why__time-what">{entry.what}</span>
+                <div className="fv-why__time-when">
+                  <span className="fv-why__time-year fv-nums">{entry.when}</span>
+                  {entry.era ? (
+                    <span className="fv-why__time-era">{entry.era}</span>
+                  ) : null}
+                </div>
+                <div className="fv-why__time-marker" aria-hidden>
+                  <span className="fv-why__time-dot" />
+                </div>
+                <p className="fv-why__time-what">{entry.what}</p>
               </li>
             ))}
           </ol>

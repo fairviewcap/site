@@ -100,8 +100,22 @@ export default async function LearnArticlePage({ params }: Props) {
             For general informational purposes only. Not investment, tax, or
             legal advice. Past performance does not guarantee future results.
             See our{" "}
-            <Link href="/disclosures/form-adv">Form ADV</Link> and{" "}
-            <Link href="/disclosures/form-crs">Form CRS</Link>.
+            <a
+              href={FIRM.disclosures.formAdv}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Form ADV
+            </a>{" "}
+            and{" "}
+            <a
+              href={FIRM.disclosures.formCrs}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Form CRS
+            </a>
+            .
           </p>
           <Link href={`/learn/${channel.slug}`} className="fv-learn-article__back">
             All {channel.label.toLowerCase()}

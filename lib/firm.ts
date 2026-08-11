@@ -9,6 +9,10 @@ export const FIRM = {
   crd: "108102",
   /** SEC investment adviser registration number */
   sec: "801-55385",
+  disclosures: {
+    formAdv: "/pdf/form-adv-part-2a.pdf",
+    formCrs: "/pdf/form-crs.pdf",
+  },
   offices: {
     greenbrae: {
       label: "Greenbrae",

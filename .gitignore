@@ -37,6 +37,13 @@ yarn-error.log*
 # Contact form submissions (may contain PII)
 /data/contact-inquiries.json
 
+# FAQ search term log (local / non-durable on many hosts)
+/data/answer-searches.json
+
+# Local design working files (Photoshop etc.)
+/working/
+.tmp-hero-preview/
+
 # vercel
 .vercel
 

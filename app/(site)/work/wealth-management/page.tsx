@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
+import HeroPhoto from "@/components/HeroPhoto";
+import LinkArrow from "@/components/LinkArrow";
 import { FIRM } from "@/lib/firm";
+import type { HeroId } from "@/lib/heroes";
 
 export const metadata: Metadata = {
   title: "Wealth Management | Fairview Capital",
@@ -28,24 +31,25 @@ const PILLARS = [
 ] as const;
 
 function WmMedia({
+  hero,
   label,
-  hint,
   ratio = "wide",
 }: {
+  hero: HeroId;
   label: string;
-  hint: string;
   ratio?: "wide" | "tall";
 }) {
   return (
     <figure className={`fv-wm__media fv-wm__media--${ratio}`}>
-      <div
-        className="fv-wm__media-plane"
-        role="img"
-        aria-label={`${label}. ${hint}`}
-      />
+      <div className="fv-wm__media-plane">
+        <HeroPhoto
+          id={hero}
+          variant={ratio === "tall" ? "tall" : "wide"}
+          imgClassName="fv-hero-photo"
+        />
+      </div>
       <figcaption className="fv-wm__media-cap">
         <span className="fv-wm__media-label">{label}</span>
-        <span className="fv-wm__media-hint">{hint}</span>
       </figcaption>
     </figure>
   );
@@ -69,17 +73,9 @@ export default function WealthManagementPage() {
         </div>
 
         <figure className="fv-wm-hero__media">
-          <div
-            className="fv-wm-hero__plane"
-            role="img"
-            aria-label="Hero. Family life in the Bay Area — well-being, not a trading floor"
-          />
-          <figcaption className="fv-wm__media-cap">
-            <span className="fv-wm__media-label">Hero</span>
-            <span className="fv-wm__media-hint">
-              Family life / well-being — not a trading-floor stock shot
-            </span>
-          </figcaption>
+          <div className="fv-wm-hero__plane">
+            <HeroPhoto id="belongings" priority imgClassName="fv-hero-photo" />
+          </div>
         </figure>
       </header>
 
@@ -107,6 +103,8 @@ export default function WealthManagementPage() {
                 </li>
               ))}
             </ol>
+
+            <WmMedia hero="acceptance" label="Education & milestones" />
           </section>
 
           <section
@@ -139,11 +137,7 @@ export default function WealthManagementPage() {
               </p>
             </div>
 
-            <WmMedia
-              label="Relationship"
-              hint="Kitchen table / real conversation — judgment over decades"
-              ratio="wide"
-            />
+            <WmMedia hero="travel" label="A life, not a ledger" />
           </section>
 
           <section className="fv-wm__section" aria-labelledby="wm-tech">
@@ -165,8 +159,9 @@ export default function WealthManagementPage() {
                 around what you actually want to see.
               </p>
               <p>
-                <Link href="/firm/technology">
-                  More on how we use technology →
+                <Link href="/firm/technology" className="fv-wm__more">
+                  More on how we use technology
+                  <LinkArrow />
                 </Link>
               </p>
             </div>
@@ -201,6 +196,8 @@ export default function WealthManagementPage() {
                 you, we&apos;ll come to you.
               </p>
             </div>
+
+            <WmMedia hero="hospital" label="When life happens" />
           </section>
 
           <section

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FIRM } from "@/lib/firm";
 
@@ -7,55 +8,66 @@ import { FIRM } from "@/lib/firm";
  */
 export default function Footer() {
   const year = new Date().getFullYear();
+  const bay = FIRM.offices.greenbrae;
+  const pit = FIRM.offices.pittsburgh;
 
   return (
     <footer className="fv-footer bg-[var(--fv-bg)] pt-8 pb-8 sm:pt-10 sm:pb-10">
       <div className="fv-frame">
         <div className="max-w-3xl">
-          <span className="fv-footer__rule" aria-hidden />
+          <Image
+            src="/fv-icon.svg"
+            alt=""
+            width={31}
+            height={31}
+            className="fv-footer__mark"
+            aria-hidden
+          />
           <dl className="fv-footer__ledger m-0">
             <div className="fv-footer__row">
               <dt>Contact</dt>
-              <dd className="fv-footer__nums">
-                <a href={FIRM.offices.greenbrae.phoneHref}>
-                  {FIRM.offices.greenbrae.phone}
-                </a>
-                <span className="fv-footer__sep" aria-hidden>
-                  ·
-                </span>
-                <a href={FIRM.offices.pittsburgh.phoneHref}>
-                  {FIRM.offices.pittsburgh.phone}
-                </a>
-                <span className="fv-footer__sep" aria-hidden>
-                  ·
-                </span>
+              <dd className="fv-footer__cluster fv-footer__nums">
+                <a href={bay.phoneHref}>{bay.phone}</a>
+                <a href={pit.phoneHref}>{pit.phone}</a>
                 <a href={`mailto:${FIRM.email}`}>{FIRM.email}</a>
               </dd>
             </div>
 
             <div className="fv-footer__row">
-              <dt>{FIRM.offices.greenbrae.label}</dt>
-              <dd className="fv-footer__nums">
-                {FIRM.offices.greenbrae.lines.join(", ")}
+              <dt>{bay.label}</dt>
+              <dd className="fv-footer__address fv-footer__nums">
+                <span>{bay.lines[0]}</span>
+                <span>{bay.lines[1]}</span>
               </dd>
             </div>
 
             <div className="fv-footer__row">
-              <dt>{FIRM.offices.pittsburgh.label}</dt>
-              <dd className="fv-footer__nums">
-                {FIRM.offices.pittsburgh.lines.join(", ")}
+              <dt>{pit.label}</dt>
+              <dd className="fv-footer__address fv-footer__nums">
+                <span>{pit.lines[0]}</span>
+                <span>{pit.lines[1]}</span>
               </dd>
             </div>
 
             <div className="fv-footer__row">
               <dt>Disclosures</dt>
-              <dd className="fv-footer__links">
-                <Link href="/disclosures/form-adv" className="fv-footer__chip">
+              <dd className="fv-footer__cluster fv-footer__links">
+                <a
+                  href={FIRM.disclosures.formAdv}
+                  className="fv-footer__chip"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Form ADV
-                </Link>
-                <Link href="/disclosures/form-crs" className="fv-footer__chip">
+                </a>
+                <a
+                  href={FIRM.disclosures.formCrs}
+                  className="fv-footer__chip"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Form CRS
-                </Link>
+                </a>
                 <span className="fv-footer__crd" title="SEC / IAPD identifiers">
                   CRD {FIRM.crd}
                   <span className="fv-footer__sep" aria-hidden>
@@ -63,14 +75,8 @@ export default function Footer() {
                   </span>
                   SEC {FIRM.sec}
                 </span>
-                <span className="fv-footer__sep" aria-hidden>
-                  ·
-                </span>
-                <Link href="/firm/privacy">Privacy</Link>
-                <span className="fv-footer__sep" aria-hidden>
-                  ·
-                </span>
-                <Link href="/legal/terms">Terms</Link>
+                <Link href="/privacy-policy">Privacy</Link>
+                <Link href="/terms-and-conditions">Terms</Link>
               </dd>
             </div>
           </dl>

@@ -1,5 +1,6 @@
-import Image from "next/image";
 import ContinueBar from "@/components/ContinueBar";
+import HeroPhoto from "@/components/HeroPhoto";
+import HomeAnswersSearch from "@/components/HomeAnswersSearch";
 import TeamRail from "@/components/TeamRail";
 import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
@@ -31,14 +32,7 @@ export default function Home() {
         </div>
 
         <div className="fv-hero__media">
-          <Image
-            src="/home/hero-grand-with-kids.jpg"
-            alt="A grandmother sharing a quiet moment with children across a wooden ledge."
-            fill
-            priority
-            sizes="(max-width: 767px) 100vw, (max-width: 1099px) 92vw, 1200px"
-            className="fv-hero__img"
-          />
+          <HeroPhoto id="grandma" priority imgClassName="fv-hero__img" />
         </div>
       </section>
 
@@ -60,10 +54,6 @@ export default function Home() {
                 prompt: "How we actually manage your money",
               },
               {
-                href: "/firm/answers",
-                prompt: "Questions, answered straight",
-              },
-              {
                 href: "/team",
                 prompt: "Who picks up",
               },
@@ -73,6 +63,8 @@ export default function Home() {
               },
             ]}
           />
+
+          <HomeAnswersSearch />
         </div>
 
         <div className="fv-home-rail">

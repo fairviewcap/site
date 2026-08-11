@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContinueBar from "@/components/ContinueBar";
+import HeroPhoto from "@/components/HeroPhoto";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
@@ -23,16 +24,11 @@ export default function CommunityPage() {
         </div>
 
         <figure className="fv-community-hero__media">
-          <div
-            className="fv-community-hero__plane"
-            role="img"
-            aria-label="Hero. Local Marin life — neighbors, not a charity gala"
-          />
+          <div className="fv-community-hero__plane">
+            <HeroPhoto id="community" priority imgClassName="fv-hero-photo" />
+          </div>
           <figcaption className="fv-community__media-cap">
-            <span className="fv-community__media-label">Hero</span>
-            <span className="fv-community__media-hint">
-              Local life in Marin — neighbors, not a charity-gala stock shot
-            </span>
+            Fairview Capital is a proud sponsor of Marin FC.
           </figcaption>
         </figure>
       </header>

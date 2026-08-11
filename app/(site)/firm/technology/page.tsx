@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContinueBar from "@/components/ContinueBar";
+import HeroPhoto from "@/components/HeroPhoto";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
@@ -10,22 +11,30 @@ export const metadata: Metadata = {
 
 export default function TechnologyPage() {
   return (
-    <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
-      <article className="fv-tech">
-        <div className="fv-tech__above">
-          <header className="fv-tech__intro">
-            <p className="fv-tech__eyebrow">Technology</p>
-            <h1 className="fv-tech__title">
-              Tools change.
-              <br />
-              Judgment doesn&apos;t.
-            </h1>
-            <p className="fv-tech__lede">
-              No machine can understand your values, weigh your trade-offs, or
-              guide your family through life&apos;s most personal decisions.
-            </p>
-          </header>
+    <main className="bg-[var(--fv-bg)] pt-0">
+      <header className="fv-tech-hero">
+        <div className="fv-tech-hero__mast">
+          <p className="fv-tech__eyebrow">Technology</p>
+          <h1 className="fv-tech__title">
+            Tools change.
+            <br />
+            Judgment doesn&apos;t.
+          </h1>
+          <p className="fv-tech__lede">
+            No machine can understand your values, weigh your trade-offs, or
+            guide your family through life&apos;s most personal decisions.
+          </p>
+        </div>
 
+        <figure className="fv-tech-hero__media">
+          <div className="fv-tech-hero__plane">
+            <HeroPhoto id="zoom" priority imgClassName="fv-hero-photo" />
+          </div>
+        </figure>
+      </header>
+
+      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
+        <article className="fv-tech">
           <div className="fv-tech__body">
             <p>
               We use technology — including AI — to run deeper analysis,
@@ -44,25 +53,25 @@ export default function TechnologyPage() {
               helps us see further, never let it decide for you.
             </p>
           </div>
-        </div>
 
-        <ContinueBar
-          items={[
-            {
-              href: "/firm/answers",
-              prompt: "Curious how we talk about AI and the tools clients use?",
-            },
-            {
-              href: "/work/wealth-management",
-              prompt: "Want to see how the day-to-day work actually runs?",
-            },
-            {
-              href: FIRM.contactHref,
-              prompt: "Ready to talk through your situation?",
-            },
-          ]}
-        />
-      </article>
+          <ContinueBar
+            items={[
+              {
+                href: "/firm/answers",
+                prompt: "Curious how we talk about AI and the tools clients use?",
+              },
+              {
+                href: "/work/wealth-management",
+                prompt: "Want to see how the day-to-day work actually runs?",
+              },
+              {
+                href: FIRM.contactHref,
+                prompt: "Ready to talk through your situation?",
+              },
+            ]}
+          />
+        </article>
+      </div>
     </main>
   );
 }
