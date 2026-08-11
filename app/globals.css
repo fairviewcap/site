@@ -3776,6 +3776,9 @@ body {
 
 .fv-learn-hero__mast {
   max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .fv-learn {
@@ -3808,7 +3811,7 @@ body {
 }
 
 .fv-learn__title {
-  margin: 0;
+  margin: 0.65rem 0 0;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
   font-size: clamp(2.75rem, 8vw, 5rem);
   font-weight: 700;
@@ -3818,18 +3821,18 @@ body {
 }
 
 .fv-learn__lede {
-  margin: 0;
-  max-width: 22rem;
+  margin: 1.15rem 0 0;
+  max-width: 26rem;
   font-size: var(--fv-lede);
   font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -0.012em;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
   color: var(--fv-lede-color);
 }
 
 .fv-learn__channels {
   list-style: none;
-  margin: 3rem 0 0;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -3842,7 +3845,7 @@ body {
   gap: 0;
   text-decoration: none;
   color: inherit;
-  border-radius: 5px;
+  border-radius: 12px;
   overflow: hidden;
   min-height: 11rem;
   transition: transform 220ms ease;
@@ -3875,6 +3878,11 @@ body {
   border-color: var(--fv-green);
 }
 
+.fv-learn__channel--green .fv-learn__channel-link {
+  /* Engraved currency hairline — same ink weight as fv-bad-ben */
+  border: 1px solid #292723;
+}
+
 .fv-learn__channel-copy {
   display: flex;
   gap: 1rem;
@@ -3891,6 +3899,11 @@ body {
 .fv-learn__channel--ink .fv-learn__channel-copy {
   background: #1a1a1a;
   color: #fff;
+}
+
+.fv-learn__channel--green .fv-learn__channel-copy {
+  /* Same paper ground as fv-bad-ben.avif */
+  background: #eef0e4;
 }
 
 .fv-learn__channel--ink .fv-learn__channel-dek {
@@ -3947,8 +3960,21 @@ body {
 }
 
 .fv-learn__channel-plate {
+  position: relative;
   min-height: 7rem;
   background: var(--fv-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fv-learn__channel-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .fv-learn__channel--ink .fv-learn__channel-plate {
@@ -3958,9 +3984,8 @@ body {
 }
 
 .fv-learn__channel--green .fv-learn__channel-plate {
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.12), transparent 50%),
-    var(--fv-green);
+  /* Match fv-bad-ben.avif paper ground so the art blends into the plate */
+  background: #eef0e4;
 }
 
 .fv-learn__channel--paper .fv-learn__channel-plate {
@@ -4023,7 +4048,20 @@ body {
   margin-top: 2rem;
   width: 100%;
   aspect-ratio: 2.4 / 1;
-  border-radius: 5px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fv-learn-index__band-art {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .fv-learn-index__band--ink {
@@ -4031,7 +4069,7 @@ body {
 }
 
 .fv-learn-index__band--green {
-  background: var(--fv-green);
+  background: #eef0e4;
 }
 
 .fv-learn-index__band--paper {

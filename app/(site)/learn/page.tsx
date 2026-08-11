@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Not content. Not noise. Quarterly letters, investment insights, and planning — thoughtful reporting on wealth, markets, and life.",
   openGraph: {
-    title: "What We Think | Fairview Capital",
+    title: "What we think | Fairview Capital",
     description:
       "Quarterly letters, investment insights, and planning content from Fairview Capital.",
   },
@@ -19,7 +19,7 @@ export default function LearnPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "What We Think",
+    name: "What we think",
     description:
       "Quarterly letters, investment insights, and planning content from Fairview Capital.",
     url: "https://www.fairviewcap.com/learn",
@@ -46,7 +46,7 @@ export default function LearnPage() {
       <header className="fv-learn-hero">
         <div className="fv-learn-hero__mast">
           <p className="fv-learn__eyebrow">Learn</p>
-          <h1 className="fv-learn__title">What We Think.</h1>
+          <h1 className="fv-learn__title">What we think.</h1>
           <p className="fv-learn__lede">
             Not content. Not noise. Just thoughtful reporting on wealth,
             markets, and life.
@@ -54,7 +54,7 @@ export default function LearnPage() {
         </div>
       </header>
 
-      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
+      <div className="fv-frame pt-8 pb-20 sm:pt-10 sm:pb-28">
         <div className="fv-learn">
           <ol className="fv-learn__channels">
             {LEARN_CHANNELS.map((channel, i) => (
@@ -78,7 +78,18 @@ export default function LearnPage() {
                       <span className="fv-learn__channel-cta">Explore</span>
                     </div>
                   </div>
-                  <div className="fv-learn__channel-plate" aria-hidden />
+                  <div className="fv-learn__channel-plate" aria-hidden>
+                    {channel.slug === "insights" ? (
+                      <img
+                        src="/photography/learn/fv-bad-ben.avif"
+                        alt=""
+                        width={614}
+                        height={614}
+                        className="fv-learn__channel-art"
+                        decoding="async"
+                      />
+                    ) : null}
+                  </div>
                 </Link>
               </li>
             ))}

@@ -79,7 +79,18 @@ export default async function LearnChannelPage({ params }: Props) {
         <div
           className={`fv-learn-index__band fv-learn-index__band--${channel.tone}`}
           aria-hidden
-        />
+        >
+          {channel.slug === "insights" ? (
+            <img
+              src="/photography/learn/fv-bad-ben.avif"
+              alt=""
+              width={614}
+              height={614}
+              className="fv-learn-index__band-art"
+              decoding="async"
+            />
+          ) : null}
+        </div>
 
         <ol className="fv-learn-index__list">
           {articles.map((article) => (
