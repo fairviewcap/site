@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
 
 /**
- * Home → Straight Answers handoff. Submitting lands on /firm/answers?q=…
+ * Home → Straight Answers handoff. Submitting lands on /answers?q=…
  */
 export default function HomeAnswersSearch() {
   const id = useId();
@@ -16,10 +16,10 @@ export default function HomeAnswersSearch() {
     e.preventDefault();
     const q = query.trim();
     if (!q) {
-      router.push("/firm/answers");
+      router.push("/answers");
       return;
     }
-    router.push(`/firm/answers?q=${encodeURIComponent(q)}`);
+    router.push(`/answers?q=${encodeURIComponent(q)}`);
   }
 
   return (

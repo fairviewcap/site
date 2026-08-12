@@ -1,12 +1,27 @@
 import {
   LEARN_ARTICLES as FALLBACK_ARTICLES,
   LEARN_CHANNELS as FALLBACK_CHANNELS,
+  estimateReadMinutes,
   formatLearnDate,
+  formatLearnDateDot,
+  formatLearnDatePlate,
 } from "@/lib/learn/content";
+import { isLearnNote } from "@/lib/learn/boilerplate";
 import type { LearnArticle, LearnChannel, LearnChannelSlug } from "@/lib/learn/types";
 import { createServiceClient } from "@/lib/supabase/server";
 
-export { formatLearnDate };
+export {
+  estimateReadMinutes,
+  formatLearnDate,
+  formatLearnDateDot,
+  formatLearnDatePlate,
+  isLearnNote,
+};
+
+const ARTICLE_SELECT =
+  "slug,channel,title,date,excerpt,body,issue,image,pull_quote,published,sort_order";
+const ARTICLE_SELECT_LEGACY =
+  "slug,channel,title,date,excerpt,body,issue,image,published,sort_order";
 
 type ChannelRow = {
   slug: string;
@@ -27,15 +42,18 @@ type ArticleRow = {
   body: string[] | null;
   issue: string | null;
   image: string | null;
+  pull_quote?: string | null;
   published: boolean;
   sort_order: number;
 };
 
 function channelFromRow(row: ChannelRow): LearnChannel {
+  const fallback = FALLBACK_CHANNELS.find((c) => c.slug === row.slug);
   return {
     slug: row.slug as LearnChannelSlug,
     label: row.label,
     title: row.title,
+    headline: fallback?.headline ?? row.title,
     dek: row.dek,
     summary: row.summary,
     tone: row.tone,
@@ -43,6 +61,9 @@ function channelFromRow(row: ChannelRow): LearnChannel {
 }
 
 function articleFromRow(row: ArticleRow): LearnArticle {
+  const fallback = FALLBACK_ARTICLES.find(
+    (a) => a.channel === row.channel && a.slug === row.slug,
+  );
   return {
     slug: row.slug,
     channel: row.channel as LearnChannelSlug,
@@ -51,7 +72,8 @@ function articleFromRow(row: ArticleRow): LearnArticle {
     excerpt: row.excerpt,
     body: row.body ?? [],
     issue: row.issue ?? undefined,
-    image: row.image,
+    image: row.image ?? fallback?.image ?? null,
+    pullQuote: row.pull_quote ?? fallback?.pullQuote ?? undefined,
   };
 }
 
@@ -94,15 +116,21 @@ export async function listArticles(opts?: {
     return articles.sort((a, b) => (a.date < b.date ? 1 : -1));
   }
 
-  let query = sb
-    .from("learn_articles")
-    .select("slug,channel,title,date,excerpt,body,issue,image,published,sort_order")
-    .order("date", { ascending: false });
+  const run = async (cols: string) => {
+    let query = sb
+      .from("learn_articles")
+      .select(cols)
+      .order("date", { ascending: false });
+    if (opts?.channel) query = query.eq("channel", opts.channel);
+    if (publishedOnly) query = query.eq("published", true);
+    return query;
+  };
 
-  if (opts?.channel) query = query.eq("channel", opts.channel);
-  if (publishedOnly) query = query.eq("published", true);
+  let { data, error } = await run(ARTICLE_SELECT);
+  if (error && /pull_quote/i.test(error.message)) {
+    ({ data, error } = await run(ARTICLE_SELECT_LEGACY));
+  }
 
-  const { data, error } = await query;
   if (error) {
     console.error("learn_articles:", error.message);
     return FALLBACK_ARTICLES.filter((a) =>
@@ -115,7 +143,7 @@ export async function listArticles(opts?: {
     ).sort((a, b) => (a.date < b.date ? 1 : -1));
   }
 
-  return (data as ArticleRow[]).map(articleFromRow);
+  return (data as unknown as ArticleRow[]).map(articleFromRow);
 }
 
 export async function getArticlesByChannel(
@@ -135,13 +163,23 @@ export async function getArticle(
     );
   }
 
-  const { data, error } = await sb
+  let { data, error } = await sb
     .from("learn_articles")
-    .select("slug,channel,title,date,excerpt,body,issue,image,published,sort_order")
+    .select(ARTICLE_SELECT)
     .eq("channel", channel)
     .eq("slug", slug)
     .eq("published", true)
     .maybeSingle();
+
+  if (error && /pull_quote/i.test(error.message)) {
+    ({ data, error } = await sb
+      .from("learn_articles")
+      .select(ARTICLE_SELECT_LEGACY)
+      .eq("channel", channel)
+      .eq("slug", slug)
+      .eq("published", true)
+      .maybeSingle());
+  }
 
   if (error) {
     console.error("learn_articles get:", error.message);
@@ -154,7 +192,7 @@ export async function getArticle(
       (a) => a.channel === channel && a.slug === slug,
     );
   }
-  return articleFromRow(data as ArticleRow);
+  return articleFromRow(data as unknown as ArticleRow);
 }
 
 export async function getArticleAdmin(
@@ -169,16 +207,25 @@ export async function getArticleAdmin(
     return a ? { ...a, published: true } : null;
   }
 
-  const { data, error } = await sb
+  let { data, error } = await sb
     .from("learn_articles")
-    .select("slug,channel,title,date,excerpt,body,issue,image,published,sort_order")
+    .select(ARTICLE_SELECT)
     .eq("channel", channel)
     .eq("slug", slug)
     .maybeSingle();
 
+  if (error && /pull_quote/i.test(error.message)) {
+    ({ data, error } = await sb
+      .from("learn_articles")
+      .select(ARTICLE_SELECT_LEGACY)
+      .eq("channel", channel)
+      .eq("slug", slug)
+      .maybeSingle());
+  }
+
   if (error) throw new Error(error.message);
   if (!data) return null;
-  const article = articleFromRow(data as ArticleRow);
+  const article = articleFromRow(data as unknown as ArticleRow);
   return { ...article, published: Boolean(data.published) };
 }
 
@@ -188,22 +235,32 @@ export async function upsertArticle(
   const sb = createServiceClient();
   if (!sb) throw new Error("Supabase is not configured");
 
-  const { error } = await sb.from("learn_articles").upsert(
-    {
-      slug: article.slug,
-      channel: article.channel,
-      title: article.title,
-      date: article.date,
-      excerpt: article.excerpt,
-      body: article.body,
-      issue: article.issue ?? null,
-      image: article.image ?? null,
-      published: article.published !== false,
-      sort_order: Number(String(article.date).replaceAll("-", "")),
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: "channel,slug" },
-  );
+  const row = {
+    slug: article.slug,
+    channel: article.channel,
+    title: article.title,
+    date: article.date,
+    excerpt: article.excerpt,
+    body: article.body,
+    issue: article.issue ?? null,
+    image: article.image ?? null,
+    pull_quote: article.pullQuote ?? null,
+    published: article.published !== false,
+    sort_order: Number(String(article.date).replaceAll("-", "")),
+    updated_at: new Date().toISOString(),
+  };
+
+  let { error } = await sb
+    .from("learn_articles")
+    .upsert(row, { onConflict: "channel,slug" });
+
+  if (error && /pull_quote/i.test(error.message)) {
+    const { pull_quote: _p, ...without } = row;
+    ({ error } = await sb
+      .from("learn_articles")
+      .upsert(without, { onConflict: "channel,slug" }));
+  }
+
   if (error) throw new Error(error.message);
 }
 

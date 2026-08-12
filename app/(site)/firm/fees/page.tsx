@@ -27,7 +27,7 @@ export default function FeesPage() {
                   "Want to see how wealth management actually works here?",
               },
               {
-                href: "/firm/answers",
+                href: "/answers",
                 prompt: "Still have questions about what the fee covers?",
               },
               {

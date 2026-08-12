@@ -117,6 +117,19 @@ export function ArticleForm({ article, channels }: Props) {
 
       <label className="flex flex-col gap-1.5">
         <span className="text-[12px] font-medium text-[var(--fv-muted)]">
+          Pull quote (letters)
+        </span>
+        <textarea
+          name="pullQuote"
+          rows={2}
+          defaultValue={article?.pullQuote ?? ""}
+          placeholder="One strong line from the letter…"
+          className="w-full px-3 py-2 border border-[var(--fv-rule)] bg-white text-[14px]"
+        />
+      </label>
+
+      <label className="flex flex-col gap-1.5">
+        <span className="text-[12px] font-medium text-[var(--fv-muted)]">
           Image URL (optional)
         </span>
         <input

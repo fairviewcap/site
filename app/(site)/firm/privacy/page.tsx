@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <ContinueBar
           items={[
             {
-              href: "/firm/answers",
+              href: "/answers",
               prompt: "More on how we protect clients and keep things straight?",
             },
             {

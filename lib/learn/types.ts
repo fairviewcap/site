@@ -6,6 +6,8 @@ export type LearnChannel = {
   label: string;
   /** Hub card title */
   title: string;
+  /** Channel index H1 — Buffett / site voice */
+  headline: string;
   /** One-line dek */
   dek: string;
   /** Longer SEO / AI-readable summary */
@@ -28,4 +30,6 @@ export type LearnArticle = {
   issue?: string;
   /** Optional hero / article photo URL; omit or null when none */
   image?: string | null;
+  /** Optional editorial pull quote for letter articles */
+  pullQuote?: string | null;
 };

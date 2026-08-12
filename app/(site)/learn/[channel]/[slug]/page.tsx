@@ -1,13 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import LearnArticleBody from "@/components/LearnArticleBody";
 import {
+  estimateReadMinutes,
   formatLearnDate,
   getArticle,
+  getArticlesByChannel,
   getChannel,
+  isLearnNote,
   listArticles,
 } from "@/lib/learn/store";
+import {
+  learnBodyContent,
+  letterNeighbors,
+  resolveLetterPullQuote,
+  quarterFromArticle,
+} from "@/lib/learn/letters";
 import { FIRM } from "@/lib/firm";
+import type { LearnArticle, LearnChannel } from "@/lib/learn/types";
+
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ channel: string; slug: string }> };
 
@@ -36,11 +49,216 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function DisclaimerFooter({
+  backHref,
+  backLabel,
+}: {
+  backHref: string;
+  backLabel: string;
+}) {
+  return (
+    <footer className="fv-learn-article__footer">
+      <p className="fv-learn-article__disclaimer">
+        For general informational purposes only. Not investment, tax, or legal
+        advice. Past performance does not guarantee future results. See our{" "}
+        <a
+          href={FIRM.disclosures.formAdv}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Form ADV
+        </a>{" "}
+        and{" "}
+        <a
+          href={FIRM.disclosures.formCrs}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Form CRS
+        </a>
+        .
+      </p>
+      <Link href={backHref} className="fv-learn-article__back">
+        {backLabel}
+      </Link>
+    </footer>
+  );
+}
+
+function SeriesNav({
+  channel,
+  prev,
+  next,
+  label,
+}: {
+  channel: LearnChannel;
+  prev: LearnArticle | null;
+  next: LearnArticle | null;
+  label: string;
+}) {
+  if (!prev && !next) return null;
+  return (
+    <nav className="fv-learn-series" aria-label={label}>
+      {prev ? (
+        <Link
+          href={`/learn/${channel.slug}/${prev.slug}`}
+          className="fv-learn-series__link fv-learn-series__link--prev"
+        >
+          <span className="fv-learn-series__dir">Previous</span>
+          <span className="fv-learn-series__title">{prev.title}</span>
+        </Link>
+      ) : (
+        <span className="fv-learn-series__link fv-learn-series__link--empty" />
+      )}
+      {next ? (
+        <Link
+          href={`/learn/${channel.slug}/${next.slug}`}
+          className="fv-learn-series__link fv-learn-series__link--next"
+        >
+          <span className="fv-learn-series__dir">Next</span>
+          <span className="fv-learn-series__title">{next.title}</span>
+        </Link>
+      ) : (
+        <span className="fv-learn-series__link fv-learn-series__link--empty" />
+      )}
+    </nav>
+  );
+}
+
+function LetterArticle({
+  channel,
+  article,
+  prev,
+  next,
+}: {
+  channel: LearnChannel;
+  article: LearnArticle;
+  prev: LearnArticle | null;
+  next: LearnArticle | null;
+}) {
+  const q = quarterFromArticle(article);
+  const year = Number(article.date.slice(0, 4));
+  const pull = resolveLetterPullQuote(article);
+  const body = learnBodyContent(article.body);
+
+  return (
+    <article className="fv-letter">
+      <nav className="fv-learn-index__crumb fv-letter__crumb" aria-label="Breadcrumb">
+        <Link href="/learn">Learn</Link>
+        <span aria-hidden>/</span>
+        <Link href={`/learn/${channel.slug}`}>{channel.label}</Link>
+        <span aria-hidden>/</span>
+        <span>{article.issue ?? `Q${q}`}</span>
+      </nav>
+
+      <header className="fv-letter__mast">
+        <p className="fv-letter__q" aria-hidden>
+          Q{q}
+        </p>
+        <time dateTime={article.date} className="fv-letter__year">
+          {year}
+        </time>
+        <h1 className="fv-letter__title">{article.title}</h1>
+      </header>
+
+      <div className="fv-letter__body">
+        {body.flatMap((paragraph, i) => {
+          const nodes = [
+            <p key={`p-${i}-${paragraph.slice(0, 24)}`}>{paragraph}</p>,
+          ];
+          if (pull && i === 0) {
+            nodes.push(
+              <blockquote key="pull" className="fv-letter__pull">
+                <p>{pull}</p>
+              </blockquote>,
+            );
+          }
+          return nodes;
+        })}
+      </div>
+
+      <SeriesNav
+        channel={channel}
+        prev={prev}
+        next={next}
+        label="Adjacent letters"
+      />
+
+      <DisclaimerFooter
+        backHref={`/learn/${channel.slug}`}
+        backLabel="All quarterly letters"
+      />
+    </article>
+  );
+}
+
+function EssayArticle({
+  channel,
+  article,
+  prev,
+  next,
+  backLabel,
+}: {
+  channel: LearnChannel;
+  article: LearnArticle;
+  prev: LearnArticle | null;
+  next: LearnArticle | null;
+  backLabel: string;
+}) {
+  const minutes = estimateReadMinutes(article.body);
+  const note = isLearnNote(article);
+
+  return (
+    <article className="fv-essay">
+      <nav className="fv-learn-index__crumb fv-essay__crumb" aria-label="Breadcrumb">
+        <Link href="/learn">Learn</Link>
+        <span aria-hidden>/</span>
+        <Link href={`/learn/${channel.slug}`}>{channel.label}</Link>
+      </nav>
+
+      <header className="fv-essay__header">
+        <p className="fv-essay__eyebrow">
+          {note ? <span>Note</span> : null}
+          {note ? <span aria-hidden>·</span> : null}
+          <time dateTime={article.date}>{formatLearnDate(article.date)}</time>
+          <span aria-hidden>·</span>
+          <span>{minutes} min read</span>
+        </p>
+        <h1 className="fv-essay__title">{article.title}</h1>
+      </header>
+
+      {article.image ? (
+        <div className="fv-essay__media">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={article.image} alt="" className="fv-essay__image" />
+        </div>
+      ) : null}
+
+      <LearnArticleBody body={article.body} pullQuote={article.pullQuote} />
+
+      <SeriesNav
+        channel={channel}
+        prev={prev}
+        next={next}
+        label={`More ${channel.label.toLowerCase()}`}
+      />
+
+      <DisclaimerFooter
+        backHref={`/learn/${channel.slug}`}
+        backLabel={backLabel}
+      />
+    </article>
+  );
+}
+
 export default async function LearnArticlePage({ params }: Props) {
   const { channel: channelSlug, slug } = await params;
   const channel = await getChannel(channelSlug);
   const article = await getArticle(channelSlug, slug);
   if (!channel || !article) notFound();
+
+  const series = await getArticlesByChannel(channel.slug);
+  const { prev, next } = letterNeighbors(series, article.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -67,75 +285,26 @@ export default async function LearnArticlePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="fv-learn-article">
-        <nav className="fv-learn-index__crumb" aria-label="Breadcrumb">
-          <Link href="/learn">Learn</Link>
-          <span aria-hidden>/</span>
-          <Link href={`/learn/${channel.slug}`}>{channel.label}</Link>
-          <span aria-hidden>/</span>
-          <span>{article.issue ?? article.title}</span>
-        </nav>
-
-        <header className="fv-learn-article__header">
-          <p className="fv-learn__eyebrow">{channel.label}</p>
-          <h1 className="fv-learn-article__title">{article.title}</h1>
-          <p className="fv-learn-article__meta">
-            <time dateTime={article.date}>{formatLearnDate(article.date)}</time>
-            {article.issue ? (
-              <>
-                <span className="fv-footer__sep" aria-hidden>
-                  ·
-                </span>
-                <span>{article.issue}</span>
-              </>
-            ) : null}
-          </p>
-        </header>
-
-        {article.image ? (
-          <div className="fv-learn-article__media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={article.image}
-              alt=""
-              className="fv-learn-article__image"
-            />
-          </div>
-        ) : null}
-
-        <div className="fv-learn-article__body">
-          {article.body.map((paragraph, i) => (
-            <p key={`${i}-${paragraph.slice(0, 32)}`}>{paragraph}</p>
-          ))}
-        </div>
-
-        <footer className="fv-learn-article__footer">
-          <p className="fv-learn-article__disclaimer">
-            For general informational purposes only. Not investment, tax, or
-            legal advice. Past performance does not guarantee future results.
-            See our{" "}
-            <a
-              href={FIRM.disclosures.formAdv}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Form ADV
-            </a>{" "}
-            and{" "}
-            <a
-              href={FIRM.disclosures.formCrs}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Form CRS
-            </a>
-            .
-          </p>
-          <Link href={`/learn/${channel.slug}`} className="fv-learn-article__back">
-            All {channel.label.toLowerCase()}
-          </Link>
-        </footer>
-      </article>
+      {channel.slug === "letters" ? (
+        <LetterArticle
+          channel={channel}
+          article={article}
+          prev={prev}
+          next={next}
+        />
+      ) : (
+        <EssayArticle
+          channel={channel}
+          article={article}
+          prev={prev}
+          next={next}
+          backLabel={
+            channel.slug === "insights"
+              ? "All investment insights"
+              : `All ${channel.label.toLowerCase()}`
+          }
+        />
+      )}
     </main>
   );
 }

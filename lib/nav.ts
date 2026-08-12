@@ -24,7 +24,6 @@ export const MENUS: Record<
     items: [
       { href: "/firm/why-fairview", label: "Why Fairview", short: "Why" },
       { href: "/team", label: "Team" },
-      { href: "/firm/answers", label: "Questions", short: "Questions" },
       { href: "/firm/fees", label: "Fees" },
       { href: "/firm/privacy", label: "Confidentiality" },
       { href: "/firm/technology", label: "Technology" },
@@ -35,5 +34,6 @@ export const MENUS: Record<
 
 export const PRIMARY_LINKS = [
   { href: "/team", label: "Team" },
+  { href: "/answers", label: "Answers" },
   { href: "/learn", label: "Learn" },
 ] as const;

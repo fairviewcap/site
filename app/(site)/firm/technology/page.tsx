@@ -28,7 +28,7 @@ export default function TechnologyPage() {
 
         <figure className="fv-tech-hero__media">
           <div className="fv-tech-hero__plane">
-            <HeroPhoto id="zoom" priority imgClassName="fv-hero-photo" />
+            <HeroPhoto id="college" priority imgClassName="fv-hero-photo" />
           </div>
         </figure>
       </header>
@@ -57,7 +57,7 @@ export default function TechnologyPage() {
           <ContinueBar
             items={[
               {
-                href: "/firm/answers",
+                href: "/answers",
                 prompt: "Curious how we talk about AI and the tools clients use?",
               },
               {

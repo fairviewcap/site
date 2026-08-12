@@ -36,8 +36,8 @@ export default async function AdminSearchesPage() {
         <p className="mt-8 text-[14px] text-[var(--fv-muted)]">
           No Straight Answers searches or views logged yet. They appear after
           someone uses the search on{" "}
-          <Link href="/firm/answers" className="underline underline-offset-4">
-            /firm/answers
+          <Link href="/answers" className="underline underline-offset-4">
+            /answers
           </Link>
           .
         </p>
@@ -67,7 +67,7 @@ export default async function AdminSearchesPage() {
                       {" "}
                       ·{" "}
                       <Link
-                        href={`/firm/answers/${event.slug}`}
+                        href={`/answers/${event.slug}`}
                         className="underline underline-offset-4"
                       >
                         open

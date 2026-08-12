@@ -167,7 +167,7 @@ export default function AnswersExplorer({
                       <span className="fv-answers__rule" aria-hidden />
                       <div className="fv-answers__body">
                         <h3 className="fv-answers__q">
-                          <Link href={`/firm/answers/${item.slug}`}>
+                          <Link href={`/answers/${item.slug}`}>
                             {item.question}
                           </Link>
                         </h3>

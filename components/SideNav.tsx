@@ -55,6 +55,15 @@ export default function SideNav() {
             <ul className="fv-rail__list">
               <li>
                 <NavLink
+                  href="/answers"
+                  className="fv-rail__link fv-rail__link--top"
+                  activeClassName="fv-rail__link--active"
+                >
+                  Answers
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   href="/learn"
                   className="fv-rail__link fv-rail__link--top"
                   activeClassName="fv-rail__link--active"

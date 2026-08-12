@@ -21,7 +21,7 @@ function revalidateLearn() {
 }
 
 function revalidateAnswers() {
-  revalidatePath("/firm/answers");
+  revalidatePath("/answers");
   revalidatePath("/admin/answers");
 }
 
@@ -41,6 +41,7 @@ export async function saveArticleAction(
   const slug = slugify(slugInput || title);
   const date = String(formData.get("date") ?? "").trim();
   const excerpt = String(formData.get("excerpt") ?? "").trim();
+  const pullQuote = String(formData.get("pullQuote") ?? "").trim() || null;
   const issue = String(formData.get("issue") ?? "").trim() || undefined;
   const image = String(formData.get("image") ?? "").trim() || null;
   const bodyRaw = String(formData.get("body") ?? "");
@@ -64,6 +65,7 @@ export async function saveArticleAction(
       body,
       issue,
       image,
+      pullQuote,
       published,
     });
   } catch (e) {

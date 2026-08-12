@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { listChannels } from "@/lib/learn/store";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Learn | Fairview Capital",
   description:
@@ -47,7 +49,6 @@ export default async function LearnPage() {
 
       <header className="fv-learn-hero">
         <div className="fv-learn-hero__mast">
-          <p className="fv-learn__eyebrow">Learn</p>
           <h1 className="fv-learn__title">What we think.</h1>
           <p className="fv-learn__lede">
             Not content. Not noise. Just thoughtful reporting on wealth,
@@ -81,13 +82,33 @@ export default async function LearnPage() {
                     </div>
                   </div>
                   <div className="fv-learn__channel-plate" aria-hidden>
-                    {channel.slug === "insights" ? (
+                    {channel.slug === "letters" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src="/photography/heroes/fv-hero-redwoods-v.avif"
+                        alt=""
+                        width={800}
+                        height={1000}
+                        className="fv-learn__channel-art"
+                        decoding="async"
+                      />
+                    ) : channel.slug === "insights" ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src="/photography/learn/fv-bad-ben.avif"
                         alt=""
                         width={614}
                         height={614}
+                        className="fv-learn__channel-art"
+                        decoding="async"
+                      />
+                    ) : channel.slug === "planning" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src="/photography/heroes/fv-hero-grandma-v.avif"
+                        alt=""
+                        width={800}
+                        height={1000}
                         className="fv-learn__channel-art"
                         decoding="async"
                       />

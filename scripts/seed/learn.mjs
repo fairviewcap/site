@@ -79,6 +79,7 @@ async function main() {
     body: a.body ?? [],
     issue: a.issue ?? null,
     image: a.image ?? null,
+    pull_quote: a.pullQuote ?? null,
     published: a.published !== false,
     sort_order: sortOrderFor(a.channel, a.date),
   }));
@@ -87,11 +88,21 @@ async function main() {
     onConflict: "channel,slug",
   });
 
+  if (artErr && /pull_quote/i.test(artErr.message)) {
+    console.warn(
+      "pull_quote column missing — seeding without it. Run supabase/migrations/20260812140000_learn_articles_pull_quote.sql, then re-run.",
+    );
+    const without = rows.map(({ pull_quote: _p, ...rest }) => rest);
+    ({ error: artErr } = await sb.from("learn_articles").upsert(without, {
+      onConflict: "channel,slug",
+    }));
+  }
+
   if (artErr && /image/i.test(artErr.message)) {
     console.warn(
       "image column missing — seeding without it. Run supabase/migrations/20260812120000_learn_articles_image.sql in the SQL editor, then re-run this script.",
     );
-    const withoutImage = rows.map(({ image: _i, ...rest }) => rest);
+    const withoutImage = rows.map(({ image: _i, pull_quote: _p, ...rest }) => rest);
     ({ error: artErr } = await sb.from("learn_articles").upsert(withoutImage, {
       onConflict: "channel,slug",
     }));

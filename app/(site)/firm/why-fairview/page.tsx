@@ -315,7 +315,7 @@ export default function WhyFairviewPage() {
               prompt: "Curious who answers when the phone rings?",
             },
             {
-              href: "/firm/answers",
+              href: "/answers",
               prompt: "Still have questions before you sit down?",
             },
           ]}

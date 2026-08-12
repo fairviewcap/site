@@ -64,7 +64,7 @@ export default async function AnswerSlugPage({ params }: Props) {
 
       <article className="fv-answer">
         <nav className="fv-answer__crumb" aria-label="Breadcrumb">
-          <Link href="/firm/answers">Straight Answers</Link>
+          <Link href="/answers">Straight Answers</Link>
           <span aria-hidden>/</span>
           <span>{item.categoryTitle}</span>
         </nav>
@@ -87,14 +87,14 @@ export default async function AnswerSlugPage({ params }: Props) {
             className="fv-answer__related"
             label="Related questions"
             items={related.map((r) => ({
-              href: `/firm/answers/${r.slug}`,
+              href: `/answers/${r.slug}`,
               prompt: r.question,
             }))}
           />
         ) : null}
 
         <p className="fv-answer__all">
-          <Link href="/firm/answers">All Straight Answers</Link>
+          <Link href="/answers">All Straight Answers</Link>
         </p>
       </article>
     </main>
