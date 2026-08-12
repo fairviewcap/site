@@ -5,14 +5,15 @@ import {
   formatLearnDate,
   getArticle,
   getChannel,
-  LEARN_ARTICLES,
-} from "@/lib/learn/content";
+  listArticles,
+} from "@/lib/learn/store";
 import { FIRM } from "@/lib/firm";
 
 type Props = { params: Promise<{ channel: string; slug: string }> };
 
 export async function generateStaticParams() {
-  return LEARN_ARTICLES.map((a) => ({
+  const articles = await listArticles({ publishedOnly: true });
+  return articles.map((a) => ({
     channel: a.channel,
     slug: a.slug,
   }));
@@ -20,7 +21,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { channel, slug } = await params;
-  const article = getArticle(channel, slug);
+  const article = await getArticle(channel, slug);
   if (!article) return {};
   return {
     title: `${article.title} | Fairview Capital`,
@@ -30,14 +31,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       type: "article",
       publishedTime: article.date,
+      ...(article.image ? { images: [{ url: article.image }] } : {}),
     },
   };
 }
 
 export default async function LearnArticlePage({ params }: Props) {
   const { channel: channelSlug, slug } = await params;
-  const channel = getChannel(channelSlug);
-  const article = getArticle(channelSlug, slug);
+  const channel = await getChannel(channelSlug);
+  const article = await getArticle(channelSlug, slug);
   if (!channel || !article) notFound();
 
   const jsonLd = {
@@ -46,6 +48,7 @@ export default async function LearnArticlePage({ params }: Props) {
     headline: article.title,
     datePublished: article.date,
     description: article.excerpt,
+    ...(article.image ? { image: article.image } : {}),
     author: {
       "@type": "Organization",
       name: FIRM.legalName,
@@ -89,9 +92,20 @@ export default async function LearnArticlePage({ params }: Props) {
           </p>
         </header>
 
+        {article.image ? (
+          <div className="fv-learn-article__media">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={article.image}
+              alt=""
+              className="fv-learn-article__image"
+            />
+          </div>
+        ) : null}
+
         <div className="fv-learn-article__body">
-          {article.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+          {article.body.map((paragraph, i) => (
+            <p key={`${i}-${paragraph.slice(0, 32)}`}>{paragraph}</p>
           ))}
         </div>
 

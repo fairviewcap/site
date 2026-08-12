@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LEARN_CHANNELS } from "@/lib/learn/content";
+import { listChannels } from "@/lib/learn/store";
 
 export const metadata: Metadata = {
   title: "Learn | Fairview Capital",
@@ -15,7 +15,9 @@ export const metadata: Metadata = {
 
 const INDEX = ["01", "02", "03"] as const;
 
-export default function LearnPage() {
+export default async function LearnPage() {
+  const channels = await listChannels();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -28,7 +30,7 @@ export default function LearnPage() {
       name: "Fairview Capital",
       url: "https://www.fairviewcap.com",
     },
-    hasPart: LEARN_CHANNELS.map((channel) => ({
+    hasPart: channels.map((channel) => ({
       "@type": "CollectionPage",
       name: channel.title,
       description: channel.summary,
@@ -57,7 +59,7 @@ export default function LearnPage() {
       <div className="fv-frame pt-8 pb-20 sm:pt-10 sm:pb-28">
         <div className="fv-learn">
           <ol className="fv-learn__channels">
-            {LEARN_CHANNELS.map((channel, i) => (
+            {channels.map((channel, i) => (
               <li
                 key={channel.slug}
                 className={`fv-learn__channel fv-learn__channel--${channel.tone}`}
@@ -80,6 +82,7 @@ export default function LearnPage() {
                   </div>
                   <div className="fv-learn__channel-plate" aria-hidden>
                     {channel.slug === "insights" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src="/photography/learn/fv-bad-ben.avif"
                         alt=""

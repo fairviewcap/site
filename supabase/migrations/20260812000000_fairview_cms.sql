@@ -51,6 +51,8 @@ create table if not exists public.learn_articles (
   excerpt text not null default '',
   body text[] not null default '{}',
   issue text,
+  -- Optional hero / article photo URL; null when none
+  image text,
   published boolean not null default true,
   sort_order integer not null default 0,
   created_at timestamptz not null default now(),

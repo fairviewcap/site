@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import AnswersExplorer from "@/components/AnswersExplorer";
 import ContinueBar from "@/components/ContinueBar";
-import { allAnswerItems, ANSWER_CATEGORIES } from "@/lib/answers";
+import {
+  allAnswerItems,
+  getAnswerCategories,
+} from "@/lib/answers/store";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
@@ -19,10 +22,13 @@ export default async function AnswersPage({ searchParams }: AnswersPageProps) {
   const raw = params.q;
   const initialQuery = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
 
+  const categories = await getAnswerCategories();
+  const items = await allAnswerItems();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: allAnswerItems().map((item) => ({
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -54,7 +60,7 @@ export default async function AnswersPage({ searchParams }: AnswersPageProps) {
         </header>
 
         <AnswersExplorer
-          categories={ANSWER_CATEGORIES}
+          categories={categories}
           initialQuery={initialQuery}
         />
 

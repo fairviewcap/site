@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:learn": "node --env-file=.env.local scripts/seed/learn.mjs",
+    "seed:team": "node --env-file=.env.local scripts/seed/team.mjs",
+    "seed:answers": "node --env-file=.env.local scripts/seed/answers.mjs",
+    "seed": "npm run seed:team && npm run seed:learn && npm run seed:answers"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
     "lucide-react": "^1.31.0",
     "next": "16.3.0",
     "react": "19.2.8",

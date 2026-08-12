@@ -7,18 +7,19 @@ import {
   allAnswerRecords,
   getAnswerBySlug,
   getRelatedAnswers,
-} from "@/lib/answers";
+} from "@/lib/answers/store";
 import AnswerViewLogger from "./AnswerViewLogger";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return allAnswerRecords().map((item) => ({ slug: item.slug }));
+export async function generateStaticParams() {
+  const records = await allAnswerRecords();
+  return records.map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const item = getAnswerBySlug(slug);
+  const item = await getAnswerBySlug(slug);
   if (!item) return {};
   return {
     title: `${item.question} | Straight Answers | Fairview Capital`,
@@ -33,10 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function AnswerSlugPage({ params }: Props) {
   const { slug } = await params;
-  const item = getAnswerBySlug(slug);
+  const item = await getAnswerBySlug(slug);
   if (!item) notFound();
 
-  const related = getRelatedAnswers(slug);
+  const related = await getRelatedAnswers(slug);
 
   const jsonLd = {
     "@context": "https://schema.org",

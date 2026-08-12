@@ -17,22 +17,19 @@ export default async function AdminTeamPage() {
             Team
           </h1>
           <p className="mt-1 m-0 text-[13px] text-[var(--fv-muted)]">
-            {members.length} people · stored in{" "}
-            <code className="text-[12px]">data/team.json</code>
+            {members.length} people · Supabase{" "}
+            <code className="text-[12px]">team_members</code>
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Link
             href="/admin/team/new"
-            className="text-[13px] font-medium underline underline-offset-4"
+            className="font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-fg)] underline underline-offset-[5px] decoration-[var(--fv-rule-strong)] hover:decoration-[var(--fv-fg)] transition-colors"
           >
             Add person
           </Link>
           <form action={logoutAction}>
-            <button
-              type="submit"
-              className="text-[13px] text-[var(--fv-muted)] hover:text-[var(--fv-fg)]"
-            >
+            <button type="submit" className="fv-btn--quiet">
               Sign out
             </button>
           </form>
@@ -73,9 +70,9 @@ export default async function AdminTeamPage() {
       </ul>
 
       <p className="mt-8 text-[12px] leading-relaxed text-[var(--fv-muted)] max-w-md">
-        Edits write to the JSON file on this machine. On Vercel, file writes
-        don&apos;t persist — use this admin locally (then commit), or move the
-        store to Supabase / Postgres when you want live production editing.
+        Edits save to Supabase and revalidate the public team pages. Keep{" "}
+        <code className="text-[11px]">data/team.json</code> as a local backup
+        seed source.
       </p>
     </div>
   );

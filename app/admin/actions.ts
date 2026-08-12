@@ -107,6 +107,7 @@ export async function saveMemberAction(
   await upsertMember(member);
   revalidatePath("/");
   revalidatePath("/team");
+  revalidatePath(`/team/${member.slug}`);
   revalidatePath("/admin/team");
   redirect(`/admin/team/${member.id}`);
 }

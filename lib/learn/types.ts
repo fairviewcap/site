@@ -26,4 +26,6 @@ export type LearnArticle = {
   body: string[];
   /** Optional display label (e.g. Q1 2026) */
   issue?: string;
+  /** Optional hero / article photo URL; omit or null when none */
+  image?: string | null;
 };

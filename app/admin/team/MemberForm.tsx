@@ -164,11 +164,7 @@ export function MemberForm({ member }: Props) {
           <p className="m-0 text-[13px] text-red-700">{state.error}</p>
         ) : null}
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="h-10 bg-[var(--fv-fg)] text-white text-[13px] font-semibold disabled:opacity-50"
-        >
+        <button type="submit" disabled={pending} className="fv-btn">
           {pending ? "Saving…" : "Save"}
         </button>
       </form>
@@ -176,10 +172,7 @@ export function MemberForm({ member }: Props) {
       {member ? (
         <form action={deleteMemberAction} className="mt-6">
           <input type="hidden" name="id" value={member.id} />
-          <button
-            type="submit"
-            className="text-[13px] text-red-700 hover:underline"
-          >
+          <button type="submit" className="fv-btn--danger">
             Delete person
           </button>
         </form>

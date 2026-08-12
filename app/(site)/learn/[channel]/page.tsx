@@ -5,19 +5,19 @@ import {
   formatLearnDate,
   getArticlesByChannel,
   getChannel,
-  LEARN_CHANNELS,
-} from "@/lib/learn/content";
-import type { LearnChannelSlug } from "@/lib/learn/types";
+  listChannels,
+} from "@/lib/learn/store";
 
 type Props = { params: Promise<{ channel: string }> };
 
 export async function generateStaticParams() {
-  return LEARN_CHANNELS.map((c) => ({ channel: c.slug }));
+  const channels = await listChannels();
+  return channels.map((c) => ({ channel: c.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { channel: slug } = await params;
-  const channel = getChannel(slug);
+  const channel = await getChannel(slug);
   if (!channel) return {};
   return {
     title: `${channel.title} | Fairview Capital`,
@@ -31,13 +31,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LearnChannelPage({ params }: Props) {
   const { channel: slug } = await params;
-  const channel = getChannel(slug);
+  const channels = await listChannels();
+  const channel = channels.find((c) => c.slug === slug);
   if (!channel) notFound();
 
-  const articles = getArticlesByChannel(slug as LearnChannelSlug);
-  const index = String(
-    LEARN_CHANNELS.findIndex((c) => c.slug === slug) + 1,
-  ).padStart(2, "0");
+  const articles = await getArticlesByChannel(slug);
+  const index = String(channels.findIndex((c) => c.slug === slug) + 1).padStart(
+    2,
+    "0",
+  );
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -81,6 +83,7 @@ export default async function LearnChannelPage({ params }: Props) {
           aria-hidden
         >
           {channel.slug === "insights" ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src="/photography/learn/fv-bad-ben.avif"
               alt=""
