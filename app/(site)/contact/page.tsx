@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/app/(site)/contact/ContactForm";
 import ContinueBar from "@/components/ContinueBar";
+import PageEnter from "@/components/PageEnter";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
@@ -14,69 +15,79 @@ export default function ContactPage() {
 
   return (
     <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
-      <div className="fv-contact">
-        <div className="fv-contact__above">
-          <header className="fv-contact__intro">
-            <p className="fv-contact__eyebrow">Contact</p>
-            <h1 className="fv-contact__title">Let&apos;s talk.</h1>
-            <p className="fv-contact__lede">
-              Tell us where you are. We&apos;ll tell you if we can help — and if
-              we can&apos;t, we&apos;ll say so.
-            </p>
-          </header>
-
-          <ContactForm />
-
-          <aside className="fv-contact__aside" aria-label="Offices">
-            <a href={`mailto:${FIRM.email}`} className="fv-contact__email">
-              {FIRM.email}
-            </a>
-
-            <div className="fv-contact__office">
-              <h2 className="fv-contact__office-name">
-                San Francisco Bay Area
-              </h2>
-              <p className="fv-contact__address">
-                {bay.lines[0]}
-                <br />
-                {bay.lines[1]}
+      <PageEnter>
+        <div className="fv-contact">
+          <div className="fv-contact__above">
+            <header className="fv-contact__intro" data-enter="0">
+              <p className="fv-contact__eyebrow">Contact</p>
+              <h1 className="fv-contact__title">Let&apos;s talk.</h1>
+              <p className="fv-contact__lede">
+                Tell us where you are. We&apos;ll tell you if we can help — and
+                if we can&apos;t, we&apos;ll say so.
               </p>
-              <a href={bay.phoneHref} className="fv-contact__phone">
-                {bay.phone}
-              </a>
+            </header>
+
+            <div data-enter="1">
+              <ContactForm />
             </div>
 
-            <div className="fv-contact__office">
-              <h2 className="fv-contact__office-name">{pit.label}</h2>
-              <p className="fv-contact__address">
-                {pit.lines[0]}
-                <br />
-                {pit.lines[1]}
-              </p>
-              <a href={pit.phoneHref} className="fv-contact__phone">
-                {pit.phone}
+            <aside
+              className="fv-contact__aside"
+              aria-label="Offices"
+              data-enter="2"
+            >
+              <a href={`mailto:${FIRM.email}`} className="fv-contact__email">
+                {FIRM.email}
               </a>
-            </div>
-          </aside>
+
+              <div className="fv-contact__office">
+                <h2 className="fv-contact__office-name">
+                  San Francisco Bay Area
+                </h2>
+                <p className="fv-contact__address">
+                  {bay.lines[0]}
+                  <br />
+                  {bay.lines[1]}
+                </p>
+                <a href={bay.phoneHref} className="fv-contact__phone">
+                  {bay.phone}
+                </a>
+              </div>
+
+              <div className="fv-contact__office">
+                <h2 className="fv-contact__office-name">{pit.label}</h2>
+                <p className="fv-contact__address">
+                  {pit.lines[0]}
+                  <br />
+                  {pit.lines[1]}
+                </p>
+                <a href={pit.phoneHref} className="fv-contact__phone">
+                  {pit.phone}
+                </a>
+              </div>
+            </aside>
+          </div>
+
+          <div data-enter="3">
+            <ContinueBar
+              items={[
+                {
+                  href: "/firm/why-fairview",
+                  prompt: "Want the longer story of how we work?",
+                },
+                {
+                  href: "/firm/fees",
+                  prompt: "Prefer to see the fee schedule first?",
+                },
+                {
+                  href: "/team",
+                  prompt: "Curious who you'd be talking to?",
+                },
+              ]}
+            />
+          </div>
         </div>
-
-        <ContinueBar
-          items={[
-            {
-              href: "/firm/why-fairview",
-              prompt: "Want the longer story of how we work?",
-            },
-            {
-              href: "/firm/fees",
-              prompt: "Prefer to see the fee schedule first?",
-            },
-            {
-              href: "/team",
-              prompt: "Curious who you'd be talking to?",
-            },
-          ]}
-        />
-      </div>
+      </PageEnter>
     </main>
   );
 }

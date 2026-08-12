@@ -6,6 +6,7 @@ export const PORTALS = {
     description: "Your entire financial story, all in one place.",
     href: "https://wealth.emaplan.com/ema/ria/fairviewcapital",
     poweredBy: "eMoney",
+    logo: "/logos/eMoney-logo.svg",
   },
   investments: {
     label: "Investments",

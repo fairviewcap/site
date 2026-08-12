@@ -12,7 +12,7 @@ export default function Footer() {
   const pit = FIRM.offices.pittsburgh;
 
   return (
-    <footer className="fv-footer bg-[var(--fv-bg)] pt-8 pb-8 sm:pt-10 sm:pb-10">
+    <footer className="fv-footer pt-8 pb-8 sm:pt-10 sm:pb-10">
       <div className="fv-frame">
         <div className="max-w-3xl">
           <Image

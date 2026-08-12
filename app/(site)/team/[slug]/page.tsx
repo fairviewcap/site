@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import TeamBioVideo from "@/components/TeamBioVideo";
 import { getMemberBySlug, listMembers } from "@/lib/team/store";
-import { tenureCaption } from "@/lib/team/types";
-import { FIRM } from "@/lib/firm";
+import { tenureCaption, type TeamMember } from "@/lib/team/types";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,15 +23,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function neighbors(
+  roster: TeamMember[],
+  current: TeamMember,
+): { prev: TeamMember | null; next: TeamMember | null } {
+  const i = roster.findIndex((m) => m.id === current.id);
+  if (i < 0) return { prev: null, next: null };
+  return {
+    prev: i > 0 ? roster[i - 1]! : null,
+    next: i < roster.length - 1 ? roster[i + 1]! : null,
+  };
+}
+
 export default async function TeamMemberPage({ params }: Props) {
   const { slug } = await params;
   const member = await getMemberBySlug(slug);
   if (!member) notFound();
 
+  const roster = await listMembers({ publishedOnly: true });
+  const { prev, next } = neighbors(roster, member);
+
   return (
     <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
       <Link href="/team" className="fv-team-bio__back">
-        ← Team
+        <ArrowLeft size={15} strokeWidth={2} aria-hidden />
+        Team
       </Link>
 
       <article className="fv-team-bio">
@@ -73,14 +89,32 @@ export default async function TeamMemberPage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: member.bioHtml }}
           />
 
-          <div className="fv-team-bio__actions">
-            <Link href={FIRM.contactHref} className="fv-team-bio__cta">
-              Let&apos;s talk
-            </Link>
-            <Link href="/team" className="fv-team-bio__more">
-              Meet everyone
-            </Link>
-          </div>
+          {(prev || next) && (
+            <nav className="fv-team-bio__adjacent" aria-label="More of the team">
+              {prev ? (
+                <Link
+                  href={`/team/${prev.slug}`}
+                  className="fv-team-bio__adjacent-link fv-team-bio__adjacent-link--prev"
+                >
+                  <span className="fv-team-bio__adjacent-dir">Previous</span>
+                  <span className="fv-team-bio__adjacent-name">{prev.name}</span>
+                </Link>
+              ) : (
+                <span className="fv-team-bio__adjacent-link fv-team-bio__adjacent-link--empty" />
+              )}
+              {next ? (
+                <Link
+                  href={`/team/${next.slug}`}
+                  className="fv-team-bio__adjacent-link fv-team-bio__adjacent-link--next"
+                >
+                  <span className="fv-team-bio__adjacent-dir">Next</span>
+                  <span className="fv-team-bio__adjacent-name">{next.name}</span>
+                </Link>
+              ) : (
+                <span className="fv-team-bio__adjacent-link fv-team-bio__adjacent-link--empty" />
+              )}
+            </nav>
+          )}
         </div>
       </article>
     </main>

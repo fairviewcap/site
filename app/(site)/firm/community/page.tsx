@@ -1,37 +1,18 @@
 import type { Metadata } from "next";
+import CommunityHero from "@/components/CommunityHero";
 import ContinueBar from "@/components/ContinueBar";
-import HeroPhoto from "@/components/HeroPhoto";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
   title: "Community | Fairview Capital",
   description:
-    "We're neighbors first. We don't just write checks in Marin. We live here.",
+    "Neighbors first. We don't just write checks in Marin. We live here.",
 };
 
 export default function CommunityPage() {
   return (
     <main className="bg-[var(--fv-bg)] pt-0">
-      <header className="fv-community-hero">
-        <div className="fv-community-hero__mast">
-          <p className="fv-community__eyebrow">Community</p>
-          <h1 className="fv-community__title">
-            We&apos;re neighbors first.
-          </h1>
-          <p className="fv-community__lede">
-            We don&apos;t just write checks in Marin. We live here.
-          </p>
-        </div>
-
-        <figure className="fv-community-hero__media">
-          <div className="fv-community-hero__plane">
-            <HeroPhoto id="community" priority imgClassName="fv-hero-photo" />
-          </div>
-          <figcaption className="fv-community__media-cap">
-            Fairview Capital is a proud sponsor of Marin FC.
-          </figcaption>
-        </figure>
-      </header>
+      <CommunityHero />
 
       <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
         <article className="fv-community">

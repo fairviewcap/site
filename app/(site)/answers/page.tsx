@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AnswersExplorer from "@/components/AnswersExplorer";
 import ContinueBar from "@/components/ContinueBar";
+import PageEnter from "@/components/PageEnter";
 import {
   allAnswerItems,
   getAnswerCategories,
@@ -10,7 +11,7 @@ import { FIRM } from "@/lib/firm";
 export const metadata: Metadata = {
   title: "Straight Answers | Fairview Capital",
   description:
-    "There's no such thing as a dumb question. There's such a thing as a bad answer. So we try not to give any.",
+    "Quick answers to all kinds of questions. Direct responses regarding fees, custody, strategy, and operations.",
 };
 
 type AnswersPageProps = {
@@ -49,38 +50,44 @@ export default async function AnswersPage({ searchParams }: AnswersPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="fv-answers">
-        <header className="fv-answers__intro">
-          <p className="fv-answers__eyebrow">Straight Answers</p>
-          <h1 className="fv-answers__title">
-            There&apos;s no such thing as a dumb question. There&apos;s such a
-            thing as a bad answer.
-          </h1>
-          <p className="fv-answers__lede">So we try not to give any.</p>
-        </header>
+      <PageEnter>
+        <div className="fv-answers">
+          <header className="fv-answers__intro" data-enter="0">
+            <p className="fv-answers__eyebrow">Straight Answers</p>
+            <h1 className="fv-answers__title">
+              Quick answers to all kinds of questions.
+            </h1>
+            <p className="fv-answers__lede">
+              Direct responses regarding fees, custody, strategy, and
+              operations.
+            </p>
+          </header>
 
-        <AnswersExplorer
-          categories={categories}
-          initialQuery={initialQuery}
-        />
+          <AnswersExplorer
+            categories={categories}
+            initialQuery={initialQuery}
+          />
 
-        <ContinueBar
-          items={[
-            {
-              href: "/firm/fees",
-              prompt: "Want the fee schedule in plain numbers?",
-            },
-            {
-              href: "/work/wealth-management",
-              prompt: "Curious how the day-to-day work actually runs?",
-            },
-            {
-              href: FIRM.contactHref,
-              prompt: "Still wondering something we didn’t cover?",
-            },
-          ]}
-        />
-      </div>
+          <div data-enter="4">
+            <ContinueBar
+              items={[
+                {
+                  href: "/firm/fees",
+                  prompt: "Want the fee schedule in plain numbers?",
+                },
+                {
+                  href: "/work/wealth-management",
+                  prompt: "Curious how the day-to-day work actually runs?",
+                },
+                {
+                  href: FIRM.contactHref,
+                  prompt: "Still wondering something we didn’t cover?",
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </PageEnter>
     </main>
   );
 }

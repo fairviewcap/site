@@ -5,8 +5,6 @@ import LettersCarousel from "@/components/LettersCarousel";
 import {
   estimateReadMinutes,
   formatLearnDate,
-  formatLearnDateDot,
-  formatLearnDatePlate,
   getArticlesByChannel,
   isLearnNote,
   listChannels,
@@ -68,7 +66,6 @@ function InsightsIndex({
   articles: LearnArticle[];
 }) {
   const count = articles.length;
-  const newest = articles[0]?.date;
 
   return (
     <div className="fv-insights">
@@ -84,12 +81,6 @@ function InsightsIndex({
         {count > 0 ? (
           <p className="fv-insights__file">
             <span>{String(count).padStart(2, "0")} entries</span>
-            {newest ? (
-              <>
-                <span aria-hidden>·</span>
-                <span>Updated {formatLearnDatePlate(newest)}</span>
-              </>
-            ) : null}
           </p>
         ) : null}
       </header>
@@ -117,9 +108,6 @@ function InsightsIndex({
                   </span>
                   <h2 className="fv-insights__headline">{article.title}</h2>
                   <div className="fv-insights__plate-foot">
-                    <time dateTime={article.date} className="fv-insights__date">
-                      {formatLearnDatePlate(article.date)}
-                    </time>
                     <span className="fv-insights__mins">{minutes} min</span>
                   </div>
                 </div>
@@ -172,9 +160,6 @@ function PlanningIndex({
                 className="fv-planning__link"
               >
                 <div className="fv-planning__meta">
-                  <time dateTime={article.date} className="fv-planning__date">
-                    {formatLearnDateDot(article.date)}
-                  </time>
                   <span className="fv-planning__read">{minutes} min read</span>
                 </div>
                 <div className="fv-planning__copy">

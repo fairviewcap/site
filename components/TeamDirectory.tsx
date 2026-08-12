@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useTransition } from "react";
+import { useMemo, useTransition, type CSSProperties } from "react";
 import type { TeamMember } from "@/lib/team/types";
 import { tenureCaption } from "@/lib/team/types";
 
@@ -22,15 +22,6 @@ function matchesFilter(member: TeamMember, filter: TeamFilterKey): boolean {
   if (filter === "leadership") return member.leadership;
   if (filter === "board") return member.board;
   return true;
-}
-
-/** “Andrew F. Mathieson” → “Andrew”; “P. Renae Branscum” → “Renae” */
-function firstName(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  if (parts.length >= 2 && /^[A-Z]\.?$/i.test(parts[0])) {
-    return parts[1].replace(/,$/, "");
-  }
-  return parts[0] ?? name;
 }
 
 export default function TeamDirectory({ members }: Props) {
@@ -90,8 +81,12 @@ export default function TeamDirectory({ members }: Props) {
         </p>
       ) : (
         <ul className="fv-team__list">
-          {visible.map((member) => (
-            <li key={member.id} className="fv-team__item">
+          {visible.map((member, i) => (
+            <li
+              key={member.id}
+              className="fv-team__item"
+              style={{ "--fv-team-i": i } as CSSProperties}
+            >
               <Link href={`/team/${member.slug}`} className="fv-team__card">
                 <div className="fv-team__copy">
                   <h2 className="fv-team__name">{member.name}</h2>
@@ -99,9 +94,6 @@ export default function TeamDirectory({ members }: Props) {
                   {member.teaser ? (
                     <p className="fv-team__teaser">{member.teaser}</p>
                   ) : null}
-                  <span className="fv-team__more">
-                    More on {firstName(member.name)}
-                  </span>
                 </div>
                 <div className="fv-team__photo">
                   {member.image ? (

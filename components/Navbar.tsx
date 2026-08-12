@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import LedgerFigure from "@/components/LedgerFigure";
 import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
@@ -10,19 +12,27 @@ import { MENUS, PRIMARY_LINKS, type MenuKey } from "@/lib/nav";
 
 const SCROLL_PX = 16;
 
+type MobilePane = "root" | MenuKey;
+
 /**
  * Clear on load. On scroll: slim frosted bar.
- * Work/Firm open as quiet panels (desktop ≥900px, if this chrome is shown).
- * Under the ledger shell, this component is mobile-only (<900px).
+ * Desktop: Work/Firm hover panels.
+ * Mobile (<900px): Apple-style full-screen sheet + drill-down (ported to body).
  */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobilePane, setMobilePane] = useState<MobilePane>("root");
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
-  const [mobileSection, setMobileSection] = useState<MenuKey | null>(null);
+  const [portalReady, setPortalReady] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
   const closeTimer = useRef<number | null>(null);
   const menuId = useId();
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobilePane("root");
+  };
 
   const clearCloseTimer = () => {
     if (closeTimer.current) {
@@ -38,9 +48,13 @@ export default function Navbar() {
 
   const openDesktopMenu = (key: MenuKey) => {
     clearCloseTimer();
-    setMobileOpen(false);
+    closeMobile();
     setOpenMenu(key);
   };
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLL_PX);
@@ -53,17 +67,19 @@ export default function Navbar() {
     if (!mobileOpen && !openMenu) return;
 
     const onPointerDown = (event: MouseEvent) => {
+      if (mobileOpen) return;
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
-        setMobileOpen(false);
         setOpenMenu(null);
-        setMobileSection(null);
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setMobileOpen(false);
+        if (mobileOpen && mobilePane !== "root") {
+          setMobilePane("root");
+          return;
+        }
+        closeMobile();
         setOpenMenu(null);
-        setMobileSection(null);
       }
     };
 
@@ -73,11 +89,19 @@ export default function Navbar() {
       document.removeEventListener("mousedown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [mobileOpen, openMenu]);
+  }, [mobileOpen, openMenu, mobilePane]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = prev;
+    };
+  }, [mobileOpen]);
 
   useEffect(() => () => clearCloseTimer(), []);
 
-  // Desktop menus float — don't force the scroll bar open.
   const barOn = scrolled || mobileOpen;
 
   const linkClass = (active?: boolean) =>
@@ -127,11 +151,120 @@ export default function Navbar() {
     );
   };
 
+  const subMenu = mobilePane === "root" ? null : MENUS[mobilePane];
+
+  const mobileSheet =
+    portalReady &&
+    createPortal(
+      <div
+        className={`fv-nav-apple min-[900px]:!hidden ${mobileOpen ? "is-open" : ""}`}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          type="button"
+          className="fv-nav-apple__close"
+          aria-label="Close menu"
+          onClick={closeMobile}
+        >
+          <span className="fv-nav-apple__close-x" aria-hidden />
+        </button>
+
+        <div
+          className={`fv-nav-apple__track${mobilePane !== "root" ? " is-drilled" : ""}`}
+        >
+          <nav className="fv-nav-apple__pane" aria-label="Mobile">
+            <ul className="fv-nav-apple__list">
+              {(Object.keys(MENUS) as MenuKey[]).map((key) => (
+                <li key={key}>
+                  <button
+                    type="button"
+                    className="fv-nav-apple__item"
+                    onClick={() => setMobilePane(key)}
+                  >
+                    <span>{MENUS[key].label}</span>
+                    <ChevronRight size={18} strokeWidth={1.75} aria-hidden />
+                  </button>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/answers"
+                  className="fv-nav-apple__item"
+                  onClick={closeMobile}
+                >
+                  Answers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/learn"
+                  className="fv-nav-apple__item"
+                  onClick={closeMobile}
+                >
+                  Learn
+                </Link>
+              </li>
+            </ul>
+
+            <ul className="fv-nav-apple__list fv-nav-apple__list--util">
+              <li>
+                <Link
+                  href={FIRM.contactHref}
+                  className="fv-nav-apple__util"
+                  onClick={closeMobile}
+                >
+                  Let&apos;s talk
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/login"
+                  className="fv-nav-apple__util"
+                  onClick={closeMobile}
+                >
+                  Log in
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <nav
+            className="fv-nav-apple__pane"
+            aria-label={subMenu?.label ?? "Section"}
+            aria-hidden={mobilePane === "root"}
+          >
+            <button
+              type="button"
+              className="fv-nav-apple__back"
+              onClick={() => setMobilePane("root")}
+            >
+              <ChevronLeft size={18} strokeWidth={1.75} aria-hidden />
+              <span>{subMenu?.label ?? "Back"}</span>
+            </button>
+            <ul className="fv-nav-apple__list">
+              {subMenu?.items.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="fv-nav-apple__item"
+                    onClick={closeMobile}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>,
+      document.body,
+    );
+
   return (
     <header
       ref={rootRef}
       className={`
-        sticky top-0 z-50 w-full pointer-events-none
+        sticky top-0 z-[200] w-full pointer-events-none
         transition-[background-color,border-color,backdrop-filter,padding] duration-300 ease-out
         ${
           barOn
@@ -150,7 +283,7 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={() => {
-            setMobileOpen(false);
+            closeMobile();
             setOpenMenu(null);
           }}
           className="shrink-0 flex items-center"
@@ -235,6 +368,7 @@ export default function Navbar() {
           <Link
             href={FIRM.contactHref}
             className="font-sans text-[13px] font-semibold tracking-[-0.01em] text-[var(--fv-fg)] hover:text-[var(--fv-muted)] transition-colors"
+            onClick={closeMobile}
           >
             Let&apos;s talk
           </Link>
@@ -246,118 +380,22 @@ export default function Navbar() {
           </Link>
           <button
             type="button"
-            className="min-[900px]:hidden relative w-8 h-8 flex items-center justify-center text-[var(--fv-fg)]"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className={`min-[900px]:hidden relative w-8 h-8 flex items-center justify-center text-[var(--fv-fg)]${mobileOpen ? " invisible pointer-events-none" : ""}`}
+            aria-label="Open menu"
             aria-expanded={mobileOpen}
             onClick={() => {
               setOpenMenu(null);
-              setMobileOpen((o) => !o);
+              setMobilePane("root");
+              setMobileOpen(true);
             }}
           >
-            <span
-              className={`absolute left-1/2 top-1/2 block w-3.5 h-px bg-current transition-transform duration-300 origin-center
-                ${mobileOpen ? "-translate-x-1/2 -translate-y-1/2 rotate-45" : "-translate-x-1/2 -translate-y-[3.5px]"}`}
-            />
-            <span
-              className={`absolute left-1/2 top-1/2 block w-3.5 h-px bg-current transition-transform duration-300 origin-center
-                ${mobileOpen ? "-translate-x-1/2 -translate-y-1/2 -rotate-45" : "-translate-x-1/2 translate-y-[3.5px]"}`}
-            />
+            <span className="absolute left-1/2 top-1/2 block w-3.5 h-px bg-current -translate-x-1/2 -translate-y-[3.5px]" />
+            <span className="absolute left-1/2 top-1/2 block w-3.5 h-px bg-current -translate-x-1/2 translate-y-[3.5px]" />
           </button>
         </div>
       </div>
 
-      {/* Mobile sheet */}
-      <div
-        className={`
-          pointer-events-auto min-[900px]:hidden grid overflow-hidden
-          transition-[grid-template-rows,opacity] duration-300 ease-out
-          ${mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
-        `}
-      >
-        <div className="fv-frame min-h-0 overflow-hidden">
-          <nav
-            className="pb-4 pt-1 border-t border-[var(--fv-rule)]"
-            aria-label="Mobile"
-          >
-            {(["work", "firm"] as const).map((key) => {
-              const menu = MENUS[key];
-              const expanded = mobileSection === key;
-              return (
-                <div key={key} className="border-b border-[var(--fv-rule)]">
-                  <button
-                    type="button"
-                    className="w-full flex items-center justify-between py-2.5 font-sans text-[13px] font-medium text-[var(--fv-fg)] text-left capitalize"
-                    aria-expanded={expanded}
-                    onClick={() =>
-                      setMobileSection((c) => (c === key ? null : key))
-                    }
-                  >
-                    <span>{key}</span>
-                    <span className="text-[var(--fv-muted)]">
-                      {expanded ? "–" : "+"}
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-[grid-template-rows] duration-200 ${
-                      expanded ? "grid-rows-[1fr] pb-2.5" : "grid-rows-[0fr]"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      {key === "firm" ? (
-                        <LedgerFigure
-                          figure={FIGURES.established}
-                          variant="eyebrow"
-                          className="mb-1.5"
-                        />
-                      ) : null}
-                      <ul className="m-0 p-0 list-none flex flex-col gap-1.5">
-                        {menu.items.map((item) => (
-                          <li key={item.href}>
-                            <Link
-                              href={item.href}
-                              onClick={() => {
-                                setMobileOpen(false);
-                                setMobileSection(null);
-                              }}
-                              className="font-sans text-[14px] font-medium text-[var(--fv-fg)]"
-                            >
-                              {item.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            {PRIMARY_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="block py-2.5 font-sans text-[13px] font-medium text-[var(--fv-fg)] border-b border-[var(--fv-rule)]"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href={FIRM.contactHref}
-              onClick={() => setMobileOpen(false)}
-              className="block py-2.5 font-sans text-[13px] font-semibold text-[var(--fv-fg)] border-b border-[var(--fv-rule)]"
-            >
-              Let&apos;s talk
-            </Link>
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="block py-2.5 font-sans text-[13px] font-medium text-[var(--fv-muted)]"
-            >
-              Log in
-            </Link>
-          </nav>
-        </div>
-      </div>
+      {mobileSheet}
     </header>
   );
 }

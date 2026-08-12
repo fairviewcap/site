@@ -59,13 +59,13 @@ export default async function TeamRail() {
             role="listitem"
             className="m-0 w-[7.5rem] shrink-0 sm:w-[8.75rem]"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[5px] bg-[rgba(20,20,20,0.06)] [filter:grayscale(1)_contrast(1.06)]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--fv-radius-media)] bg-[var(--fv-team-plate)] [filter:grayscale(1)_contrast(1.06)]">
               {member.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={member.image}
                   alt=""
-                  className="absolute inset-0 block h-full w-full object-cover object-left-bottom"
+                  className="absolute inset-0 block h-full w-full object-cover object-center"
                 />
               ) : null}
             </div>

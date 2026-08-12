@@ -33,6 +33,7 @@ export default function AnswersExplorer({
 }) {
   const inputId = useId();
   const [query, setQuery] = useState(initialQuery);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const deferred = useDeferredValue(query.trim());
   const searching = deferred.length > 0;
 
@@ -41,8 +42,15 @@ export default function AnswersExplorer({
   }, [initialQuery]);
 
   const filtered = useMemo(() => {
-    if (!searching) return categories;
-    return categories
+    let next = categories;
+
+    if (!searching && activeCategory) {
+      next = next.filter((category) => category.id === activeCategory);
+    }
+
+    if (!searching) return next;
+
+    return next
       .map((category) => ({
         ...category,
         items: category.items.filter((item) =>
@@ -50,7 +58,7 @@ export default function AnswersExplorer({
         ),
       }))
       .filter((category) => category.items.length > 0);
-  }, [categories, deferred, searching]);
+  }, [categories, deferred, searching, activeCategory]);
 
   const matchCount = useMemo(
     () => filtered.reduce((n, c) => n + c.items.length, 0),
@@ -82,7 +90,7 @@ export default function AnswersExplorer({
 
   return (
     <>
-      <div className="fv-answers__search">
+      <div className="fv-answers__search" data-enter="1">
         <label className="fv-answers__search-field" htmlFor={inputId}>
           <Search
             className="fv-answers__search-icon"
@@ -110,23 +118,42 @@ export default function AnswersExplorer({
       </div>
 
       {!searching ? (
-        <nav className="fv-answers__jump" aria-label="Jump to section">
-          <ul className="fv-answers__jump-list">
-            {categories.map((category) => (
-              <li key={category.id}>
-                <a
-                  className="fv-answers__jump-chip"
-                  href={`#answers-${category.id}`}
-                >
-                  {category.title}
-                </a>
-              </li>
-            ))}
+        <nav
+          className="fv-answers__jump"
+          aria-label="Filter by topic"
+          data-enter="2"
+        >
+          <ul className="fv-answers__jump-list" role="list">
+            <li>
+              <button
+                type="button"
+                className={`fv-answers__jump-chip${activeCategory === null ? " is-active" : ""}`}
+                aria-pressed={activeCategory === null}
+                onClick={() => setActiveCategory(null)}
+              >
+                All
+              </button>
+            </li>
+            {categories.map((category) => {
+              const active = activeCategory === category.id;
+              return (
+                <li key={category.id}>
+                  <button
+                    type="button"
+                    className={`fv-answers__jump-chip${active ? " is-active" : ""}`}
+                    aria-pressed={active}
+                    onClick={() => setActiveCategory(category.id)}
+                  >
+                    {category.title}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       ) : null}
 
-      <div className="fv-answers__schedule">
+      <div className="fv-answers__schedule" data-enter="3">
         {filtered.length === 0 ? (
           <div className="fv-answers__empty">
             <p>

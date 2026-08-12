@@ -51,7 +51,7 @@ export const HEROES: Record<HeroId, HeroAsset> = {
     id: "college",
     desktop: `${base}/fv-hero-college-h.avif`,
     mobile: `${base}/fv-hero-college-v.avif`,
-    alt: "A parent and child share a quiet embrace outside a family home.",
+    alt: "A parent kisses a young adult’s temple in a close embrace outside the family home.",
   },
   community: {
     id: "community",
