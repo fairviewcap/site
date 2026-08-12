@@ -6027,15 +6027,44 @@ html.fv-shell-tween .fv-rail {
 }
 
 .fv-letters-carousel__q {
-  display: block;
+  position: relative;
+  display: inline-block;
   margin: 0;
+  padding-right: 0.42em;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
   font-size: clamp(9.5rem, 32vw, 11.5rem);
   font-weight: 700;
   letter-spacing: -0.08em;
-  line-height: 0.82;
+  line-height: 0.85;
   color: var(--fv-fg);
   transition: color 160ms ease;
+}
+
+.fv-letters-carousel__q-mark {
+  display: block;
+  line-height: 0.85;
+}
+
+.fv-letters-carousel__yy {
+  position: absolute;
+  top: 0.08em;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.55em;
+  height: 1.15em;
+  padding: 0 0.22em;
+  border-radius: 0.28em;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--fv-fg) 28%, transparent);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.18em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--fv-fg);
 }
 
 @media (min-width: 900px) {
@@ -6048,19 +6077,13 @@ html.fv-shell-tween .fv-rail {
   color: var(--fv-green);
 }
 
-.fv-letters-carousel__year {
-  margin: 1.65rem 0 0;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fv-muted);
-  font-variant-numeric: tabular-nums;
+.fv-letters-carousel__slide:hover .fv-letters-carousel__yy {
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--fv-green) 55%, transparent);
+  color: var(--fv-green);
 }
 
 .fv-letters-carousel__headline {
-  margin: 0.45rem 0 0;
+  margin: 1.35rem 0 0;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
   font-size: clamp(1.15rem, 2vw, 1.35rem);
   font-weight: 700;
@@ -6449,28 +6472,47 @@ html.fv-shell-tween .fv-rail {
 }
 
 .fv-letter__q {
+  position: relative;
+  display: inline-block;
   margin: 0;
+  padding-right: 0.42em;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
   font-size: clamp(11rem, 36vw, 19rem);
   font-weight: 700;
   letter-spacing: -0.08em;
-  line-height: 0.82;
+  line-height: 0.85;
   color: var(--fv-fg);
 }
 
-.fv-letter__year {
-  margin: 1.5rem 0 0;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fv-muted);
+.fv-letter__q-mark {
+  display: block;
+  line-height: 0.85;
+}
+
+.fv-letter__yy {
+  position: absolute;
+  top: 0.08em;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.55em;
+  height: 1.15em;
+  padding: 0 0.22em;
+  border-radius: 0.28em;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--fv-fg) 28%, transparent);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.18em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
+  color: var(--fv-fg);
 }
 
 .fv-letter__title {
-  margin: 0.45rem 0 0;
+  margin: 1.35rem 0 0;
   max-width: 28rem;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
   font-size: clamp(1.55rem, 3.5vw, 2.15rem);

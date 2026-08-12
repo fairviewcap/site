@@ -153,11 +153,9 @@ function LetterArticle({
 
       <header className="fv-letter__mast">
         <p className="fv-letter__q" aria-hidden>
-          Q{q}
+          <span className="fv-letter__q-mark">Q{q}</span>
+          <span className="fv-letter__yy">{String(year).slice(2)}</span>
         </p>
-        <time dateTime={article.date} className="fv-letter__year">
-          {year}
-        </time>
         <h1 className="fv-letter__title">{article.title}</h1>
       </header>
 

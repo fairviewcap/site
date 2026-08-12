@@ -162,9 +162,11 @@ export default function LettersCarousel({
               aria-label={`${issue}: ${slide.article.title}`}
             >
               <span className="fv-letters-carousel__q" aria-hidden>
-                Q{slide.q}
+                <span className="fv-letters-carousel__q-mark">Q{slide.q}</span>
+                <span className="fv-letters-carousel__yy">
+                  {String(slide.year).slice(2)}
+                </span>
               </span>
-              <p className="fv-letters-carousel__year">{slide.year}</p>
               <h2 className="fv-letters-carousel__headline">
                 {slide.article.title}
               </h2>
