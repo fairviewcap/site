@@ -30,6 +30,87 @@ const PILLARS = [
   },
 ] as const;
 
+/** Planning domains — content from client overview; presentation is site-native. */
+const PLANNING_DOMAINS = [
+  {
+    title: "Investment Strategy",
+    items: [
+      "Investment selection",
+      "Asset allocation",
+      "Risk management",
+      "Asset location",
+    ],
+  },
+  {
+    title: "Retirement Planning",
+    items: [
+      "Retirement income planning",
+      "Cash flow projections",
+      "Benefits + Social Security",
+      "Business succession planning",
+    ],
+  },
+  {
+    title: "Income & Tax",
+    items: [
+      "Tax-efficient investing",
+      "Withdrawal strategy",
+      "Stock option advice",
+      "Coordination with CPA",
+    ],
+  },
+  {
+    title: "Family",
+    items: [
+      "Family dynamics",
+      "Life events",
+      "Education funding",
+      "Assisting parents + children",
+      "Annual gifting",
+    ],
+  },
+  {
+    title: "Estate Planning",
+    items: [
+      "Trusts",
+      "Wills",
+      "Intergenerational wealth transfer",
+      "Coordination with estate attorney",
+      "Philanthropic planning",
+    ],
+  },
+  {
+    title: "Insurance",
+    items: [
+      "Insurance review",
+      "Life",
+      "Disability",
+      "Long-term care",
+      "Coordination with insurance specialist",
+    ],
+  },
+] as const;
+
+const LIFE_PATH = [
+  "Marriage?",
+  "First child?",
+  "Buy house?",
+  "Inheritance?",
+  "Sell business?",
+  "Widow / widower?",
+  "Assisted living?",
+] as const;
+
+const LIFE_VISION = [
+  "Dream travel?",
+  "Vacation home?",
+  "Fund education?",
+  "Assist adult children?",
+  "Volunteer?",
+  "Philanthropy?",
+  "Retirement?",
+] as const;
+
 function WmMedia({
   hero,
   label,
@@ -105,6 +186,35 @@ export default function WealthManagementPage() {
             </ol>
 
             <WmMedia hero="acceptance" label="Education & milestones" />
+          </section>
+
+          <section
+            className="fv-wm__section"
+            aria-labelledby="wm-domains"
+          >
+            <h2 id="wm-domains" className="fv-wm__section-title">
+              Wealth planning is complex — and unique to every family.
+            </h2>
+            <p className="fv-wm__domains-lede">
+              We guide the questions and the coordination that help a family
+              reach its goals — across investments, taxes, estate, and the
+              people in the middle.
+            </p>
+            <ul className="fv-wm__domains">
+              {PLANNING_DOMAINS.map((domain, i) => (
+                <li key={domain.title} className="fv-wm__domain">
+                  <p className="fv-wm__domain-index" aria-hidden>
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="fv-wm__domain-title">{domain.title}</h3>
+                  <ul className="fv-wm__domain-list">
+                    {domain.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <section
@@ -198,6 +308,56 @@ export default function WealthManagementPage() {
             </div>
 
             <WmMedia hero="hospital" label="When life happens" />
+          </section>
+
+          <section className="fv-wm__section" aria-labelledby="wm-path">
+            <h2 id="wm-path" className="fv-wm__section-title">
+              The plan has to survive the life that interrupts it.
+            </h2>
+            <p className="fv-wm__domains-lede">
+              We map the forks ahead — obligations and aspirations — so the
+              portfolio is answering the right questions.
+            </p>
+
+            <div className="fv-wm__rails">
+              <div className="fv-wm__rail">
+                <p className="fv-wm__rail-label">What&apos;s your life path?</p>
+                <ol className="fv-wm__rail-track">
+                  {LIFE_PATH.map((label, i) => (
+                    <li
+                      key={label}
+                      className={
+                        i % 2 === 0
+                          ? "fv-wm__rail-stop fv-wm__rail-stop--above"
+                          : "fv-wm__rail-stop fv-wm__rail-stop--below"
+                      }
+                    >
+                      <span className="fv-wm__rail-tick" aria-hidden />
+                      <span className="fv-wm__rail-text">{label}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="fv-wm__rail">
+                <p className="fv-wm__rail-label">What&apos;s your vision?</p>
+                <ol className="fv-wm__rail-track">
+                  {LIFE_VISION.map((label, i) => (
+                    <li
+                      key={label}
+                      className={
+                        i % 2 === 0
+                          ? "fv-wm__rail-stop fv-wm__rail-stop--above"
+                          : "fv-wm__rail-stop fv-wm__rail-stop--below"
+                      }
+                    >
+                      <span className="fv-wm__rail-tick" aria-hidden />
+                      <span className="fv-wm__rail-text">{label}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           </section>
 
           <section

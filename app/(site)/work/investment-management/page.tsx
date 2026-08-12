@@ -95,7 +95,7 @@ export default function InvestmentManagementPage() {
 
         <figure className="fv-wm-hero__media">
           <div className="fv-wm-hero__plane">
-            <HeroPhoto id="piano" priority imgClassName="fv-hero-photo" />
+            <HeroPhoto id="acceptance" priority imgClassName="fv-hero-photo" />
           </div>
         </figure>
       </header>
