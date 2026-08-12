@@ -28,3 +28,20 @@ export const FIRM = {
     },
   },
 } as const;
+
+/**
+ * Firm founding anniversary — tenure copy (“N years”) counts from this date.
+ * Month is 0-indexed (0 = January).
+ */
+export const FIRM_FOUNDED = { year: 1995, month: 0, day: 1 } as const;
+
+/** Whole years since founding, rolling on each Jan 1 anniversary. */
+export function yearsSinceFounded(now = new Date()): number {
+  const years = now.getFullYear() - FIRM_FOUNDED.year;
+  const anniversary = new Date(
+    now.getFullYear(),
+    FIRM_FOUNDED.month,
+    FIRM_FOUNDED.day,
+  );
+  return Math.max(0, now < anniversary ? years - 1 : years);
+}

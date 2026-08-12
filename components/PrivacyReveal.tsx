@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { yearsSinceFounded } from "@/lib/firm";
 
-const YEARS_TARGET = 30;
 const COUNT_MS = 1400;
 const HOLD_MS = 700;
 const LEAKS_TO_REST_MS = 520;
@@ -16,6 +16,7 @@ function formatYears(n: number) {
 
 /**
  * Confidentiality mast: count years → hold → fade “0 leaks.” → reveal the rest.
+ * Year total rolls forward from the firm founding date.
  * Instant final state when prefers-reduced-motion.
  */
 export default function PrivacyReveal() {
@@ -23,9 +24,10 @@ export default function PrivacyReveal() {
   const [phase, setPhase] = useState<Phase>("counting");
 
   useEffect(() => {
+    const target = yearsSinceFounded();
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      setYears(YEARS_TARGET);
+      setYears(target);
       setPhase("done");
       return;
     }
@@ -37,15 +39,13 @@ export default function PrivacyReveal() {
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / COUNT_MS);
       const eased = 1 - (1 - t) ** 3;
-      setYears(Math.round(YEARS_TARGET * eased));
+      setYears(Math.round(target * eased));
       if (t < 1) {
         raf = requestAnimationFrame(tick);
       } else {
-        setYears(YEARS_TARGET);
+        setYears(target);
         setPhase("hold");
-        timers.push(
-          window.setTimeout(() => setPhase("leaks"), HOLD_MS),
-        );
+        timers.push(window.setTimeout(() => setPhase("leaks"), HOLD_MS));
         timers.push(
           window.setTimeout(
             () => setPhase("rest"),

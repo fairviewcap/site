@@ -15,14 +15,19 @@ export type ContinueItem = {
 export default function ContinueBar({
   items,
   label = "Continue",
+  className,
 }: {
   items: ContinueItem[];
   label?: string;
+  className?: string;
 }) {
   if (items.length === 0) return null;
 
   return (
-    <nav className="fv-continue" aria-label={label}>
+    <nav
+      className={className ? `fv-continue ${className}` : "fv-continue"}
+      aria-label={label}
+    >
       <p className="fv-continue__label">
         <LinkArrow size={14} className="fv-continue__mark" />
         <span>{label}</span>

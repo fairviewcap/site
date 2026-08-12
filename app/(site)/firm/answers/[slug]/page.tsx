@@ -8,7 +8,6 @@ import {
   getAnswerBySlug,
   getRelatedAnswers,
 } from "@/lib/answers";
-import { FIRM } from "@/lib/firm";
 import AnswerViewLogger from "./AnswerViewLogger";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -83,39 +82,19 @@ export default async function AnswerSlugPage({ params }: Props) {
         ) : null}
 
         {related.length > 0 ? (
-          <section
+          <ContinueBar
             className="fv-answer__related"
-            aria-labelledby="answer-related"
-          >
-            <h2 id="answer-related" className="fv-answer__related-title">
-              Related questions
-            </h2>
-            <ul className="fv-answer__related-list">
-              {related.map((r) => (
-                <li key={r.slug}>
-                  <Link href={`/firm/answers/${r.slug}`}>{r.question}</Link>
-                </li>
-              ))}
-            </ul>
-          </section>
+            label="Related questions"
+            items={related.map((r) => ({
+              href: `/firm/answers/${r.slug}`,
+              prompt: r.question,
+            }))}
+          />
         ) : null}
 
         <p className="fv-answer__all">
           <Link href="/firm/answers">All Straight Answers</Link>
         </p>
-
-        <ContinueBar
-          items={[
-            {
-              href: "/firm/fees",
-              prompt: "Want the fee schedule in plain numbers?",
-            },
-            {
-              href: FIRM.contactHref,
-              prompt: "Still wondering something we didn’t cover?",
-            },
-          ]}
-        />
       </article>
     </main>
   );

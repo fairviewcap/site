@@ -3,7 +3,7 @@ import HeroPhoto from "@/components/HeroPhoto";
 import HomeAnswersSearch from "@/components/HomeAnswersSearch";
 import TeamRail from "@/components/TeamRail";
 import { FIGURES } from "@/lib/figures";
-import { FIRM } from "@/lib/firm";
+import { FIRM, yearsSinceFounded } from "@/lib/firm";
 
 /**
  * Home — mast → plane → directory → team rail.
@@ -24,8 +24,9 @@ export default function Home() {
           </p>
           <p className="fv-hero__proof">
             We started Fairview in{" "}
-            <span className="fv-nums">{FIGURES.established.value}</span>.
-            Thirty-one years later, the people who run the firm own all of it.{" "}
+            <span className="fv-nums">{FIGURES.established.value}</span>.{" "}
+            <span className="fv-nums">{yearsSinceFounded()}</span> years
+            later, the people who run the firm own all of it.{" "}
             <span className="fv-nums">{FIGURES.aum.value}</span> under
             management, as of March 2026.
           </p>

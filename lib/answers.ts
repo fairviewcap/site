@@ -61,6 +61,16 @@ export const ANSWER_CATEGORIES: AnswerCategory[] = [
           "Usually a few weeks. Enough time to understand your situation and implement things carefully—never rushed.",
       },
       {
+        question: "Will moving my accounts to Fairview trigger a big tax bill?",
+        slug: "will-moving-my-accounts-to-fairview-trigger-a-big-tax-bill",
+        answer:
+          "Not if we can help it. When you arrive with existing holdings, we unwind positions gradually and with tax impact in mind, rather than liquidating everything on day one.",
+        more: {
+          href: "/work/wealth-management",
+          label: "How we handle the transition",
+        },
+      },
+      {
         question: "Where are your offices?",
         slug: "where-are-your-offices",
         answer:
@@ -127,6 +137,19 @@ export const ANSWER_CATEGORIES: AnswerCategory[] = [
         answer:
           "You’ll have a primary relationship, but you benefit from the entire Fairview team—advisors, analysts, and operations professionals working together.",
         more: { href: "/team", label: "Meet the team" },
+      },
+      {
+        question: "What happens if my advisor leaves or retires?",
+        slug: "what-happens-if-my-advisor-leaves-or-retires",
+        answer:
+          "Your relationship isn’t tied to one person. Every account is known by more than one member of the team, and that continuity—across advisors, and across generations of your family—is part of how the firm is built.",
+      },
+      {
+        question: "Do you have a clean regulatory record?",
+        slug: "do-you-have-a-clean-regulatory-record",
+        answer:
+          "Yes. You can verify it yourself through FINRA BrokerCheck or the SEC’s Investment Adviser Public Disclosure site—we’d rather you check than take our word for it.",
+        more: { href: "/pdf/form-adv-part-2a.pdf", label: "Form ADV" },
       },
       {
         question: "How often will we talk?",

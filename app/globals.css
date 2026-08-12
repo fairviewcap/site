@@ -4192,49 +4192,6 @@ html.fv-shell-tween .fv-rail {
   text-underline-offset: 4px;
 }
 
-.fv-answer__related {
-  margin-top: 2.75rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--fv-rule);
-}
-
-.fv-answer__related-title {
-  margin: 0;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fv-muted);
-}
-
-.fv-answer__related-list {
-  list-style: none;
-  margin: 0.85rem 0 0;
-  padding: 0;
-}
-
-.fv-answer__related-list li {
-  border-top: 1px solid var(--fv-rule);
-}
-
-.fv-answer__related-list li:last-child {
-  border-bottom: 1px solid var(--fv-rule);
-}
-
-.fv-answer__related-list a {
-  display: block;
-  padding: 0.75rem 0;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--fv-fg);
-  text-decoration: none;
-}
-
-.fv-answer__related-list a:hover {
-  color: var(--fv-green);
-}
-
 .fv-answer__all {
   margin: 1.75rem 0 0;
   font-size: 14px;
@@ -4253,6 +4210,12 @@ html.fv-shell-tween .fv-rail {
 
 .fv-answer .fv-continue {
   margin-top: 2.75rem;
+}
+
+.fv-answer__related .fv-continue__link {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
 }
 
 .fv-answers__more {

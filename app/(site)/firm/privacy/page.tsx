@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import ContinueBar from "@/components/ContinueBar";
 import PrivacyReveal from "@/components/PrivacyReveal";
 import PrivacyTheme from "@/components/PrivacyTheme";
-import { FIRM } from "@/lib/firm";
+import { FIRM, yearsSinceFounded } from "@/lib/firm";
 
-export const metadata: Metadata = {
-  title: "Confidentiality | Fairview Capital",
-  description:
-    "30 years. 0 leaks. Good advice requires the whole truth. The whole truth requires privacy.",
-};
+export function generateMetadata(): Metadata {
+  const years = yearsSinceFounded();
+  return {
+    title: "Confidentiality | Fairview Capital",
+    description: `${years} years. 0 leaks. Good advice requires the whole truth. The whole truth requires privacy.`,
+  };
+}
 
 export default function PrivacyPage() {
   return (
