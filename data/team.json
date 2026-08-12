@@ -9,8 +9,8 @@
       "slug": "andrew-f-mathieson",
       "role": "Managing Member & Founder",
       "teaser": "Where Fairview began.",
-      "bioHtml": "<p>Andy is the founder and managing member of Fairview Capital Investment Management, LLC. Prior to starting Fairview, Andy was a principal at Ashfield &amp; Co, Inc. He earned his undergraduate degree from Yale University in 1978, and his MBA from Stanford University in 1984.</p><p>Andy is on the Board of Dominican University in San Rafael and works in an advisory capacity for the Santa Lucia Conservancy. Andy also serves on the board of DiCon Fiberoptics, a private Richmond, California-based manufacturer of passive optical components, integrated modules and test instruments.</p><p>Andy previously has served on the Boards of Guide Dogs for the Blind, The Branson School, and the Bay Area Discovery Museum. He has also been active in the community as a youth sports coach (soccer and softball), a mentor, and a fundraiser for many Marin-based causes.</p><p>‍</p>",
-      "bioText": "Andy is the founder and managing member of Fairview Capital Investment Management, LLC. Prior to starting Fairview, Andy was a principal at Ashfield & Co, Inc. He earned his undergraduate degree from Yale University in 1978, and his MBA from Stanford University in 1984. Andy is on the Board of Dominican University in San Rafael and works in an advisory capacity for the Santa Lucia Conservancy. Andy also serves on the board of DiCon Fiberoptics, a private Richmond, California-based manufacturer of passive optical components, integrated modules and test instruments. Andy previously has served on the Boards of Guide Dogs for the Blind, The Branson School, and the Bay Area Discovery Museum. He has also been active in the community as a youth sports coach (soccer and softball), a mentor, and a fundraiser for many Marin-based causes. ‍",
+      "bioHtml": "<p>Andy is the founder and managing member of Fairview Capital Investment Management, LLC. Prior to starting Fairview, Andy was a principal at Ashfield &amp; Co, Inc. He earned his undergraduate degree from Yale University in 1978, and his MBA from Stanford University in 1984.</p><p>Andy is on the Board of Dominican University in San Rafael and works in an advisory capacity for the Santa Lucia Conservancy. Andy also serves on the board of DiCon Fiberoptics, a private Richmond, California-based manufacturer of passive optical components, integrated modules and test instruments.</p><p>Andy previously has served on the Boards of Guide Dogs for the Blind, The Branson School, and the Bay Area Discovery Museum. He has also been active in the community as a youth sports coach (soccer and softball), a mentor, and a fundraiser for many Marin-based causes.</p><p>\u200d</p>",
+      "bioText": "Andy is the founder and managing member of Fairview Capital Investment Management, LLC. Prior to starting Fairview, Andy was a principal at Ashfield & Co, Inc. He earned his undergraduate degree from Yale University in 1978, and his MBA from Stanford University in 1984. Andy is on the Board of Dominican University in San Rafael and works in an advisory capacity for the Santa Lucia Conservancy. Andy also serves on the board of DiCon Fiberoptics, a private Richmond, California-based manufacturer of passive optical components, integrated modules and test instruments. Andy previously has served on the Boards of Guide Dogs for the Blind, The Branson School, and the Bay Area Discovery Museum. He has also been active in the community as a youth sports coach (soccer and softball), a mentor, and a fundraiser for many Marin-based causes. \u200d",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad7215c4f235249196f20_master_0014_andy.webp",
       "email": null,
       "phone": null,
@@ -20,7 +20,8 @@
       "since": 1995,
       "sortOrder": 0,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": "/video/team/prototype.mp4"
     },
     {
       "id": "marcia-nakamura",
@@ -40,7 +41,8 @@
       "since": 2001,
       "sortOrder": 1,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": "/video/team/prototype.mp4"
     },
     {
       "id": "p-renae-branscum",
@@ -49,8 +51,8 @@
       "slug": "p-renae-branscum",
       "role": "Client Service Administrator",
       "teaser": "Making sure clients always have support.",
-      "bioHtml": "<p>Renae became a member of the client service and operations team after having been the executive assistant to Fairview’s founder. Previously, she was a senior administrative assistant for KPMG LLP, the U.S. audit, tax and advisory services firm. Earlier she was an executive assistant at StarMine and executive assistant to the president at Triplex, an infoUSA Company. Renae also has experience as a human resources administrator and head bookkeeper. To expand the in-office support to Fairview clients, Renae became a licensed notary public in July, 2011.</p>",
-      "bioText": "Renae became a member of the client service and operations team after having been the executive assistant to Fairview’s founder. Previously, she was a senior administrative assistant for KPMG LLP, the U.S. audit, tax and advisory services firm. Earlier she was an executive assistant at StarMine and executive assistant to the president at Triplex, an infoUSA Company. Renae also has experience as a human resources administrator and head bookkeeper. To expand the in-office support to Fairview clients, Renae became a licensed notary public in July, 2011.",
+      "bioHtml": "<p>Renae became a member of the client service and operations team after having been the executive assistant to Fairview\u2019s founder. Previously, she was a senior administrative assistant for KPMG LLP, the U.S. audit, tax and advisory services firm. Earlier she was an executive assistant at StarMine and executive assistant to the president at Triplex, an infoUSA Company. Renae also has experience as a human resources administrator and head bookkeeper. To expand the in-office support to Fairview clients, Renae became a licensed notary public in July, 2011.</p>",
+      "bioText": "Renae became a member of the client service and operations team after having been the executive assistant to Fairview\u2019s founder. Previously, she was a senior administrative assistant for KPMG LLP, the U.S. audit, tax and advisory services firm. Earlier she was an executive assistant at StarMine and executive assistant to the president at Triplex, an infoUSA Company. Renae also has experience as a human resources administrator and head bookkeeper. To expand the in-office support to Fairview clients, Renae became a licensed notary public in July, 2011.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad73ecde0d5673896973f_master_0011_ranae.webp",
       "email": null,
       "phone": null,
@@ -60,7 +62,8 @@
       "since": null,
       "sortOrder": 2,
       "showOnRail": false,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "peter-mathieson",
@@ -69,8 +72,8 @@
       "slug": "peter-mathieson",
       "role": "President",
       "teaser": "A long view on wealth and advice.",
-      "bioHtml": "<p>Peter joined the firm in 2012 to establish the Pittsburgh office. Previously, he was the President and a principal shareholder of Guyasuta Investment Advisors, an asset management firm in Pittsburgh that he co-founded in 1994. He earned a BA in Economics from Bucknell University in 1983.</p><p>Peter currently sits on the Board of Directors of the Museum of The Rockies, the One Valley Community Foundation, Big Sky Youth Empowerment, and the Arts Council of Big Sky. Peter also serves on the investment committee of the Pittsburgh Cultural Trust and is an emeritus board member of the Pittsburgh Foundation.</p><p>‍</p>",
-      "bioText": "Peter joined the firm in 2012 to establish the Pittsburgh office. Previously, he was the President and a principal shareholder of Guyasuta Investment Advisors, an asset management firm in Pittsburgh that he co-founded in 1994. He earned a BA in Economics from Bucknell University in 1983. Peter currently sits on the Board of Directors of the Museum of The Rockies, the One Valley Community Foundation, Big Sky Youth Empowerment, and the Arts Council of Big Sky. Peter also serves on the investment committee of the Pittsburgh Cultural Trust and is an emeritus board member of the Pittsburgh Foundation. ‍",
+      "bioHtml": "<p>Peter joined the firm in 2012 to establish the Pittsburgh office. Previously, he was the President and a principal shareholder of Guyasuta Investment Advisors, an asset management firm in Pittsburgh that he co-founded in 1994. He earned a BA in Economics from Bucknell University in 1983.</p><p>Peter currently sits on the Board of Directors of the Museum of The Rockies, the One Valley Community Foundation, Big Sky Youth Empowerment, and the Arts Council of Big Sky. Peter also serves on the investment committee of the Pittsburgh Cultural Trust and is an emeritus board member of the Pittsburgh Foundation.</p><p>\u200d</p>",
+      "bioText": "Peter joined the firm in 2012 to establish the Pittsburgh office. Previously, he was the President and a principal shareholder of Guyasuta Investment Advisors, an asset management firm in Pittsburgh that he co-founded in 1994. He earned a BA in Economics from Bucknell University in 1983. Peter currently sits on the Board of Directors of the Museum of The Rockies, the One Valley Community Foundation, Big Sky Youth Empowerment, and the Arts Council of Big Sky. Peter also serves on the investment committee of the Pittsburgh Cultural Trust and is an emeritus board member of the Pittsburgh Foundation. \u200d",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad717dabde55e069c9625_master_0015_peter.webp",
       "email": null,
       "phone": null,
@@ -80,7 +83,8 @@
       "since": 2012,
       "sortOrder": 3,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "brian-ahlemeyer",
@@ -100,7 +104,8 @@
       "since": 2014,
       "sortOrder": 4,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": "/video/team/prototype.mp4"
     },
     {
       "id": "annie-scherr",
@@ -120,7 +125,8 @@
       "since": 2015,
       "sortOrder": 5,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": "/video/team/prototype.mp4"
     },
     {
       "id": "sally-cervetto",
@@ -140,7 +146,8 @@
       "since": 2015,
       "sortOrder": 6,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "maaren-boucher",
@@ -160,7 +167,8 @@
       "since": 2017,
       "sortOrder": 7,
       "showOnRail": false,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "jake-miller",
@@ -180,17 +188,18 @@
       "since": 2018,
       "sortOrder": 8,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "maria-elena-roner",
-      "name": "Maria-Elena Ronér",
-      "lastName": "Ronér",
+      "name": "Maria-Elena Ron\u00e9r",
+      "lastName": "Ron\u00e9r",
       "slug": "maria-elena-roner",
       "role": "Private Client Avisor",
       "teaser": "Helping families make smart decisions with real wealth.",
-      "bioHtml": "<p>Maria joined the firm in 2019 as a private client advisor. She has spent her career building financial plans and advising high net worth families at Summitry, USAA Wealth Management, and Merrill Lynch Private Bank. She graduated cum laude from UC Berkeley with a BA in Economics in 2002 and earned her CFP® designation in 2010.</p>",
-      "bioText": "Maria joined the firm in 2019 as a private client advisor. She has spent her career building financial plans and advising high net worth families at Summitry, USAA Wealth Management, and Merrill Lynch Private Bank. She graduated cum laude from UC Berkeley with a BA in Economics in 2002 and earned her CFP® designation in 2010.",
+      "bioHtml": "<p>Maria joined the firm in 2019 as a private client advisor. She has spent her career building financial plans and advising high net worth families at Summitry, USAA Wealth Management, and Merrill Lynch Private Bank. She graduated cum laude from UC Berkeley with a BA in Economics in 2002 and earned her CFP\u00ae designation in 2010.</p>",
+      "bioText": "Maria joined the firm in 2019 as a private client advisor. She has spent her career building financial plans and advising high net worth families at Summitry, USAA Wealth Management, and Merrill Lynch Private Bank. She graduated cum laude from UC Berkeley with a BA in Economics in 2002 and earned her CFP\u00ae designation in 2010.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad6e1d0ab272e8bde889b_master_0004_maria-elena.webp",
       "email": null,
       "phone": null,
@@ -200,7 +209,8 @@
       "since": 2019,
       "sortOrder": 9,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "soledad-jean-pierre",
@@ -220,7 +230,8 @@
       "since": 2021,
       "sortOrder": 10,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "michelle-pak",
@@ -229,8 +240,8 @@
       "slug": "michelle-pak",
       "role": "Client Service Administrator",
       "teaser": "Making the client experience feel effortless.",
-      "bioHtml": "<p>Michelle joined Fairview in 2023 as a member of the client service and operations team. &nbsp;Prior to joining Fairview, Michelle’s career included time working with high net worth clients at Merrill Lynch Private Bank and US Trust. Michelle received her undergraduate degree from the University of the Pacific.</p>",
-      "bioText": "Michelle joined Fairview in 2023 as a member of the client service and operations team. Prior to joining Fairview, Michelle’s career included time working with high net worth clients at Merrill Lynch Private Bank and US Trust. Michelle received her undergraduate degree from the University of the Pacific.",
+      "bioHtml": "<p>Michelle joined Fairview in 2023 as a member of the client service and operations team. &nbsp;Prior to joining Fairview, Michelle\u2019s career included time working with high net worth clients at Merrill Lynch Private Bank and US Trust. Michelle received her undergraduate degree from the University of the Pacific.</p>",
+      "bioText": "Michelle joined Fairview in 2023 as a member of the client service and operations team. Prior to joining Fairview, Michelle\u2019s career included time working with high net worth clients at Merrill Lynch Private Bank and US Trust. Michelle received her undergraduate degree from the University of the Pacific.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad6eefa89ea5cc1a44d19_master_0001_michelle.webp",
       "email": null,
       "phone": null,
@@ -240,7 +251,8 @@
       "since": 2023,
       "sortOrder": 11,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "mario-stadtlander",
@@ -249,8 +261,8 @@
       "slug": "mario-stadtlander",
       "role": "Wealth Management Associate",
       "teaser": "Helping turn plans into action.",
-      "bioHtml": "<p>Mario joined Fairview in 2024 as a Wealth Management Associate working closely with the private client advisors. Prior to joining the firm, Mario worked as a financial advisor for a RIA in San Diego after spending time on their research, trading, and financial planning teams. Mario graduated from the University of San Diego, majoring in Finance and Business Economics and received his CFP® designation in 2023.</p>",
-      "bioText": "Mario joined Fairview in 2024 as a Wealth Management Associate working closely with the private client advisors. Prior to joining the firm, Mario worked as a financial advisor for a RIA in San Diego after spending time on their research, trading, and financial planning teams. Mario graduated from the University of San Diego, majoring in Finance and Business Economics and received his CFP® designation in 2023.",
+      "bioHtml": "<p>Mario joined Fairview in 2024 as a Wealth Management Associate working closely with the private client advisors. Prior to joining the firm, Mario worked as a financial advisor for a RIA in San Diego after spending time on their research, trading, and financial planning teams. Mario graduated from the University of San Diego, majoring in Finance and Business Economics and received his CFP\u00ae designation in 2023.</p>",
+      "bioText": "Mario joined Fairview in 2024 as a Wealth Management Associate working closely with the private client advisors. Prior to joining the firm, Mario worked as a financial advisor for a RIA in San Diego after spending time on their research, trading, and financial planning teams. Mario graduated from the University of San Diego, majoring in Finance and Business Economics and received his CFP\u00ae designation in 2023.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad6ca0ee386774782222b_master_0007_mario.webp",
       "email": null,
       "phone": null,
@@ -260,7 +272,8 @@
       "since": 2024,
       "sortOrder": 12,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "carla-cardarelli",
@@ -280,7 +293,8 @@
       "since": 2025,
       "sortOrder": 13,
       "showOnRail": false,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "bobby-miller",
@@ -289,8 +303,8 @@
       "slug": "bobby-miller",
       "role": "Senior Research Analyst",
       "teaser": "Finding the signals in the noise.",
-      "bioHtml": "<p>Bobby is a member of Fairview’s research team. Prior to joining Fairview, he was a credit analyst with a division of BNP Paribas. Bobby received his undergraduate degree in Business Administration from the University of Hawaii in 2008 and a MS in Financial Analysis from the University of San Francisco in 2014.</p>",
-      "bioText": "Bobby is a member of Fairview’s research team. Prior to joining Fairview, he was a credit analyst with a division of BNP Paribas. Bobby received his undergraduate degree in Business Administration from the University of Hawaii in 2008 and a MS in Financial Analysis from the University of San Francisco in 2014.",
+      "bioHtml": "<p>Bobby is a member of Fairview\u2019s research team. Prior to joining Fairview, he was a credit analyst with a division of BNP Paribas. Bobby received his undergraduate degree in Business Administration from the University of Hawaii in 2008 and a MS in Financial Analysis from the University of San Francisco in 2014.</p>",
+      "bioText": "Bobby is a member of Fairview\u2019s research team. Prior to joining Fairview, he was a credit analyst with a division of BNP Paribas. Bobby received his undergraduate degree in Business Administration from the University of Hawaii in 2008 and a MS in Financial Analysis from the University of San Francisco in 2014.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad707e6a80a9e39231fec_master_0000_bobby.webp",
       "email": null,
       "phone": null,
@@ -300,7 +314,8 @@
       "since": null,
       "sortOrder": 14,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "gian-perani",
@@ -309,8 +324,8 @@
       "slug": "gian-perani",
       "role": "Sr. Research Analyst & Head Trader",
       "teaser": "Turning research into smarter portfolios",
-      "bioHtml": "<p>Gian is a member of Fairview’s research team and is responsible for trading and portfolio analysis. Prior to joining Fairview, he worked for Prudential Financial as an investment analyst in the Chief Investment Office. Gian graduated from Colby College with a double major in Economics and Biology in 2014 and became a CFA® Charterholder in 2019.</p>",
-      "bioText": "Gian is a member of Fairview’s research team and is responsible for trading and portfolio analysis. Prior to joining Fairview, he worked for Prudential Financial as an investment analyst in the Chief Investment Office. Gian graduated from Colby College with a double major in Economics and Biology in 2014 and became a CFA® Charterholder in 2019.",
+      "bioHtml": "<p>Gian is a member of Fairview\u2019s research team and is responsible for trading and portfolio analysis. Prior to joining Fairview, he worked for Prudential Financial as an investment analyst in the Chief Investment Office. Gian graduated from Colby College with a double major in Economics and Biology in 2014 and became a CFA\u00ae Charterholder in 2019.</p>",
+      "bioText": "Gian is a member of Fairview\u2019s research team and is responsible for trading and portfolio analysis. Prior to joining Fairview, he worked for Prudential Financial as an investment analyst in the Chief Investment Office. Gian graduated from Colby College with a double major in Economics and Biology in 2014 and became a CFA\u00ae Charterholder in 2019.",
       "image": "https://cdn.prod.website-files.com/69b88a38eb2f8159f233ce40/69bad6e6404528fbe1c5145f_master_0003_gian.webp",
       "email": null,
       "phone": null,
@@ -320,7 +335,8 @@
       "since": null,
       "sortOrder": 15,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     },
     {
       "id": "maria-terezis",
@@ -340,7 +356,8 @@
       "since": null,
       "sortOrder": 16,
       "showOnRail": true,
-      "board": false
+      "board": false,
+      "videoUrl": null
     }
   ]
 }

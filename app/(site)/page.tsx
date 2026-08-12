@@ -18,9 +18,9 @@ export default function Home() {
             the phone ringing.
           </h1>
           <p className="fv-hero__sub">
-            When a firm serves outside owners, they have two mouths to feed:
-            their shareholders and you. Guess who gets fed first. We built
-            Fairview so we only have one boss. You.
+            When a firm serves outside owners, they have two mouths to
+            feed—shareholders, then you. We built Fairview so we only have one
+            boss. You.
           </p>
           <p className="fv-hero__proof">
             We started Fairview in{" "}

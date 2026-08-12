@@ -116,6 +116,11 @@ export function MemberForm({ member }: Props) {
           name="image"
           defaultValue={member?.image}
         />
+        <Field
+          label="Portrait video URL (optional)"
+          name="videoUrl"
+          defaultValue={member?.videoUrl}
+        />
         <Field label="Email" name="email" defaultValue={member?.email} />
         <Field label="Phone" name="phone" defaultValue={member?.phone} />
         <Field

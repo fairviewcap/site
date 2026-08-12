@@ -9,7 +9,7 @@ import type { HeroId } from "@/lib/heroes";
 export const metadata: Metadata = {
   title: "Wealth Management | Fairview Capital",
   description:
-    "Wealth used to mean well-being. Somewhere along the way, Wall Street redefined it to mean their casino. Managing wealth isn't a series of bets.",
+    "Wealth used to mean well-being. Somewhere along the way, Wall Street redefined it to mean casino. Managing wealth isn't a series of bets and fees.",
 };
 
 const PILLARS = [
@@ -63,10 +63,10 @@ export default function WealthManagementPage() {
           <p className="fv-wm__eyebrow">Wealth Management</p>
           <h1 className="fv-wm__title">
             Wealth used to mean well-being. Somewhere along the way, Wall Street
-            redefined it to mean their casino.
+            redefined it to mean casino.
           </h1>
           <p className="fv-wm__lede">
-            Managing wealth isn&apos;t a series of bets. It&apos;s your entire
+            Managing wealth isn&apos;t a series of bets and fees. It&apos;s your entire
             financial life—your business, your taxes, your family, and your
             philanthropic legacy—all pulling in the same direction.
           </p>

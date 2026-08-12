@@ -64,6 +64,7 @@ function memberFromForm(formData: FormData, existing?: TeamMember): TeamMember {
     bioHtml: String(formData.get("bioHtml") ?? "").trim(),
     bioText: String(formData.get("bioText") ?? "").trim(),
     image: String(formData.get("image") ?? "").trim(),
+    videoUrl: String(formData.get("videoUrl") ?? "").trim() || null,
     email: String(formData.get("email") ?? "").trim() || null,
     phone: String(formData.get("phone") ?? "").trim() || null,
     leadership: bool(formData, "leadership"),

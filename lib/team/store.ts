@@ -24,6 +24,7 @@ export type TeamFilter = "all" | "leadership" | "board";
 export async function listMembers(opts?: {
   publishedOnly?: boolean;
   railOnly?: boolean;
+  withVideo?: boolean;
   filter?: TeamFilter;
 }): Promise<TeamMember[]> {
   const db = await readTeamDb();
@@ -33,6 +34,9 @@ export async function listMembers(opts?: {
   }
   if (opts?.railOnly) {
     members = members.filter((m) => m.showOnRail && !m.board);
+  }
+  if (opts?.withVideo) {
+    members = members.filter((m) => Boolean(m.videoUrl));
   }
   if (opts?.filter === "leadership") {
     members = members.filter((m) => m.leadership);

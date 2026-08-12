@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import TeamBioVideo from "@/components/TeamBioVideo";
 import { getMemberBySlug, listMembers } from "@/lib/team/store";
 import { tenureCaption } from "@/lib/team/types";
 import { FIRM } from "@/lib/firm";
@@ -34,16 +35,24 @@ export default async function TeamMemberPage({ params }: Props) {
       </Link>
 
       <article className="fv-team-bio">
-        <div className="fv-team-bio__photo">
-          {member.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={member.image}
-              alt=""
-              className="fv-team-bio__img"
-            />
-          ) : null}
-        </div>
+        {member.videoUrl ? (
+          <TeamBioVideo
+            name={member.name}
+            image={member.image}
+            videoUrl={member.videoUrl}
+          />
+        ) : (
+          <div className="fv-team-bio__photo">
+            {member.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={member.image}
+                alt=""
+                className="fv-team-bio__img"
+              />
+            ) : null}
+          </div>
+        )}
 
         <div className="fv-team-bio__body">
           <p className="fv-team-bio__eyebrow">

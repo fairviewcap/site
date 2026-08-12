@@ -8,6 +8,8 @@ export type TeamMember = {
   bioHtml: string;
   bioText: string;
   image: string;
+  /** Optional short portrait intro (phone vertical). Null if none yet. */
+  videoUrl: string | null;
   email: string | null;
   phone: string | null;
   leadership: boolean;

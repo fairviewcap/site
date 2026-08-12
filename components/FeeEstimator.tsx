@@ -30,13 +30,14 @@ export default function FeeEstimator() {
   return (
     <div className="fv-fee-est">
       <header className="fv-fee-est__intro">
-        <p className="fv-fee-est__eyebrow">Illustrative estimate</p>
+        <p className="fv-fee-est__eyebrow">Your number</p>
         <h2 id={`${id}-title`} className="fv-fee-est__title">
-          See the blended fee on a given amount
+          See it on your assets
         </h2>
         <p className="fv-fee-est__lede">
           Drag to a level that feels like yours. The schedule is marginal — as
-          assets rise, the rate on the next dollar falls.
+          assets rise, the rate on the next dollar falls. Illustrative, not a
+          quote.
         </p>
       </header>
 

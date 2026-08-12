@@ -119,6 +119,23 @@ export default function InvestmentManagementPage() {
                 and unique circumstances and needs.
               </p>
             </div>
+
+            <figure className="fv-im-ideas" aria-label="Ideas come from everywhere">
+              <div className="fv-im-ideas__plane">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/photography/im/ideation-rail.png"
+                  alt="Research sources we draw on — filings, letters, and long-form reporting"
+                  className="fv-im-ideas__img"
+                />
+              </div>
+              <figcaption className="fv-im-ideas__cap">
+                <span className="fv-im-ideas__label">Ideation</span>
+                <span className="fv-im-ideas__hint">
+                  Ideas come from everywhere. Placeholder rail.
+                </span>
+              </figcaption>
+            </figure>
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-equity">

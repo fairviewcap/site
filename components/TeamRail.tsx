@@ -1,15 +1,29 @@
 import Link from "next/link";
 import { listMembers } from "@/lib/team/store";
 import { tenureCaption } from "@/lib/team/types";
+import TeamVideoReel from "@/components/TeamVideoReel";
 
 /**
  * Horizontal cast rail — faces + tenure, no cards.
- * Teaser into /team; not a replacement for the full page.
+ * Optional portrait-video poster opens a modal of short intros.
  */
 export default async function TeamRail() {
   const members = await listMembers({ publishedOnly: true, railOnly: true });
+  const clips = await listMembers({ publishedOnly: true, withVideo: true });
 
   if (members.length === 0) return null;
+
+  const reelClips = clips
+    .filter((m) => !m.board)
+    .map((m) => ({
+      id: m.id,
+      name: m.name,
+      slug: m.slug,
+      role: m.role,
+      since: m.since,
+      image: m.image,
+      videoUrl: m.videoUrl,
+    }));
 
   return (
     <div>
@@ -30,6 +44,15 @@ export default async function TeamRail() {
         role="list"
         aria-label="Team"
       >
+        {reelClips.length > 0 ? (
+          <div role="listitem" className="shrink-0">
+            <TeamVideoReel
+              clips={reelClips}
+              posterImage={reelClips[0]?.image}
+            />
+          </div>
+        ) : null}
+
         {members.map((member) => (
           <figure
             key={member.id}
