@@ -12,6 +12,7 @@ export const HERO_IDS = [
   "piano",
   "redwoods",
   "travel",
+  "travel2",
   "zoom",
 ] as const;
 
@@ -94,6 +95,12 @@ export const HEROES: Record<HeroId, HeroAsset> = {
     desktop: `${base}/fv-hero-travel-h.avif`,
     mobile: `${base}/fv-hero-travel-v.avif`,
     alt: "A mother and two children share a joyful hug while traveling.",
+  },
+  travel2: {
+    id: "travel2",
+    desktop: `${base}/fv-hero-travel2-h.avif`,
+    mobile: `${base}/fv-hero-travel2-v.avif`,
+    alt: "Two travelers walk a desert path toward the pyramids.",
   },
   zoom: {
     id: "zoom",

@@ -2,12 +2,11 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { HEROES, type HeroId } from "@/lib/heroes";
 
 export type PlanningDomainPoster = {
   title: string;
   items: readonly string[];
-  hero: HeroId;
+  src: string;
 };
 
 /**
@@ -66,7 +65,7 @@ export default function WmDomainsRail({
 
       <div ref={railRef} className="fv-wm-posters__rail">
         {domains.map((domain, i) => {
-          const hero = HEROES[domain.hero];
+          const src = domain.src;
           const index = String(i + 1).padStart(2, "0");
           const isOpen = open === i;
           const panelId = `${labelId}-panel-${i}`;
@@ -90,10 +89,10 @@ export default function WmDomainsRail({
                 <span className="fv-wm-posters__media" aria-hidden>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={hero.mobile}
+                    src={src}
                     alt=""
-                    width={1600}
-                    height={2000}
+                    width={1200}
+                    height={1680}
                     className="fv-wm-posters__img"
                     loading={i < 2 ? "eager" : "lazy"}
                     decoding="async"

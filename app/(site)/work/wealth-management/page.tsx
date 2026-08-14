@@ -49,52 +49,11 @@ const PILLARS: {
   },
 ];
 
-/** Planning domains — poster rail with art-directed heroes. */
+/** Planning domains — 5:7 poster rail. Life first, portfolio last. */
 const PLANNING_DOMAINS = [
   {
-    title: "Investment Strategy",
-    hero: "piano" as const,
-    items: [
-      "Investment selection",
-      "Asset allocation",
-      "Risk management",
-      "Asset location",
-    ],
-  },
-  {
-    title: "Retirement Planning",
-    hero: "grandma" as const,
-    items: [
-      "Retirement income planning",
-      "Cash flow projections",
-      "Benefits + Social Security",
-      "Business succession planning",
-    ],
-  },
-  {
-    title: "Income & Tax",
-    hero: "zoom" as const,
-    items: [
-      "Tax-efficient investing",
-      "Withdrawal strategy",
-      "Stock option advice",
-      "Coordination with CPA",
-    ],
-  },
-  {
-    title: "Family",
-    hero: "travel" as const,
-    items: [
-      "Family dynamics",
-      "Life events",
-      "Education funding",
-      "Assisting parents + children",
-      "Annual gifting",
-    ],
-  },
-  {
     title: "Estate Planning",
-    hero: "college" as const,
+    src: "/photography/5x7-cards/fv-estate-planning.avif",
     items: [
       "Trusts",
       "Wills",
@@ -104,8 +63,49 @@ const PLANNING_DOMAINS = [
     ],
   },
   {
+    title: "Family",
+    src: "/photography/5x7-cards/fv-family.avif",
+    items: [
+      "Family dynamics",
+      "Life events",
+      "Education funding",
+      "Assisting parents + children",
+      "Annual gifting",
+    ],
+  },
+  {
+    title: "Retirement Planning",
+    src: "/photography/5x7-cards/fv-retirement.avif",
+    items: [
+      "Retirement income planning",
+      "Cash flow projections",
+      "Benefits + Social Security",
+      "Business succession planning",
+    ],
+  },
+  {
+    title: "Income & Tax",
+    src: "/photography/5x7-cards/fv-taxes.avif",
+    items: [
+      "Tax-efficient investing",
+      "Withdrawal strategy",
+      "Stock option advice",
+      "Coordination with CPA",
+    ],
+  },
+  {
+    title: "Investment Strategy",
+    src: "/photography/5x7-cards/fv-investment-strategy.avif",
+    items: [
+      "Investment selection",
+      "Asset allocation",
+      "Risk management",
+      "Asset location",
+    ],
+  },
+  {
     title: "Insurance",
-    hero: "hospital" as const,
+    src: "/photography/5x7-cards/fv-insurance.avif",
     items: [
       "Insurance review",
       "Life",
