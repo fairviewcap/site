@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import LinkArrow from "@/components/LinkArrow";
 import PageEnter from "@/components/PageEnter";
-import WmAssetUnify from "@/components/WmAssetUnify";
-import WmDomainsRail from "@/components/WmDomainsRail";
-import WmIphoneMedia from "@/components/WmIphoneMedia";
-import WmHorizonSwitch from "@/components/WmHorizonSwitch";
-import WmLifeHorizon from "@/components/WmLifeHorizon";
-import WmTwoFutures from "@/components/WmTwoFutures";
 import WmPillarVisual, {
   type PillarDiagramId,
 } from "@/components/WmPillarVisual";
 import { FIRM } from "@/lib/firm";
+
+const WmAssetUnify = dynamic(() => import("@/components/WmAssetUnify"));
+const WmDomainsRail = dynamic(() => import("@/components/WmDomainsRail"));
+const WmHorizonSwitch = dynamic(() => import("@/components/WmHorizonSwitch"));
+const WmIphoneMedia = dynamic(() => import("@/components/WmIphoneMedia"));
+const WmLifeHorizon = dynamic(() => import("@/components/WmLifeHorizon"));
+const WmTwoFutures = dynamic(() => import("@/components/WmTwoFutures"));
 
 export const metadata: Metadata = {
   title: "Wealth Management | Fairview Capital",
@@ -199,8 +201,7 @@ export default function WealthManagementPage() {
               aria-labelledby="wm-relationship"
             >
               <h2 id="wm-relationship" className="fv-wm__section-title">
-                The heavy lifting happens upfront. The judgment happens over
-                decades.
+              Logic removes the noise. Judgment holds the path.
               </h2>
 
               <WmHorizonSwitch />
@@ -234,34 +235,38 @@ export default function WealthManagementPage() {
               </div>
             </section>
 
-            <section className="fv-wm__section" aria-labelledby="wm-tech">
-              <h2 id="wm-tech" className="fv-wm__section-title">
-                Computers draw straight lines into the future. Real markets
-                don&apos;t.
-              </h2>
-              <div className="fv-wm__prose">
-                <p>
-                  We use software to stress-test your plan against bad markets,
-                  rising taxes, and unexpected events—not to draw straight lines
-                  pointing upward. Through a secure portal, you can view — and
-                  update — your entire financial picture in real time, including
-                  the assets we don&apos;t manage.
-                </p>
-                <p>
-                  Some of our clients like to inspect every line item and stress
-                  test. Others just want the summary. We design your reporting
-                  around what you actually want to see.
-                </p>
+            <section
+              className="fv-wm__section fv-wm__section--mc"
+              aria-labelledby="wm-tech"
+            >
+              <div className="fv-wm-mc-split">
+                <div className="fv-wm-mc-split__copy">
+                  <h2 id="wm-tech" className="fv-wm__section-title">
+                  Technology built around how you want to see your money.
+                  </h2>
+                  <div className="fv-wm__prose">
+                    <p>
+                      We use software to stress-test your plan against bad
+                      markets, rising taxes, and unexpected events—not to draw
+                      straight lines pointing upward. Through a secure portal,
+                      you can view — and update — your entire financial picture
+                      in real time, including the assets we don&apos;t manage.
+                    </p>
+                    <p>
+                      Some of our clients like to inspect every line item and
+                      stress test. Others just want the summary. We design your
+                      reporting around what you actually want to see.
+                    </p>
+                  </div>
+                  <p className="fv-wm__tech-more">
+                    <Link href="/firm/technology" className="fv-wm__more">
+                      More on how we use technology
+                      <LinkArrow />
+                    </Link>
+                  </p>
+                </div>
+                <WmTwoFutures />
               </div>
-
-              <WmTwoFutures />
-
-              <p className="fv-wm__tech-more">
-                <Link href="/firm/technology" className="fv-wm__more">
-                  More on how we use technology
-                  <LinkArrow />
-                </Link>
-              </p>
             </section>
 
             <section className="fv-wm__section" aria-labelledby="wm-outside">

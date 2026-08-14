@@ -24,6 +24,7 @@ const FADE_MS = 380;
 export default function WmLifeHorizon() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(true);
+  const [pageVisible, setPageVisible] = useState(true);
   const [paused, setPaused] = useState(false);
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -42,6 +43,13 @@ export default function WmLifeHorizon() {
   }, []);
 
   useEffect(() => {
+    const onVis = () => setPageVisible(document.visibilityState === "visible");
+    onVis();
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+
+  useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
 
@@ -57,7 +65,7 @@ export default function WmLifeHorizon() {
   }, []);
 
   useEffect(() => {
-    if (!inView || paused || reduced) return;
+    if (!inView || paused || reduced || !pageVisible) return;
 
     let fadeTimer = 0;
     const tick = window.setInterval(() => {
@@ -72,7 +80,7 @@ export default function WmLifeHorizon() {
       window.clearInterval(tick);
       window.clearTimeout(fadeTimer);
     };
-  }, [inView, paused, reduced]);
+  }, [inView, paused, reduced, pageVisible]);
 
   const scene = SCENES[index];
   const mark = String(index + 1).padStart(2, "0");

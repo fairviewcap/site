@@ -217,10 +217,14 @@ export default function WmAssetUnify() {
         </button>
       </div>
 
+      <div className="fv-wm-unify__stage">
       <svg
         key={runKey}
         className="fv-wm-unify__svg"
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+        width={VIEW_W}
+        height={VIEW_H}
+        preserveAspectRatio="xMinYMid meet"
         role="img"
         aria-labelledby={`${id}-desc`}
       >
@@ -266,6 +270,7 @@ export default function WmAssetUnify() {
           ),
         )}
       </svg>
+      </div>
 
       <p className="fv-wm-unify__status" aria-live="polite">
         <span className="fv-wm-unify__pulse" aria-hidden />

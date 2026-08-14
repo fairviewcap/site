@@ -97,25 +97,14 @@ export default function WmHorizonSwitch() {
   const ampRef = useRef(1);
   const inViewRef = useRef(true);
   const pausedRef = useRef(false);
+  const kickRef = useRef<() => void>(() => {});
   const [on, setOn] = useState(false);
   const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
     onRef.current = on;
+    kickRef.current();
   }, [on]);
-
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        inViewRef.current = Boolean(entry?.isIntersecting);
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -141,6 +130,13 @@ export default function WmHorizonSwitch() {
     let followVy = 0;
     let seeded = false;
 
+    const pageVisible = () => document.visibilityState === "visible";
+    const live = () =>
+      !reduced &&
+      inViewRef.current &&
+      !pausedRef.current &&
+      pageVisible();
+
     const size = () => {
       const w = root.clientWidth || 800;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -153,14 +149,12 @@ export default function WmHorizonSwitch() {
     };
 
     let width = size();
-    const ro = new ResizeObserver(() => {
-      width = size();
-    });
-    ro.observe(root);
 
     const draw = (now: number) => {
+      raf = 0;
       const dt = Math.min(32, now - last) / 16.67;
       last = now;
+      const animating = live();
 
       const bg = readColor(root, "--fv-bg", "#f2f1ef");
       const fg = readColor(root, "--fv-fg", "#141414");
@@ -183,7 +177,7 @@ export default function WmHorizonSwitch() {
       const amp = ampRef.current;
       const tone = mixHex(LOGO_GREEN, RED, amp);
 
-      if (!reduced && inViewRef.current && !pausedRef.current) {
+      if (animating) {
         time += SPEED * dt;
       }
 
@@ -209,7 +203,7 @@ export default function WmHorizonSwitch() {
         followY += followVy * dt;
       }
 
-      if (!reduced && inViewRef.current && !pausedRef.current) {
+      if (animating) {
         rotation += (SPEED * Math.hypot(1, path.slope) * dt) / BALL_R;
       }
 
@@ -289,13 +283,45 @@ export default function WmHorizonSwitch() {
       ctx.fillStyle = fade;
       ctx.fillRect(0, 0, width, HEIGHT);
 
-      raf = requestAnimationFrame(draw);
+      const settling =
+        Math.abs(target - amp) > 0.002 ||
+        Math.abs(ampVel) > 0.002 ||
+        Math.hypot(followVx, followVy) > 0.03;
+
+      if (animating || settling) raf = requestAnimationFrame(draw);
     };
 
-    raf = requestAnimationFrame(draw);
+    const kick = () => {
+      if (raf) return;
+      last = performance.now();
+      raf = requestAnimationFrame(draw);
+    };
+    kickRef.current = kick;
+
+    const ro = new ResizeObserver(() => {
+      width = size();
+      kick();
+    });
+    ro.observe(root);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = Boolean(entry?.isIntersecting);
+        kick();
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(root);
+    document.addEventListener("visibilitychange", kick);
+
+    kick();
     return () => {
+      kickRef.current = () => {};
       cancelAnimationFrame(raf);
+      raf = 0;
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", kick);
     };
   }, []);
 
@@ -331,6 +357,7 @@ export default function WmHorizonSwitch() {
           onClick={() => {
             pausedRef.current = playing;
             setPlaying((p) => !p);
+            kickRef.current();
           }}
         >
           <span className="fv-wm-horizon-sw__play-icon" aria-hidden>
