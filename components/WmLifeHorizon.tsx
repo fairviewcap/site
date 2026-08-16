@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HEROES, type HeroId } from "@/lib/heroes";
+import PlayPauseIcon from "@/components/PlayPauseIcon";
 
 const SCENES: {
   q: string;
   fill: string;
   hero?: HeroId;
 }[] = [
-  { q: "Selling a business?", fill: "#3d4a43" },
-  { q: "Funding a grandchild's trust?", fill: "#5a6b5e" },
+  { q: "Selling a business?", fill: "#3d4a43", hero: "sellbusiness" },
+  { q: "Funding a grandchild's trust?", fill: "#5a6b5e", hero: "fundgrandkids" },
   { q: "Building a legacy?", fill: "#2f3632" },
   { q: "Buying a first home?", fill: "#7a8a7c", hero: "firsthome" },
   { q: "Dream travel?", fill: "#4a5c62", hero: "travel2" },
@@ -105,6 +106,7 @@ export default function WmLifeHorizon() {
     >
       <figure className="fv-wm-horizon__media">
         <div className="fv-wm-horizon__plane">
+          <div className="fv-wm-horizon__clip">
           {SCENES.map((s, i) => {
             const hero = s.hero ? HEROES[s.hero] : null;
             return (
@@ -133,7 +135,7 @@ export default function WmLifeHorizon() {
                       width={1600}
                       height={2000}
                       className="fv-wm-horizon__photo"
-                      loading={i === 3 || i === 4 ? "eager" : "lazy"}
+                      loading={i < 2 ? "eager" : "lazy"}
                       decoding="async"
                     />
                   </picture>
@@ -141,6 +143,7 @@ export default function WmLifeHorizon() {
               </span>
             );
           })}
+          </div>
 
           <div className="fv-wm-horizon__pill">
             <span className="fv-wm-horizon__index" aria-hidden>
@@ -194,7 +197,7 @@ export default function WmLifeHorizon() {
               aria-pressed={playing}
               onClick={() => setPaused((p) => !p)}
             >
-              <span className="fv-wm-horizon__toggle-icon" aria-hidden />
+              <PlayPauseIcon playing={playing} />
             </button>
             <button
               type="button"

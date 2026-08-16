@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import PlayPauseIcon from "@/components/PlayPauseIcon";
 
 const HEIGHT = 280;
 const BALL_R = 8;
@@ -70,25 +71,6 @@ function readColor(el: HTMLElement, name: string, fallback: string) {
   return v || fallback;
 }
 
-function PlayGlyph() {
-  return (
-    <svg className="fv-wm-horizon-sw__glyph" viewBox="0 0 24 24" aria-hidden>
-      <path
-        fill="currentColor"
-        d="M8.15 5.05c0-.92.97-1.52 1.77-1.08l10.05 5.5a1.25 1.25 0 0 1 0 2.16l-10.05 5.5c-.8.44-1.77-.16-1.77-1.08V5.05z"
-      />
-    </svg>
-  );
-}
-
-function PauseGlyph() {
-  return (
-    <svg className="fv-wm-horizon-sw__glyph" viewBox="0 0 24 24" aria-hidden>
-      <rect x="6.2" y="5" width="4" height="14" rx="1.6" fill="currentColor" />
-      <rect x="13.8" y="5" width="4" height="14" rx="1.6" fill="currentColor" />
-    </svg>
-  );
-}
 export default function WmHorizonSwitch() {
   const id = useId();
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -361,7 +343,7 @@ export default function WmHorizonSwitch() {
           }}
         >
           <span className="fv-wm-horizon-sw__play-icon" aria-hidden>
-            {playing ? <PauseGlyph /> : <PlayGlyph />}
+            <PlayPauseIcon playing={playing} />
           </span>
         </button>
       </div>

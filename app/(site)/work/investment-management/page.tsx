@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
-import HoldingsExhibit from "@/components/HoldingsExhibit";
+import ImEquityStep, { type EquityStepId } from "@/components/ImEquityStep";
+import ImSourcesRail from "@/components/ImSourcesRail";
 import { FIRM } from "@/lib/firm";
-import type { HeroId } from "@/lib/heroes";
+import { HEROES, type HeroId } from "@/lib/heroes";
 
 export const metadata: Metadata = {
   title: "Investment Management | Fairview Capital",
@@ -12,37 +13,46 @@ export const metadata: Metadata = {
     "We don't predict the future. We prepare for several of them — 25 to 30 deeply researched companies built on five-year models, direct due diligence, and simple arithmetic.",
 };
 
-const EQUITY_PROCESS = [
+const EQUITY_PROCESS: {
+  index: string;
+  title: string;
+  diagram: EquityStepId;
+  body: string;
+}[] = [
   {
     index: "01",
     title: "In-house assessment",
+    diagram: "assess",
     body: "Before investing, we conduct extensive assessments of each company’s business, management, and markets.",
   },
   {
     index: "02",
     title: "Five-year projections",
+    diagram: "project",
     body: "We build detailed five-year financial projections for every holding. We continuously monitor and update them, aiming to understand how the company will be competing and performing far into the future.",
   },
   {
     index: "03",
     title: "Direct research",
+    diagram: "research",
     body: "Our research includes meetings with company management, industry experts, and other research analysts.",
   },
   {
     index: "04",
     title: "Disciplined valuation",
+    diagram: "value",
     body: "We undertake a rigorous valuation analysis of each company, comparing it against the overall market and its peers, with a focus on current prices relative to earnings and cash flow quality and growth.",
   },
-] as const;
+];
 
-const THEMES = [
-  "Artificial Intelligence (AI)",
-  "Electrification of the economy",
-  "Climate trends",
-  "Aging demographics",
-  "Water infrastructure",
-  "Live and unique media content",
-] as const;
+const THEMES: { title: string; hero: HeroId }[] = [
+  { title: "Artificial Intelligence (AI)", hero: "zoom" },
+  { title: "Electrification of the economy", hero: "sellbusiness" },
+  { title: "Climate trends", hero: "redwoods" },
+  { title: "Aging demographics", hero: "grandma" },
+  { title: "Water infrastructure", hero: "community" },
+  { title: "Live and unique media content", hero: "ballet" },
+];
 
 const ALLOCATIONS = [
   "Our core stock holdings",
@@ -51,31 +61,6 @@ const ALLOCATIONS = [
   "Fixed income ETFs",
   "Alternative assets",
 ] as const;
-
-function ImMedia({
-  hero,
-  label,
-  ratio = "wide",
-}: {
-  hero: HeroId;
-  label: string;
-  ratio?: "wide" | "tall";
-}) {
-  return (
-    <figure className={`fv-wm__media fv-wm__media--${ratio}`}>
-      <div className="fv-wm__media-plane">
-        <HeroPhoto
-          id={hero}
-          variant={ratio === "tall" ? "tall" : "wide"}
-          imgClassName="fv-hero-photo"
-        />
-      </div>
-      <figcaption className="fv-wm__media-cap">
-        <span className="fv-wm__media-label">{label}</span>
-      </figcaption>
-    </figure>
-  );
-}
 
 export default function InvestmentManagementPage() {
   return (
@@ -119,57 +104,42 @@ export default function InvestmentManagementPage() {
                 and unique circumstances and needs.
               </p>
             </div>
-
-            <figure className="fv-im-ideas" aria-label="Ideas come from everywhere">
-              <div className="fv-im-ideas__plane">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/photography/im/ideation-rail.png"
-                  alt="Research sources we draw on — filings, letters, and long-form reporting"
-                  className="fv-im-ideas__img"
-                />
-              </div>
-              <figcaption className="fv-im-ideas__cap">
-                <span className="fv-im-ideas__label">Ideation</span>
-                <span className="fv-im-ideas__hint">
-                  Ideas come from everywhere. Placeholder rail.
-                </span>
-              </figcaption>
-            </figure>
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-equity">
             <h2 id="im-equity" className="fv-wm__section-title">
               Our core equity strategy
             </h2>
+            <p className="fv-im-equity__lede">
+              A ticker is just a string of letters. We buy what&apos;s
+              underneath it.
+            </p>
             <div className="fv-wm__prose">
               <p>
-                A ticker is just a string of letters. We buy what&apos;s
-                underneath it.
-              </p>
-              <p>
-                Our model equity portfolio is a diversified collection of 25 to
-                30 deeply researched, best-in-class businesses with visible and
+                Our model equity portfolio is a diversified collection of
+                deeply researched, best-in-class businesses with visible and
                 durable strengths.
               </p>
             </div>
 
-            <ol className="fv-wm__schedule">
+            <ol className="fv-im-steps">
               {EQUITY_PROCESS.map((step) => (
-                <li key={step.index} className="fv-wm__row">
-                  <span className="fv-wm__index" aria-hidden>
-                    {step.index}
-                  </span>
-                  <span className="fv-wm__rule" aria-hidden />
-                  <div className="fv-wm__row-body">
+                <li key={step.index} className="fv-im-step">
+                  <figure className="fv-im-step__media">
+                    <div className="fv-im-step__plane">
+                      <ImEquityStep id={step.diagram} />
+                    </div>
+                  </figure>
+                  <div className="fv-im-step__copy">
+                    <p className="fv-wm__pillar-index" aria-hidden>
+                      {step.index}
+                    </p>
                     <h3 className="fv-wm__pillar-title">{step.title}</h3>
                     <p className="fv-wm__pillar-body">{step.body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-
-            <HoldingsExhibit />
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-macro">
@@ -193,7 +163,7 @@ export default function InvestmentManagementPage() {
               </p>
             </div>
 
-            <ImMedia hero="redwoods" label="Long horizons" />
+            <ImSourcesRail />
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-themes">
@@ -209,12 +179,32 @@ export default function InvestmentManagementPage() {
               </p>
             </div>
 
-            <ul className="fv-wm__ledger">
-              {THEMES.map((theme) => (
-                <li key={theme} className="fv-wm__ledger-item">
-                  {theme}
-                </li>
-              ))}
+            <ul className="fv-im-themes">
+              {THEMES.map((theme, i) => {
+                const hero = HEROES[theme.hero];
+                const index = String(i + 1).padStart(2, "0");
+                return (
+                  <li key={theme.title} className="fv-im-themes__card">
+                    <figure className="fv-im-themes__face">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={hero.mobile}
+                        alt=""
+                        width={1600}
+                        height={2000}
+                        className="fv-im-themes__img"
+                        loading={i < 3 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                      <span className="fv-im-themes__shade" aria-hidden />
+                      <figcaption className="fv-im-themes__meta">
+                        <span className="fv-im-themes__index">{index}</span>
+                        <span className="fv-im-themes__title">{theme.title}</span>
+                      </figcaption>
+                    </figure>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="fv-wm__prose fv-wm__prose--follow">

@@ -7,10 +7,12 @@ export const HERO_IDS = [
   "college",
   "community",
   "firsthome",
+  "fundgrandkids",
   "grandma",
   "hospital",
   "piano",
   "redwoods",
+  "sellbusiness",
   "travel",
   "travel2",
   "zoom",
@@ -66,6 +68,12 @@ export const HEROES: Record<HeroId, HeroAsset> = {
     mobile: `${base}/fv-hero-firsthome-v.avif`,
     alt: "A young couple shares a laugh among moving boxes in a new home.",
   },
+  fundgrandkids: {
+    id: "fundgrandkids",
+    desktop: `${base}/fv-hero-fundgrandkids-h.avif`,
+    mobile: `${base}/fv-hero-fundgrandkids-v.avif`,
+    alt: "A grandmother and a young boy reach toward each other in a grassy field.",
+  },
   grandma: {
     id: "grandma",
     desktop: `${base}/fv-hero-grandma-h.avif`,
@@ -89,6 +97,12 @@ export const HEROES: Record<HeroId, HeroAsset> = {
     desktop: `${base}/fv-hero-redwoods-h.avif`,
     mobile: `${base}/fv-hero-redwoods-v.avif`,
     alt: "A person and their dog stand among towering California redwoods.",
+  },
+  sellbusiness: {
+    id: "sellbusiness",
+    desktop: `${base}/fv-hero-sellbusiness-h.avif`,
+    mobile: `${base}/fv-hero-sellbusiness-v.avif`,
+    alt: "A business owner stands in her workshop, hands on hips, smiling.",
   },
   travel: {
     id: "travel",

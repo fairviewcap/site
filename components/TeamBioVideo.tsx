@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import PlayPauseIcon from "@/components/PlayPauseIcon";
 
 type Props = {
   name: string;
@@ -50,7 +51,9 @@ export default function TeamBioVideo({ name, image, videoUrl }: Props) {
         onClick={toggle}
         aria-label={playing ? `Pause ${name}` : `Play ${name} introduction`}
       >
-        <span className="fv-team-bio__play-mark" aria-hidden />
+        <span className="fv-team-bio__play-mark" aria-hidden>
+          <PlayPauseIcon playing={playing} />
+        </span>
       </button>
     </div>
   );

@@ -10,6 +10,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import type { TeamMember } from "@/lib/team/types";
+import PlayPauseIcon from "@/components/PlayPauseIcon";
 
 type Clip = Pick<
   TeamMember,
@@ -130,7 +131,9 @@ export default function TeamVideoReel({ clips, posterImage }: Props) {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={poster} alt="" className="fv-team-reel__poster-img" />
           ) : null}
-          <span className="fv-team-reel__poster-play" aria-hidden />
+          <span className="fv-team-reel__poster-play" aria-hidden>
+            <PlayPauseIcon playing={false} />
+          </span>
         </span>
         <span className="fv-team-reel__poster-cap">
           <span className="fv-team-reel__poster-title">Short introductions</span>
@@ -205,7 +208,9 @@ export default function TeamVideoReel({ clips, posterImage }: Props) {
                   onClick={() => void playCurrent()}
                   aria-label={`Play ${clip.name}`}
                 >
-                  <span className="fv-team-reel__play-mark" aria-hidden />
+                  <span className="fv-team-reel__play-mark" aria-hidden>
+                    <PlayPauseIcon playing={false} />
+                  </span>
                 </button>
               ) : null}
             </div>
