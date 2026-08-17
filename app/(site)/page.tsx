@@ -4,7 +4,7 @@ import HomeAnswersSearch from "@/components/HomeAnswersSearch";
 import PageEnter from "@/components/PageEnter";
 import TeamRail from "@/components/TeamRail";
 import { FIGURES } from "@/lib/figures";
-import { FIRM, yearsSinceFounded } from "@/lib/firm";
+import { FIRM } from "@/lib/firm";
 
 /**
  * Home — mast → plane → directory → team rail.
@@ -17,22 +17,33 @@ export default function Home() {
         <div className="fv-hero__mast">
           <h1 className="fv-hero__title" data-enter="0">
             Most firms answer to a board, a bank, or a buyer. Ours answers to
-            the phone ringing.
+            the phone&nbsp;ringing.
           </h1>
           <p className="fv-hero__sub" data-enter="1">
             When a firm serves outside owners, they have two mouths to
             feed—shareholders, then you. We built Fairview so we only have one
-            boss. You.
-          </p>
-          <p className="fv-hero__proof" data-enter="2">
-            We started Fairview in{" "}
-            <span className="fv-nums">{FIGURES.established.value}</span>.{" "}
-            <span className="fv-nums">{yearsSinceFounded()}</span> years
-            later, the people who run the firm own all of it.{" "}
-            <span className="fv-nums">{FIGURES.aum.value}</span> under
-            management, as of March 2026.
+            boss.&nbsp;You.
           </p>
         </div>
+
+        <dl className="fv-hero__proof" data-enter="2">
+          <div className="fv-hero__proof-item">
+            <dt className="fv-hero__proof-value fv-nums">
+              {FIGURES.established.value}
+            </dt>
+            <dd className="fv-hero__proof-label">Founded</dd>
+          </div>
+          <div className="fv-hero__proof-item">
+            <dt className="fv-hero__proof-value fv-nums">100%</dt>
+            <dd className="fv-hero__proof-label">Employee-owned</dd>
+          </div>
+          <div className="fv-hero__proof-item">
+            <dt className="fv-hero__proof-value fv-nums">
+              {FIGURES.aum.value}
+            </dt>
+            <dd className="fv-hero__proof-label">Client assets</dd>
+          </div>
+        </dl>
 
         <div className="fv-hero__media" data-enter="3">
           <HeroPhoto id="grandma" priority imgClassName="fv-hero__img" />

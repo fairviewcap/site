@@ -91,7 +91,10 @@ export default function InvestmentManagementPage() {
             className="fv-wm__section fv-wm__section--first"
             aria-labelledby="im-how"
           >
-            <h2 id="im-how" className="fv-wm__section-title">
+            <h2
+              id="im-how"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               How we invest
             </h2>
             <div className="fv-wm__prose">
@@ -107,10 +110,13 @@ export default function InvestmentManagementPage() {
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-equity">
-            <h2 id="im-equity" className="fv-wm__section-title">
+            <h2
+              id="im-equity"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               Our core equity strategy
             </h2>
-            <p className="fv-im-equity__lede">
+            <p className="fv-im-equity__lede fv-im-equity__lede--center">
               A ticker is just a string of letters. We buy what&apos;s
               underneath it.
             </p>
@@ -143,7 +149,10 @@ export default function InvestmentManagementPage() {
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-macro">
-            <h2 id="im-macro" className="fv-wm__section-title">
+            <h2
+              id="im-macro"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               Macro trends &amp; economic scenarios
             </h2>
             <div className="fv-wm__prose">
@@ -167,7 +176,10 @@ export default function InvestmentManagementPage() {
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-themes">
-            <h2 id="im-themes" className="fv-wm__section-title">
+            <h2
+              id="im-themes"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               Long-term investment themes
             </h2>
             <div className="fv-wm__prose">
@@ -217,7 +229,10 @@ export default function InvestmentManagementPage() {
           </section>
 
           <section className="fv-wm__section" aria-labelledby="im-impl">
-            <h2 id="im-impl" className="fv-wm__section-title">
+            <h2
+              id="im-impl"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               Portfolio implementation
             </h2>
             <div className="fv-wm__prose">
@@ -253,10 +268,13 @@ export default function InvestmentManagementPage() {
           </section>
 
           <section
-            className="fv-wm__section fv-wm__section--close"
+            className="fv-wm__section fv-wm__section--close fv-wm__section--center"
             aria-labelledby="im-close"
           >
-            <h2 id="im-close" className="fv-wm__section-title">
+            <h2
+              id="im-close"
+              className="fv-wm__section-title fv-wm__section-title--center"
+            >
               Several futures. One careful portfolio.
             </h2>
             <div className="fv-wm__prose">

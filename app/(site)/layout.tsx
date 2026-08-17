@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SideNav from "@/components/SideNav";
 
 /**
- * Sitewide ledger shell — server SideNav on desktop, Navbar on small screens.
- * No client pathname switch.
+ * Sitewide shell — top bar on all sizes, then page + footer.
  */
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -13,7 +11,6 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       <a href="#main" className="fv-skip">
         Skip to content
       </a>
-      <SideNav />
       <div className="fv-shell__main">
         <div className="fv-mobile-nav">
           <Navbar />

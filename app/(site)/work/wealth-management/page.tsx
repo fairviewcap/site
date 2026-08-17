@@ -118,7 +118,7 @@ const PLANNING_DOMAINS = [
 
 export default function WealthManagementPage() {
   return (
-    <main className="bg-[var(--fv-bg)] pt-0">
+    <main className="fv-wm-page bg-[var(--fv-bg)] pt-0">
       <PageEnter>
         <header className="fv-wm-hero">
           <div className="fv-wm-hero__mast">
@@ -150,10 +150,13 @@ export default function WealthManagementPage() {
               aria-labelledby="wm-pillars"
               data-enter="4"
             >
-              <h2 id="wm-pillars" className="fv-wm__section-title">
+              <h2
+                id="wm-pillars"
+                className="fv-wm__section-title fv-wm__section-title--center"
+              >
                 A balance sheet is a snapshot. We turn it into a plan.
               </h2>
-              <p className="fv-wm__domains-lede">
+              <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
                 Planning, portfolios, and coordination — one picture, not three
                 separate products.
               </p>
@@ -185,10 +188,13 @@ export default function WealthManagementPage() {
               className="fv-wm__section fv-wm__section--domains"
               aria-labelledby="wm-domains"
             >
-              <h2 id="wm-domains" className="fv-wm__section-title">
+              <h2
+                id="wm-domains"
+                className="fv-wm__section-title fv-wm__section-title--center"
+              >
                 Wealth planning is complex — and unique to every family.
               </h2>
-              <p className="fv-wm__domains-lede">
+              <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
                 We guide the questions and the coordination that help a family
                 reach its goals — across investments, taxes, estate, and the
                 people in the middle.
@@ -200,8 +206,13 @@ export default function WealthManagementPage() {
               className="fv-wm__section"
               aria-labelledby="wm-relationship"
             >
-              <h2 id="wm-relationship" className="fv-wm__section-title">
-              Logic removes the noise. Judgment holds the path.
+              <h2
+                id="wm-relationship"
+                className="fv-wm__section-title fv-wm__section-title--center"
+              >
+                Logic removes the noise.
+                <br />
+                Judgment holds the path.
               </h2>
 
               <WmHorizonSwitch />
@@ -269,8 +280,14 @@ export default function WealthManagementPage() {
               </div>
             </section>
 
-            <section className="fv-wm__section" aria-labelledby="wm-outside">
-              <h2 id="wm-outside" className="fv-wm__section-title">
+            <section
+              className="fv-wm__section fv-wm__section--center"
+              aria-labelledby="wm-outside"
+            >
+              <h2
+                id="wm-outside"
+                className="fv-wm__section-title fv-wm__section-title--center"
+              >
                 If it affects your financial life, we advise on it—whether we bill
                 on it or not.
               </h2>
@@ -311,13 +328,16 @@ export default function WealthManagementPage() {
             </section>
 
             <section
-              className="fv-wm__section fv-wm__section--close"
+              className="fv-wm__section fv-wm__section--close fv-wm__section--center"
               aria-labelledby="wm-path"
             >
-              <h2 id="wm-path" className="fv-wm__section-title">
+              <h2
+                id="wm-path"
+                className="fv-wm__section-title fv-wm__section-title--center"
+              >
                 Life doesn&apos;t happen in a straight line.
               </h2>
-              <p className="fv-wm__domains-lede">
+              <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
                 We build plans resilient enough for both your ambitions and the
                 unexpected.
               </p>

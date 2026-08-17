@@ -12,7 +12,7 @@ const SCENES: {
   { q: "Selling a business?", fill: "#3d4a43", hero: "sellbusiness" },
   { q: "Funding a grandchild's trust?", fill: "#5a6b5e", hero: "fundgrandkids" },
   { q: "Building a legacy?", fill: "#2f3632" },
-  { q: "Buying a first home?", fill: "#7a8a7c", hero: "firsthome" },
+  { q: "Buying a first home?", fill: "#333a2f", hero: "firsthome" },
   { q: "Dream travel?", fill: "#4a5c62", hero: "travel2" },
   { q: "Assisting adult children?", fill: "#6b6358" },
   { q: "Philanthropy?", fill: "#44554a" },

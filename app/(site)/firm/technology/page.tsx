@@ -4,7 +4,7 @@ import TechReveal from "@/components/TechReveal";
 export const metadata: Metadata = {
   title: "Technology | Fairview Capital",
   description:
-    "Tools change. Judgment doesn't. We use technology — including AI — to see further, never to decide for you.",
+    "Tools change. Relationships last. We use technology — including AI — to see further, never to decide for you.",
 };
 
 export default function TechnologyPage() {

@@ -26,7 +26,7 @@ const DWELL_MS = [420, 140, 180, 180, 180, 200, 380] as const;
 type Phase = "reel" | "line2" | "hero" | "rest";
 
 /**
- * Inline reel (prototype A): Tools: [archive] → Judgment doesn't. → hero → body.
+ * Inline reel (prototype A): Tools: [archive] → Relationships last. → hero → body.
  */
 export default function TechRevealInline() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -72,7 +72,7 @@ export default function TechRevealInline() {
           </p>
           <h1
             className="fv-tech__title"
-            aria-label="Tools change. Judgment doesn't."
+            aria-label="Tools change. Relationships last."
           >
             <span className="fv-tech__line fv-tech__reel" aria-hidden>
               <span className="fv-tech__reel-fixed">Tools:</span>{" "}
@@ -100,7 +100,7 @@ export default function TechRevealInline() {
               }
               aria-hidden={!line2In}
             >
-              Judgment doesn&apos;t.
+              Relationships last.
             </span>
           </h1>
           <p

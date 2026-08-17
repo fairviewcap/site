@@ -69,19 +69,7 @@ export default async function LearnPage() {
                   href={`/learn/${channel.slug}`}
                   className="fv-learn__channel-link"
                 >
-                  <div className="fv-learn__channel-copy">
-                    <span className="fv-learn__channel-index" aria-hidden>
-                      {INDEX[i]}
-                    </span>
-                    <div>
-                      <h2 className="fv-learn__channel-title">
-                        {channel.title}
-                      </h2>
-                      <p className="fv-learn__channel-dek">{channel.dek}</p>
-                      <span className="fv-learn__channel-cta">Explore</span>
-                    </div>
-                  </div>
-                  <div className="fv-learn__channel-plate" aria-hidden>
+                  <div className="fv-learn__channel-plate">
                     {channel.slug === "letters" ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -113,6 +101,19 @@ export default async function LearnPage() {
                         decoding="async"
                       />
                     ) : null}
+                    <span className="fv-learn__channel-shade" aria-hidden />
+                    <div className="fv-learn__channel-meta">
+                      <span className="fv-learn__channel-index" aria-hidden>
+                        {INDEX[i]}
+                      </span>
+                      <h2 className="fv-learn__channel-title">
+                        {channel.title}
+                      </h2>
+                    </div>
+                  </div>
+                  <div className="fv-learn__channel-copy">
+                    <p className="fv-learn__channel-dek">{channel.dek}</p>
+                    <span className="fv-learn__channel-cta">Explore</span>
                   </div>
                 </Link>
               </li>

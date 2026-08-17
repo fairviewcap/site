@@ -91,7 +91,7 @@ export default function FeeSchedule({ active = true }: { active?: boolean }) {
               } as CSSProperties
             }
           >
-            <p className="fv-fees__band fv-frame">
+            <p className="fv-fees__band">
               <AssetsSentence tier={tier} />
             </p>
 
@@ -120,11 +120,6 @@ export default function FeeSchedule({ active = true }: { active?: boolean }) {
           </div>
         );
       })}
-
-      <p className="fv-fees__scale fv-frame">
-        Each bar is <span className="fv-nums">100%</span> of assets in that
-        band. The mark is the advisory fee.
-      </p>
     </div>
   );
 }

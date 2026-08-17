@@ -5,9 +5,8 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import LedgerFigure from "@/components/LedgerFigure";
-import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
+import { HEROES } from "@/lib/heroes";
 import { MENUS, PRIMARY_LINKS, type MenuKey } from "@/lib/nav";
 
 const SCROLL_PX = 16;
@@ -15,15 +14,16 @@ const SCROLL_PX = 16;
 type MobilePane = "root" | MenuKey;
 
 /**
- * Clear on load. On scroll: slim frosted bar.
- * Desktop: Work/Firm hover panels.
- * Mobile (<900px): Apple-style full-screen sheet + drill-down (ported to body).
+ * Rivian chip: logo left, links centered, talk/login right.
+ * Desktop (≥900px): image-button mega under the chip.
+ * Mobile: Apple-style full-screen sheet + drill-down (ported to body).
  */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobilePane, setMobilePane] = useState<MobilePane>("root");
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
+  const [shownMenu, setShownMenu] = useState<MenuKey | null>(null);
   const [portalReady, setPortalReady] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
   const closeTimer = useRef<number | null>(null);
@@ -102,54 +102,23 @@ export default function Navbar() {
 
   useEffect(() => () => clearCloseTimer(), []);
 
-  const barOn = scrolled || mobileOpen;
+  useEffect(() => {
+    if (openMenu) {
+      setShownMenu(openMenu);
+      return;
+    }
+    const id = window.setTimeout(() => setShownMenu(null), 340);
+    return () => window.clearTimeout(id);
+  }, [openMenu]);
 
   const linkClass = (active?: boolean) =>
-    `font-sans text-[13px] font-medium tracking-[-0.01em] transition-colors ${
+    `font-sans text-[13px] font-medium tracking-[-0.015em] transition-colors ${
       active
         ? "text-[var(--fv-fg)]"
-        : "text-[var(--fv-fg)]/80 hover:text-[var(--fv-fg)]"
+        : "text-[var(--fv-fg)]/75 hover:text-[var(--fv-fg)]"
     }`;
 
-  const renderMenu = (key: MenuKey) => {
-    const menu = MENUS[key];
-    const open = openMenu === key;
-    return (
-      <div
-        className={`
-          absolute top-full left-0 z-[60] pt-2.5
-          transition-opacity duration-150 ease-out
-          ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}
-        `}
-        id={open ? `${menuId}-panel` : undefined}
-        role="menu"
-        aria-hidden={!open}
-        onMouseEnter={clearCloseTimer}
-      >
-        <div className="fv-menu">
-          {key === "firm" ? (
-            <div className="fv-menu__head">
-              <LedgerFigure figure={FIGURES.established} variant="eyebrow" />
-            </div>
-          ) : null}
-          <ul className="fv-menu__list">
-            {menu.items.map((item) => (
-              <li key={item.href} role="none">
-                <Link
-                  href={item.href}
-                  role="menuitem"
-                  onClick={() => setOpenMenu(null)}
-                  className="fv-menu__link"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  };
+  const mega = shownMenu ? MENUS[shownMenu] : null;
 
   const subMenu = mobilePane === "root" ? null : MENUS[mobilePane];
 
@@ -263,30 +232,20 @@ export default function Navbar() {
   return (
     <header
       ref={rootRef}
-      className={`
-        sticky top-0 z-[200] w-full pointer-events-none
-        transition-[background-color,border-color,backdrop-filter,padding] duration-300 ease-out
-        ${
-          barOn
-            ? "fv-nav-bar py-0"
-            : "bg-transparent border-transparent pt-3 pb-3 sm:pt-4 sm:pb-4"
-        }
-      `}
+      className="fv-nav"
+      onMouseLeave={scheduleClose}
     >
       <div
-        className={`
-          fv-frame pointer-events-auto flex items-center gap-3
-          transition-[height] duration-300 ease-out
-          ${barOn ? "h-12" : "h-auto"}
-        `}
+        className={`fv-nav-shell${openMenu || mobileOpen ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}
       >
+      <div className="fv-nav-chip">
         <Link
           href="/"
           onClick={() => {
             closeMobile();
             setOpenMenu(null);
           }}
-          className="shrink-0 flex items-center"
+          className="fv-nav-chip__brand"
           aria-label="Fairview Capital home"
         >
           <Image
@@ -295,26 +254,17 @@ export default function Navbar() {
             width={165}
             height={15}
             priority
-            className={`w-auto select-none transition-[height] duration-300 ${
-              barOn ? "h-[10px]" : "h-[11px]"
-            }`}
+            className="fv-nav-chip__logo"
           />
         </Link>
 
-        <nav
-          className="fv-nav-desktop hidden min-[900px]:flex items-center gap-3 ml-3"
-          aria-label="Primary"
-        >
-          <div
-            className="relative"
-            onMouseEnter={() => openDesktopMenu("work")}
-            onMouseLeave={scheduleClose}
-          >
+        <nav className="fv-nav-chip__links" aria-label="Primary">
+          <div onMouseEnter={() => openDesktopMenu("work")}>
             <button
               type="button"
               className={linkClass(openMenu === "work")}
               aria-expanded={openMenu === "work"}
-              aria-controls={`${menuId}-panel`}
+              aria-controls={`${menuId}-mega`}
               aria-haspopup="menu"
               onFocus={() => openDesktopMenu("work")}
               onClick={() => {
@@ -324,19 +274,14 @@ export default function Navbar() {
             >
               Work
             </button>
-            {renderMenu("work")}
           </div>
 
-          <div
-            className="relative"
-            onMouseEnter={() => openDesktopMenu("firm")}
-            onMouseLeave={scheduleClose}
-          >
+          <div onMouseEnter={() => openDesktopMenu("firm")}>
             <button
               type="button"
               className={linkClass(openMenu === "firm")}
               aria-expanded={openMenu === "firm"}
-              aria-controls={`${menuId}-panel`}
+              aria-controls={`${menuId}-mega`}
               aria-haspopup="menu"
               onFocus={() => openDesktopMenu("firm")}
               onClick={() => {
@@ -346,7 +291,6 @@ export default function Navbar() {
             >
               Firm
             </button>
-            {renderMenu("firm")}
           </div>
 
           {PRIMARY_LINKS.map((item) => (
@@ -364,23 +308,20 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 sm:gap-4">
+        <div className="fv-nav-chip__actions">
+          <Link href="/login" className="fv-nav-chip__login">
+            Log in
+          </Link>
           <Link
             href={FIRM.contactHref}
-            className="font-sans text-[13px] font-semibold tracking-[-0.01em] text-[var(--fv-fg)] hover:text-[var(--fv-muted)] transition-colors"
+            className="fv-nav-chip__talk"
             onClick={closeMobile}
           >
             Let&apos;s talk
           </Link>
-          <Link
-            href="/login"
-            className="hidden min-[900px]:inline-flex font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-muted)] hover:text-[var(--fv-fg)] transition-colors"
-          >
-            Log in
-          </Link>
           <button
             type="button"
-            className={`min-[900px]:hidden relative w-8 h-8 flex items-center justify-center text-[var(--fv-fg)]${mobileOpen ? " invisible pointer-events-none" : ""}`}
+            className={`fv-nav-chip__menu${mobileOpen ? " is-hidden" : ""}`}
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             onClick={() => {
@@ -389,10 +330,52 @@ export default function Navbar() {
               setMobileOpen(true);
             }}
           >
-            <span className="absolute left-1/2 top-1/2 block w-3.5 h-px bg-current -translate-x-1/2 -translate-y-[3.5px]" />
-            <span className="absolute left-1/2 top-1/2 block w-3.5 h-px bg-current -translate-x-1/2 translate-y-[3.5px]" />
+            <span className="fv-nav-chip__menu-line" aria-hidden />
+            <span className="fv-nav-chip__menu-line" aria-hidden />
           </button>
         </div>
+      </div>
+
+      <div className="fv-mega-slot">
+        <div
+          id={`${menuId}-mega`}
+          className="fv-mega"
+          role="menu"
+          aria-hidden={!openMenu}
+          aria-label={mega?.label}
+          onMouseEnter={clearCloseTimer}
+        >
+          {mega ? (
+            <ul className={`fv-mega__grid fv-mega__grid--${shownMenu}`}>
+              {mega.items.map((item) => {
+                const hero = HEROES[item.hero];
+                return (
+                  <li key={item.href} role="none">
+                    <Link
+                      href={item.href}
+                      role="menuitem"
+                      className="fv-mega__card"
+                      onClick={() => setOpenMenu(null)}
+                    >
+                      <span className="fv-mega__shot">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={hero.desktop}
+                          alt=""
+                          width={2400}
+                          height={1200}
+                          className="fv-mega__img"
+                        />
+                      </span>
+                      <span className="fv-mega__name">{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
+        </div>
+      </div>
       </div>
 
       {mobileSheet}

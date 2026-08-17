@@ -96,10 +96,10 @@ export default function FeesHero() {
         </div>
       </div>
 
-      <FeeSchedule active={bodyIn} />
-
       <div className="fv-frame">
         <div className="fv-fees">
+          <FeeSchedule active={bodyIn} />
+
           <p
             className={
               notesIn
@@ -120,6 +120,16 @@ export default function FeesHero() {
             we combine assets across families, which can further reduce fees. No
             commissions. No separate planning fees. We are a Registered
             Investment Advisor and act as a fiduciary.
+          </p>
+          <p
+            className={
+              notesIn
+                ? "fv-fees__scale fv-fees__fade fv-fees__fade--in"
+                : "fv-fees__scale fv-fees__fade"
+            }
+          >
+            Each bar is <span className="fv-nums">100%</span> of assets in that
+            band. The mark is the advisory fee.
           </p>
         </div>
       </div>

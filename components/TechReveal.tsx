@@ -41,7 +41,7 @@ function fitFontSize(
 }
 
 /**
- * Full-bleed tool reel → Tools change. → Judgment doesn't. → hero → body.
+ * Full-bleed tool reel → Tools change. → Relationships last. → hero → body.
  */
 export default function TechReveal() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -154,7 +154,7 @@ export default function TechReveal() {
           <p className="fv-tech__eyebrow">Technology</p>
           <h1
             className="fv-tech__title"
-            aria-label="Tools change. Judgment doesn't."
+            aria-label="Tools change. Relationships last."
           >
             <span className="fv-tech__line">Tools change.</span>
             <br />
@@ -166,7 +166,7 @@ export default function TechReveal() {
               }
               aria-hidden={!line2In}
             >
-              Judgment doesn&apos;t.
+              Relationships last.
             </span>
           </h1>
           <p

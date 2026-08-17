@@ -10,7 +10,7 @@ export type PlanningDomainPoster = {
 };
 
 /**
- * Horizontal poster rail — flush left, bleeds right.
+ * Planning posters — scroll on small screens, six-up across the page gutters.
  * Click fades to black with white scope list. Arrows scroll the rail.
  */
 export default function WmDomainsRail({

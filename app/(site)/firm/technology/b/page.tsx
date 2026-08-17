@@ -4,7 +4,7 @@ import TechRevealInline from "@/components/TechRevealInline";
 export const metadata: Metadata = {
   title: "Technology (inline reel) | Fairview Capital",
   description:
-    "Tools change. Judgment doesn't. Prototype — inline Tools: reel headline.",
+    "Tools change. Relationships last. Prototype — inline Tools: reel headline.",
   robots: { index: false, follow: false },
 };
 

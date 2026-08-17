@@ -40,7 +40,7 @@ export default async function TeamRail() {
       </div>
 
       <div
-        className="fv-team-rail fv-bleed-right mt-6 flex gap-4 overflow-x-auto pb-2 sm:gap-5"
+        className="fv-team-rail mt-6 flex gap-4 overflow-x-auto pb-2 sm:gap-5 lg:gap-6"
         role="list"
         aria-label="Team"
       >
@@ -57,26 +57,28 @@ export default async function TeamRail() {
           <figure
             key={member.id}
             role="listitem"
-            className="m-0 w-[7.5rem] shrink-0 sm:w-[8.75rem]"
+            className="m-0 w-[10rem] shrink-0 sm:w-[12.5rem] lg:w-[15rem]"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--fv-radius-media)] bg-[var(--fv-team-plate)] [filter:grayscale(1)_contrast(1.06)]">
-              {member.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={member.image}
-                  alt=""
-                  className="absolute inset-0 block h-full w-full object-cover object-center"
-                />
-              ) : null}
-            </div>
-            <figcaption className="mt-2.5">
-              <p className="m-0 font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-fg)]">
-                {member.name}
-              </p>
-              <p className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] fv-nums">
-                {tenureCaption(member)}
-              </p>
-            </figcaption>
+            <Link href={`/team/${member.slug}`} className="fv-team-rail__link">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--fv-radius-media)] bg-[var(--fv-team-plate)] [filter:grayscale(1)_contrast(1.06)]">
+                {member.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={member.image}
+                    alt=""
+                    className="absolute inset-0 block h-full w-full object-cover object-center"
+                  />
+                ) : null}
+              </div>
+              <figcaption className="mt-2.5">
+                <p className="m-0 font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-fg)]">
+                  {member.name}
+                </p>
+                <p className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] fv-nums">
+                  {tenureCaption(member)}
+                </p>
+              </figcaption>
+            </Link>
           </figure>
         ))}
       </div>

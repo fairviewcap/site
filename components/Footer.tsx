@@ -3,8 +3,7 @@ import Link from "next/link";
 import { FIRM } from "@/lib/firm";
 
 /**
- * Quiet ledger footer — contact & disclosures as line items.
- * Prospectus cues: small-cap labels, tabular figures, CRD.
+ * Site footer — mark, then a full-frame instrument: contact, offices, disclosures.
  */
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,84 +11,88 @@ export default function Footer() {
   const pit = FIRM.offices.pittsburgh;
 
   return (
-    <footer className="fv-footer pt-8 pb-8 sm:pt-10 sm:pb-10">
+    <footer className="fv-footer">
       <div className="fv-frame">
-        <div className="max-w-3xl">
-          <Image
-            src="/fv-icon.svg"
-            alt=""
-            width={31}
-            height={31}
-            className="fv-footer__mark"
-            aria-hidden
-          />
-          <dl className="fv-footer__ledger m-0">
-            <div className="fv-footer__row">
-              <dt>Contact</dt>
-              <dd className="fv-footer__cluster fv-footer__nums">
-                <a href={bay.phoneHref}>{bay.phone}</a>
-                <a href={pit.phoneHref}>{pit.phone}</a>
-                <a href={`mailto:${FIRM.email}`}>{FIRM.email}</a>
-              </dd>
-            </div>
+        <Image
+          src="/fv-icon.svg"
+          alt=""
+          width={31}
+          height={31}
+          className="fv-footer__mark"
+          aria-hidden
+        />
 
-            <div className="fv-footer__row">
-              <dt>{bay.label}</dt>
-              <dd className="fv-footer__address fv-footer__nums">
-                <span>{bay.lines[0]}</span>
-                <span>{bay.lines[1]}</span>
-              </dd>
-            </div>
+        <div className="fv-footer__grid">
+          <div className="fv-footer__col">
+            <p className="fv-footer__label">Contact</p>
+            <a href={`mailto:${FIRM.email}`}>{FIRM.email}</a>
+          </div>
 
-            <div className="fv-footer__row">
-              <dt>{pit.label}</dt>
-              <dd className="fv-footer__address fv-footer__nums">
-                <span>{pit.lines[0]}</span>
-                <span>{pit.lines[1]}</span>
-              </dd>
-            </div>
+          <div className="fv-footer__col">
+            <p className="fv-footer__label">{bay.label}</p>
+            <a className="fv-footer__nums" href={bay.phoneHref}>
+              {bay.phone}
+            </a>
+            <address className="fv-footer__address fv-footer__nums">
+              <span>{bay.lines[0]}</span>
+              <span>{bay.lines[1]}</span>
+            </address>
+          </div>
 
-            <div className="fv-footer__row">
-              <dt>Disclosures</dt>
-              <dd className="fv-footer__cluster fv-footer__links">
-                <a
-                  href={FIRM.disclosures.formAdv}
-                  className="fv-footer__chip"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Form ADV
-                </a>
-                <a
-                  href={FIRM.disclosures.formCrs}
-                  className="fv-footer__chip"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Form CRS
-                </a>
-                <span className="fv-footer__crd" title="SEC / IAPD identifiers">
-                  CRD {FIRM.crd}
-                  <span className="fv-footer__sep" aria-hidden>
-                    ·
-                  </span>
-                  SEC {FIRM.sec}
-                </span>
-                <Link href="/privacy-policy">Privacy</Link>
-                <Link href="/terms-and-conditions">Terms</Link>
-              </dd>
-            </div>
-          </dl>
+          <div className="fv-footer__col">
+            <p className="fv-footer__label">{pit.label}</p>
+            <a className="fv-footer__nums" href={pit.phoneHref}>
+              {pit.phone}
+            </a>
+            <address className="fv-footer__address fv-footer__nums">
+              <span>{pit.lines[0]}</span>
+              <span>{pit.lines[1]}</span>
+            </address>
+          </div>
 
-          <p className="fv-footer__legal mt-6 m-0 max-w-2xl">
+          <div className="fv-footer__col">
+            <p className="fv-footer__label">Disclosures</p>
+            <div className="fv-footer__cluster">
+              <a
+                href={FIRM.disclosures.formAdv}
+                className="fv-footer__chip"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Form ADV
+              </a>
+              <a
+                href={FIRM.disclosures.formCrs}
+                className="fv-footer__chip"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Form CRS
+              </a>
+            </div>
+            <p className="fv-footer__crd fv-footer__nums" title="SEC / IAPD identifiers">
+              CRD {FIRM.crd}
+              <span className="fv-footer__sep" aria-hidden>
+                ·
+              </span>
+              SEC {FIRM.sec}
+            </p>
+            <div className="fv-footer__cluster">
+              <Link href="/privacy-policy">Privacy</Link>
+              <Link href="/terms-and-conditions">Terms</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="fv-footer__base">
+          <p className="fv-footer__legal">
             Nothing in these materials should be construed as investment or legal
             advice or a recommendation to purchase or sell securities. The
             information is not intended as an offer to provide advisory services
             in any state or jurisdiction where such offer would not be permitted
             under applicable law.
           </p>
-
-          <p className="fv-footer__copy mt-4 m-0">
+          <p className="fv-footer__copy">
             © {year} {FIRM.legalName}
           </p>
         </div>

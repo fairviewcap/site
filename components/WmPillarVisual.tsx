@@ -61,115 +61,78 @@ function useOnceInView<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-/** Household arithmetic: atmosphere + one locked figure per column. */
-const PLAN_PROTO = [
-  {
-    label: "Own",
-    key: "$2,480,000",
-    delay: 0,
-    rest: [
-      "$18,400",
-      "$94,800",
-      "$327,500",
-      "$58,900",
-      "$1,095,000",
-      "$7,820",
-      "$412,000",
-      "$12,060",
-      "$6,240",
-    ],
-  },
-  {
-    label: "Owe",
-    key: "$412,000",
-    delay: 70,
-    rest: [
-      "$54,200",
-      "$8,760",
-      "$22,900",
-      "$7,180",
-      "$210,000",
-      "$4,350",
-      "$9,180",
-      "$31,250",
-      "$6,240",
-    ],
-  },
-  {
-    label: "In",
-    key: "$31,250",
-    delay: 130,
-    rest: [
-      "$9,400",
-      "$16,750",
-      "$62,400",
-      "$11,400",
-      "$128,000",
-      "$2,760",
-      "$41,800",
-      "$3,120",
-      "$7,180",
-    ],
-  },
-  {
-    label: "Leave",
-    key: "$1,020,000",
-    delay: 40,
-    rest: [
-      "$14,200",
-      "$73,600",
-      "$19,900",
-      "$4,860",
-      "$236,000",
-      "$5,940",
-      "$81,200",
-      "$2,040",
-      "$508,000",
-    ],
-  },
-];
+const PLAN_HERO = { label: "Own", value: 8_240_000 };
+const PLAN_REST = [
+  { label: "Owe", value: 412_000 },
+  { label: "In", value: 31_250 },
+  { label: "Leave", value: 1_020_000 },
+] as const;
+
+const PLAN_COUNT_MS = 1400;
+
+const usd0 = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
 
 function PlanProto({ className }: DiagramProps) {
   const { ref, inView } = useOnceInView<HTMLDivElement>();
+  const [shown, setShown] = useState(0);
+  const [settled, setSettled] = useState(false);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setShown(PLAN_HERO.value);
+      setSettled(true);
+      return;
+    }
+
+    let raf = 0;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / PLAN_COUNT_MS);
+      const eased = 1 - (1 - t) ** 3;
+      setShown(Math.round(PLAN_HERO.value * eased));
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      setShown(PLAN_HERO.value);
+      setSettled(true);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView]);
 
   return (
     <div
       ref={ref}
-      className={["fv-wm__plan2", className, inView ? "is-in" : ""]
+      className={[
+        "fv-wm__plan2",
+        className,
+        inView ? "is-in" : "",
+        settled ? "is-settled" : "",
+      ]
         .filter(Boolean)
         .join(" ")}
       aria-hidden
     >
-      {PLAN_PROTO.map((col) => {
-        const above = col.rest.slice(0, 4);
-        const below = [...col.rest.slice(4), ...col.rest.slice(0, 4)];
-        const figures = [...above, col.key, ...below];
-        const keyAt = above.length;
-        return (
-          <div
-            key={col.label}
-            className="fv-wm__plan2-col"
-            style={{ "--fv-plan-delay": `${col.delay}ms` } as CSSProperties}
-          >
-            <span className="fv-wm__plan2-label">{col.label}</span>
-            <div className="fv-wm__plan2-track">
-              {figures.map((v, j) => (
-                <span
-                  key={`${col.label}-${j}`}
-                  className={
-                    j === keyAt
-                      ? "fv-wm__plan2-fig is-key"
-                      : "fv-wm__plan2-fig"
-                  }
-                  style={{ "--fv-plan-i": Math.min(j, 8) } as CSSProperties}
-                >
-                  {v}
-                </span>
-              ))}
-            </div>
-          </div>
-        );
-      })}
+      <span className="fv-wm__plan2-kicker">{PLAN_HERO.label}</span>
+      <p className="fv-wm__plan2-hero">{usd0.format(shown)}</p>
+      <ul className="fv-wm__plan2-rest">
+        {PLAN_REST.map((item) => (
+          <li key={item.label}>
+            <span>{item.label}</span>
+            <strong>{usd0.format(item.value)}</strong>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -11,16 +11,16 @@ const PAD = 7;
 
 /** Managed: even green on the rail. Outside: uneven size + subtle Y drift; settle on hit. */
 const ASSETS = [
-  { id: "equities", kind: "managed" as const, color: "var(--fv-green)", scale: 1, dy: 0 },
-  { id: "bonds", kind: "managed" as const, color: "var(--fv-green)", scale: 1, dy: 0 },
-  { id: "cash", kind: "managed" as const, color: "var(--fv-green)", scale: 1, dy: 0 },
-  { id: "re", kind: "outside" as const, color: "#e33f84", scale: 0.72, dy: -4 },
-  { id: "stake", kind: "outside" as const, color: "#a62b9a", scale: 1.55, dy: 5 },
-  { id: "k401", kind: "outside" as const, color: "#6816b0", scale: 1.68, dy: -3 },
-  { id: "other", kind: "outside" as const, color: "#4211a2", scale: 0.34, dy: 6 },
-  { id: "art", kind: "outside" as const, color: "#3e37c2", scale: 0.52, dy: -5 },
-  { id: "collectible", kind: "outside" as const, color: "#4a60e6", scale: 1.28, dy: 3 },
-  { id: "alt", kind: "outside" as const, color: "#71c7ec", scale: 0.9, dy: -2 },
+  { id: "equities", kind: "managed" as const, color: "#7c857a", scale: 1, dy: 0 },
+  { id: "bonds", kind: "managed" as const, color: "#7c857a", scale: 1, dy: 0 },
+  { id: "cash", kind: "managed" as const, color: "#7c857a", scale: 1, dy: 0 },
+  { id: "re", kind: "outside" as const, color: "#7a8490", scale: 0.72, dy: -4 },
+  { id: "stake", kind: "outside" as const, color: "#4a5c6e", scale: 1.55, dy: 5 },
+  { id: "k401", kind: "outside" as const, color: "#9aa3ab", scale: 1.68, dy: -3 },
+  { id: "other", kind: "outside" as const, color: "#5e6b78", scale: 0.34, dy: 6 },
+  { id: "art", kind: "outside" as const, color: "#b4b8bc", scale: 0.52, dy: -5 },
+  { id: "collectible", kind: "outside" as const, color: "#3d4f5e", scale: 1.28, dy: 3 },
+  { id: "alt", kind: "outside" as const, color: "#6e7c88", scale: 0.9, dy: -2 },
 ].map((a, i) => ({ ...a, x: X0 + STEP * i, i }));
 
 const TOTAL = ASSETS.length;
