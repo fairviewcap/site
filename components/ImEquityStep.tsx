@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 
 export type EquityStepId = "assess" | "project" | "research" | "value";
 
@@ -42,10 +42,12 @@ function useOnceInView<T extends HTMLElement>() {
 }
 
 const ASSESS_FIGS = [
-  { label: "Rev", value: "$4.2B" },
+  { label: "Revenue", value: "$4.2B" },
   { label: "EBIT", value: "18%" },
   { label: "FCF", value: "$612M" },
 ] as const;
+
+const ASSESS_QUALITY = ["Moat", "Mgmt", "Markets"] as const;
 
 function AssessPlate() {
   const { ref, inView } = useOnceInView<HTMLDivElement>();
@@ -58,7 +60,7 @@ function AssessPlate() {
         .join(" ")}
       aria-hidden
     >
-      <span className="fv-im-eq__ticker">XYZ</span>
+      <p className="fv-im-eq__note">Research note</p>
       <ul className="fv-im-eq__figs">
         {ASSESS_FIGS.map((fig, i) => (
           <li
@@ -71,23 +73,47 @@ function AssessPlate() {
           </li>
         ))}
       </ul>
+      <ul className="fv-im-eq__qual">
+        {ASSESS_QUALITY.map((item, i) => (
+          <li
+            key={item}
+            className="fv-im-eq__qual-item"
+            style={{ "--fv-eq-i": i + 3 } as CSSProperties}
+          >
+            <span className="fv-im-eq__qual-mark" />
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 function ProjectPlate() {
   const { ref, inView } = useOnceInView<HTMLDivElement>();
+  const clipId = useId().replace(/:/g, "");
 
-  const W = 240;
-  const H = 240;
-  const xs = [24, 70, 120, 170, 216];
-  const base = [168, 148, 122, 98, 72];
-  const alt = [168, 156, 142, 128, 112];
+  const W = 320;
+  const H = 180;
+  const pad = { l: 18, r: 14, t: 16, b: 28 };
+  const xs = [0, 0.25, 0.5, 0.75, 1].map(
+    (t) => pad.l + t * (W - pad.l - pad.r),
+  );
+  const plotH = H - pad.t - pad.b;
+  const yOf = (n: number) => pad.t + plotH * (1 - n);
 
-  const toPath = (ys: number[]) =>
-    ys
-      .map((y, i) => `${i === 0 ? "M" : "L"}${xs[i]} ${y}`)
-      .join(" ");
+  const high = [0.22, 0.34, 0.5, 0.68, 0.86].map(yOf);
+  const base = [0.22, 0.3, 0.42, 0.56, 0.7].map(yOf);
+  const low = [0.22, 0.26, 0.32, 0.38, 0.44].map(yOf);
+
+  const toLine = (ys: number[]) =>
+    ys.map((y, i) => `${i === 0 ? "M" : "L"}${xs[i]!.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+
+  const fan = `${toLine(high)} ${low
+    .slice()
+    .reverse()
+    .map((y, i) => `L${xs[4 - i]!.toFixed(1)} ${y.toFixed(1)}`)
+    .join(" ")} Z`;
 
   return (
     <div
@@ -97,42 +123,73 @@ function ProjectPlate() {
         .join(" ")}
       aria-hidden
     >
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        preserveAspectRatio="none"
-        fill="none"
-        aria-hidden
-      >
-        <line
-          className="fv-im-eq__axis"
-          x1={16}
-          y1={196}
-          x2={224}
-          y2={196}
-        />
+      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" fill="none">
+        <defs>
+          <linearGradient id={`${clipId}-fill`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--fv-green)" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="var(--fv-green)" stopOpacity="0.04" />
+          </linearGradient>
+          <clipPath id={clipId}>
+            <rect
+              className="fv-im-eq__fan-reveal"
+              x="0"
+              y="0"
+              width={W}
+              height={H}
+            />
+          </clipPath>
+        </defs>
         {xs.map((x, i) => (
           <g key={x}>
-            <line className="fv-im-eq__tick" x1={x} y1={192} x2={x} y2={200} />
-            <text className="fv-im-eq__yr" x={x} y={222} textAnchor="middle">
+            <line
+              className="fv-im-eq__tick"
+              x1={x}
+              y1={H - pad.b}
+              x2={x}
+              y2={H - pad.b + 4}
+            />
+            <text
+              className="fv-im-eq__yr"
+              x={x}
+              y={H - 8}
+              textAnchor="middle"
+            >
               Y{i + 1}
             </text>
           </g>
         ))}
-        <path className="fv-im-eq__ghost" d={toPath(alt)} />
-        <path
-          className="fv-im-eq__line"
-          d={toPath(base)}
-          pathLength={1}
+        <line
+          className="fv-im-eq__axis"
+          x1={pad.l}
+          y1={H - pad.b}
+          x2={W - pad.r}
+          y2={H - pad.b}
         />
-        <circle className="fv-im-eq__dot" cx={xs[4]} cy={base[4]} r={3} />
+        <g clipPath={`url(#${clipId})`}>
+          <path className="fv-im-eq__fan" d={fan} fill={`url(#${clipId}-fill)`} />
+          <path className="fv-im-eq__ghost" d={toLine(high)} />
+          <path className="fv-im-eq__ghost fv-im-eq__ghost--low" d={toLine(low)} />
+          <path className="fv-im-eq__line" d={toLine(base)} pathLength={1} />
+        </g>
+        <circle
+          className="fv-im-eq__dot"
+          cx={xs[4]}
+          cy={base[4]}
+          r={2.6}
+        />
       </svg>
     </div>
   );
 }
 
+const RESEARCH_LOG = [
+  { when: "12 Mar", who: "Management" },
+  { when: "04 Apr", who: "Industry expert" },
+  { when: "21 Apr", who: "Sell-side" },
+] as const;
+
 function ResearchPlate() {
   const { ref, inView } = useOnceInView<HTMLDivElement>();
-  const rows = ["Management", "Experts", "Analysts"] as const;
 
   return (
     <div
@@ -142,19 +199,20 @@ function ResearchPlate() {
         .join(" ")}
       aria-hidden
     >
-      <ul className="fv-im-eq__meet">
-        {rows.map((label, i) => (
+      <p className="fv-im-eq__note">Work log</p>
+      <ul className="fv-im-eq__log">
+        {RESEARCH_LOG.map((row, i) => (
           <li
-            key={label}
-            className="fv-im-eq__meet-row"
+            key={row.who}
+            className="fv-im-eq__log-row"
             style={{ "--fv-eq-i": i } as CSSProperties}
           >
-            <span className="fv-im-eq__meet-lab">{label}</span>
-            <span className="fv-im-eq__meet-rule" />
+            <span className="fv-im-eq__log-when fv-nums">{row.when}</span>
+            <span className="fv-im-eq__log-who">{row.who}</span>
+            <span className="fv-im-eq__log-mark" />
           </li>
         ))}
       </ul>
-      <span className="fv-im-eq__meet-dot" />
     </div>
   );
 }
@@ -170,31 +228,29 @@ function ValuePlate() {
         .join(" ")}
       aria-hidden
     >
-      <span
-        className="fv-im-eq__val-lab"
+      <div
+        className="fv-im-eq__scale-row"
         style={{ "--fv-eq-i": 0 } as CSSProperties}
       >
-        Price
-      </span>
-      <span
-        className="fv-im-eq__val-num fv-nums"
+        <span className="fv-im-eq__val-lab">Price</span>
+        <span className="fv-im-eq__scale">
+          <span className="fv-im-eq__scale-fill fv-im-eq__scale-fill--price" />
+        </span>
+        <span className="fv-im-eq__val-num fv-nums">84</span>
+      </div>
+      <div
+        className="fv-im-eq__scale-row"
         style={{ "--fv-eq-i": 1 } as CSSProperties}
       >
-        84
-      </span>
-      <span className="fv-im-eq__val-rule" />
-      <span
-        className="fv-im-eq__val-lab"
-        style={{ "--fv-eq-i": 2 } as CSSProperties}
-      >
-        FCF
-      </span>
-      <span
-        className="fv-im-eq__val-num fv-im-eq__val-num--key fv-nums"
-        style={{ "--fv-eq-i": 3 } as CSSProperties}
-      >
-        112
-      </span>
+        <span className="fv-im-eq__val-lab">Worth</span>
+        <span className="fv-im-eq__scale">
+          <span className="fv-im-eq__scale-fill fv-im-eq__scale-fill--worth" />
+        </span>
+        <span className="fv-im-eq__val-num fv-im-eq__val-num--key fv-nums">
+          112
+        </span>
+      </div>
+      <p className="fv-im-eq__wait">Wait</p>
     </div>
   );
 }

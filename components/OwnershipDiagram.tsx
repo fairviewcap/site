@@ -6,9 +6,9 @@ type Mode = "typical" | "fairview";
 
 /** Ownership layers above the advisor — these collapse on Fairview. */
 const OWNERSHIP_LAYERS = [
-  { id: "board", label: "Board" },
-  { id: "parent", label: "Parent company / bank" },
-  { id: "shareholders", label: "Outside shareholders" },
+  { id: "board", label: "Board", idx: "01" },
+  { id: "parent", label: "Parent company / bank", idx: "02" },
+  { id: "shareholders", label: "Outside shareholders", idx: "03" },
 ] as const;
 
 /**
@@ -133,7 +133,8 @@ export default function OwnershipDiagram() {
           <div className="fv-own__stack">
             {OWNERSHIP_LAYERS.map((layer) => (
               <div key={layer.id} className="fv-own__mid">
-                <div className="fv-own__node fv-own__node--mid">
+                <div className="fv-own__card fv-own__card--mid">
+                  <span className="fv-own__idx">{layer.idx}</span>
                   <span className="fv-own__label">{layer.label}</span>
                 </div>
                 <div className="fv-own__spine">
@@ -143,7 +144,8 @@ export default function OwnershipDiagram() {
             ))}
           </div>
 
-          <div className="fv-own__node fv-own__node--full">
+          <div className="fv-own__card fv-own__card--full">
+            <span className="fv-own__idx">{fairview ? "01" : "04"}</span>
             <span className="fv-own__label">
               {fairview ? "Advisor-owner" : "Advisor"}
             </span>
@@ -157,10 +159,11 @@ export default function OwnershipDiagram() {
           <div
             className={
               fairview
-                ? "fv-own__node fv-own__node--client fv-own__node--full"
-                : "fv-own__node fv-own__node--client fv-own__node--dim"
+                ? "fv-own__card fv-own__card--client fv-own__card--full"
+                : "fv-own__card fv-own__card--client fv-own__card--dim"
             }
           >
+            <span className="fv-own__idx">{fairview ? "02" : "05"}</span>
             <span className="fv-own__label">Client</span>
           </div>
         </div>

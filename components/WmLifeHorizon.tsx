@@ -4,21 +4,47 @@ import { useEffect, useRef, useState } from "react";
 import { HEROES, type HeroId } from "@/lib/heroes";
 import PlayPauseIcon from "@/components/PlayPauseIcon";
 
+type ScenePhoto = { desktop: string; mobile: string };
+
+const LIFE = "/photography/life-paths";
+
+const heroPair = (id: HeroId): ScenePhoto => ({
+  desktop: HEROES[id].desktop,
+  mobile: HEROES[id].mobile,
+});
+
+const lifePair = (slug: string): ScenePhoto => ({
+  desktop: `${LIFE}/${slug}-h.avif`,
+  mobile: `${LIFE}/${slug}-v.avif`,
+});
+
 const SCENES: {
   q: string;
   fill: string;
-  hero?: HeroId;
+  photo: ScenePhoto;
 }[] = [
-  { q: "Selling a business?", fill: "#3d4a43", hero: "sellbusiness" },
-  { q: "Funding a grandchild's trust?", fill: "#5a6b5e", hero: "fundgrandkids" },
-  { q: "Building a legacy?", fill: "#2f3632" },
-  { q: "Buying a first home?", fill: "#333a2f", hero: "firsthome" },
-  { q: "Dream travel?", fill: "#4a5c62", hero: "travel2" },
-  { q: "Assisting adult children?", fill: "#6b6358" },
-  { q: "Philanthropy?", fill: "#44554a" },
-  { q: "Retirement?", fill: "#8a8478" },
-  { q: "An inheritance arrives?", fill: "#55635a" },
-  { q: "Assisted living?", fill: "#3a4540", hero: "hospital" },
+  { q: "Selling a business?", fill: "#3d4a43", photo: heroPair("sellbusiness") },
+  {
+    q: "Funding a grandchild's trust?",
+    fill: "#5a6b5e",
+    photo: heroPair("fundgrandkids"),
+  },
+  { q: "Building a legacy?", fill: "#2f3632", photo: lifePair("legacy") },
+  { q: "Buying a first home?", fill: "#333a2f", photo: heroPair("firsthome") },
+  { q: "Dream travel?", fill: "#4a5c62", photo: heroPair("travel2") },
+  {
+    q: "Assisting adult children?",
+    fill: "#6b6358",
+    photo: lifePair("adult-children"),
+  },
+  { q: "Philanthropy?", fill: "#44554a", photo: lifePair("philanthropy") },
+  { q: "Retirement?", fill: "#8a8478", photo: lifePair("retirement") },
+  {
+    q: "An inheritance arrives?",
+    fill: "#55635a",
+    photo: lifePair("inheritance"),
+  },
+  { q: "Assisted living?", fill: "#3a4540", photo: heroPair("hospital") },
 ];
 
 const HOLD_MS = 2800;
@@ -107,9 +133,7 @@ export default function WmLifeHorizon() {
       <figure className="fv-wm-horizon__media">
         <div className="fv-wm-horizon__plane">
           <div className="fv-wm-horizon__clip">
-          {SCENES.map((s, i) => {
-            const hero = s.hero ? HEROES[s.hero] : null;
-            return (
+          {SCENES.map((s, i) => (
               <span
                 key={s.q}
                 className={
@@ -117,32 +141,29 @@ export default function WmLifeHorizon() {
                     ? "fv-wm-horizon__fill is-on"
                     : "fv-wm-horizon__fill"
                 }
-                style={hero ? undefined : { background: s.fill }}
+                style={{ background: s.fill }}
                 aria-hidden
               >
-                {hero ? (
-                  <picture>
-                    <source
-                      media="(min-width: 768px)"
-                      srcSet={hero.desktop}
-                      type="image/avif"
-                      width={2400}
-                      height={1200}
-                    />
-                    <img
-                      src={hero.mobile}
-                      alt=""
-                      width={1600}
-                      height={2000}
-                      className="fv-wm-horizon__photo"
-                      loading={i < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  </picture>
-                ) : null}
+                <picture>
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet={s.photo.desktop}
+                    type="image/avif"
+                    width={2400}
+                    height={1200}
+                  />
+                  <img
+                    src={s.photo.mobile}
+                    alt=""
+                    width={1600}
+                    height={2000}
+                    className="fv-wm-horizon__photo"
+                    loading={i < 2 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                </picture>
               </span>
-            );
-          })}
+            ))}
           </div>
 
           <div className="fv-wm-horizon__pill">

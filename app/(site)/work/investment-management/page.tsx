@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
+import ImBookSleeves from "@/components/ImBookSleeves";
 import ImEquityStep, { type EquityStepId } from "@/components/ImEquityStep";
 import ImSourcesRail from "@/components/ImSourcesRail";
 import { FIRM } from "@/lib/firm";
-import { HEROES, type HeroId } from "@/lib/heroes";
 
 export const metadata: Metadata = {
   title: "Investment Management | Fairview Capital",
@@ -45,26 +45,36 @@ const EQUITY_PROCESS: {
   },
 ];
 
-const THEMES: { title: string; hero: HeroId }[] = [
-  { title: "Artificial Intelligence (AI)", hero: "zoom" },
-  { title: "Electrification of the economy", hero: "sellbusiness" },
-  { title: "Climate trends", hero: "redwoods" },
-  { title: "Aging demographics", hero: "grandma" },
-  { title: "Water infrastructure", hero: "community" },
-  { title: "Live and unique media content", hero: "ballet" },
+const THEMES: { title: string; photo: string }[] = [
+  {
+    title: "Artificial Intelligence (AI)",
+    photo: "/photography/investment-themes/artificial-intelligence.avif",
+  },
+  {
+    title: "Electrification of the economy",
+    photo: "/photography/investment-themes/electrification.avif",
+  },
+  {
+    title: "Climate trends",
+    photo: "/photography/investment-themes/climate-trends.avif",
+  },
+  {
+    title: "Aging demographics",
+    photo: "/photography/investment-themes/aging-demographics.avif",
+  },
+  {
+    title: "Water infrastructure",
+    photo: "/photography/investment-themes/water-infrastructure.avif",
+  },
+  {
+    title: "Live and unique media content",
+    photo: "/photography/investment-themes/live-media.avif",
+  },
 ];
-
-const ALLOCATIONS = [
-  "Our core stock holdings",
-  "Domestic equity ETFs",
-  "International ETFs",
-  "Fixed income ETFs",
-  "Alternative assets",
-] as const;
 
 export default function InvestmentManagementPage() {
   return (
-    <main className="bg-[var(--fv-bg)] pt-0">
+    <main className="fv-im-page bg-[var(--fv-bg)] pt-0">
       <header className="fv-wm-hero">
         <div className="fv-wm-hero__mast">
           <p className="fv-wm__eyebrow">Investment Management</p>
@@ -80,7 +90,7 @@ export default function InvestmentManagementPage() {
 
         <figure className="fv-wm-hero__media">
           <div className="fv-wm-hero__plane">
-            <HeroPhoto id="acceptance" priority imgClassName="fv-hero-photo" />
+            <HeroPhoto id="piano" priority imgClassName="fv-hero-photo" />
           </div>
         </figure>
       </header>
@@ -193,17 +203,16 @@ export default function InvestmentManagementPage() {
 
             <ul className="fv-im-themes">
               {THEMES.map((theme, i) => {
-                const hero = HEROES[theme.hero];
                 const index = String(i + 1).padStart(2, "0");
                 return (
                   <li key={theme.title} className="fv-im-themes__card">
                     <figure className="fv-im-themes__face">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={hero.mobile}
+                        src={theme.photo}
                         alt=""
-                        width={1600}
-                        height={2000}
+                        width={1200}
+                        height={1200}
                         className="fv-im-themes__img"
                         loading={i < 3 ? "eager" : "lazy"}
                         decoding="async"
@@ -235,6 +244,11 @@ export default function InvestmentManagementPage() {
             >
               Portfolio implementation
             </h2>
+            <figure className="fv-im-impl__media">
+              <div className="fv-wm-hero__plane">
+                <HeroPhoto id="zoom" imgClassName="fv-hero-photo" />
+              </div>
+            </figure>
             <div className="fv-wm__prose">
               <p>
                 Guided by our macro research and relative valuations, we form an
@@ -250,13 +264,7 @@ export default function InvestmentManagementPage() {
               </p>
             </div>
 
-            <ul className="fv-wm__ledger">
-              {ALLOCATIONS.map((item) => (
-                <li key={item} className="fv-wm__ledger-item">
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <ImBookSleeves />
 
             <div className="fv-wm__prose fv-wm__prose--follow">
               <p>

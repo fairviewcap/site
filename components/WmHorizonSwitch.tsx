@@ -6,7 +6,7 @@ import PlayPauseIcon from "@/components/PlayPauseIcon";
 const HEIGHT = 280;
 const BALL_R = 8;
 const RED = "#ef4444";
-const LOGO_GREEN = "#0d905a";
+const LOGO_GREEN = "#49cc8a";
 const SPEED = 1.35;
 
 function mixHex(a: string, b: string, t: number) {

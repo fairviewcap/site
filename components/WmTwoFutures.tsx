@@ -323,8 +323,8 @@ export default function WmTwoFutures() {
           >
             <defs>
               <linearGradient id={hiId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#8FA094" stopOpacity="0.38" />
-                <stop offset="100%" stopColor="#8FA094" stopOpacity="0.06" />
+                <stop offset="0%" stopColor="#49CC8A" stopOpacity="0.38" />
+                <stop offset="100%" stopColor="#49CC8A" stopOpacity="0.06" />
               </linearGradient>
               <linearGradient id={loId} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#6A86A8" stopOpacity="0.04" />

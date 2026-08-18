@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import LearnTheme from "@/components/LearnTheme";
 import { listChannels } from "@/lib/learn/store";
 
 export const revalidate = 3600;
@@ -41,7 +42,8 @@ export default async function LearnPage() {
   };
 
   return (
-    <main className="bg-[var(--fv-bg)] pt-0">
+    <main className="fv-learn-page pt-0">
+      <LearnTheme />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

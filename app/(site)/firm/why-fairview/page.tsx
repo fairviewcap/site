@@ -4,6 +4,8 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import LinkArrow from "@/components/LinkArrow";
 import OwnershipDiagram from "@/components/OwnershipDiagram";
+import WhyResearchBook from "@/components/WhyResearchBook";
+import { FIGURES, formatAsOf } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
 import type { HeroId } from "@/lib/heroes";
 import { WHY_FIGURES, WHY_TIMELINE } from "@/lib/why-fairview";
@@ -41,37 +43,6 @@ function WhyMedia({
   );
 }
 
-/** Quiet bars — research patience, not performance. */
-function ResearchBars() {
-  const bars = [
-    { label: "Watch", h: 28 },
-    { label: "Study", h: 48 },
-    { label: "Wait", h: 72 },
-    { label: "Own", h: 100 },
-  ];
-
-  return (
-    <figure className="fv-why__bars">
-      <div className="fv-why__bars-plot" aria-hidden>
-        {bars.map((bar) => (
-          <div key={bar.label} className="fv-why__bars-col">
-            <div className="fv-why__bars-track">
-              <div
-                className="fv-why__bars-fill"
-                style={{ height: `${bar.h}%` }}
-              />
-            </div>
-            <span className="fv-why__bars-label">{bar.label}</span>
-          </div>
-        ))}
-      </div>
-      <figcaption className="fv-why__bars-cap">
-        Years of homework before a dollar moves
-      </figcaption>
-    </figure>
-  );
-}
-
 export default function WhyFairviewPage() {
   return (
     <main className="bg-[var(--fv-bg)] pt-0">
@@ -95,7 +66,7 @@ export default function WhyFairviewPage() {
 
         <figure className="fv-why-hero__media">
           <div className="fv-why-hero__plane">
-            <HeroPhoto id="ballet" priority imgClassName="fv-hero-photo" />
+            <HeroPhoto id="acceptance" priority imgClassName="fv-hero-photo" />
           </div>
         </figure>
       </header>
@@ -151,7 +122,9 @@ export default function WhyFairviewPage() {
           aria-labelledby="why-ownership"
         >
           <h2 id="why-ownership" className="fv-why__h2">
-            One fee. One boss.
+            One fee.
+            <br />
+            One boss.
           </h2>
           <div className="fv-why__prose">
             <p>
@@ -187,7 +160,11 @@ export default function WhyFairviewPage() {
             Most wealth managers don&apos;t know what they own. We do.
           </h2>
 
-          <WhyMedia hero="piano" label="In-house research" ratio="wide" />
+          <WhyMedia
+            hero="sellbusiness"
+            label="The underlying business"
+            ratio="wide"
+          />
 
           <div className="fv-why__research">
             <div className="fv-why__prose">
@@ -215,28 +192,34 @@ export default function WhyFairviewPage() {
                 them—not just bill them.
               </p>
             </div>
-            <ResearchBars />
+            <WhyResearchBook />
           </div>
         </section>
 
         <section
           id="numbers"
-          className="fv-why__section"
+          className="fv-why__section fv-why__section--figures"
           aria-labelledby="why-numbers"
         >
-          <h2 id="why-numbers" className="fv-why__h2">
-            The numbers, not the adjectives.
-          </h2>
+          <header className="fv-why__figures-mast">
+            <p className="fv-why__figures-eyebrow">The record</p>
+            <h2 id="why-numbers" className="fv-why__h2">
+              The numbers, not the adjectives.
+            </h2>
+            {FIGURES.aum.asOf ? (
+              <p className="fv-why__figures-asof">
+                {formatAsOf(FIGURES.aum.asOf)}
+              </p>
+            ) : null}
+          </header>
           <dl className="fv-why__figures">
-            {WHY_FIGURES.map((fig) => (
+            {WHY_FIGURES.map((fig, i) => (
               <div key={fig.label} className="fv-why__figure">
+                <span className="fv-why__figure-idx" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <dt className="fv-why__figure-value fv-nums">{fig.value}</dt>
-                <dd className="fv-why__figure-label">
-                  {fig.label}
-                  {fig.note ? (
-                    <span className="fv-why__figure-note"> · {fig.note}</span>
-                  ) : null}
-                </dd>
+                <dd className="fv-why__figure-label">{fig.label}</dd>
               </div>
             ))}
           </dl>
@@ -244,7 +227,7 @@ export default function WhyFairviewPage() {
 
         <section
           id="timeline"
-          className="fv-why__section"
+          className="fv-why__section fv-why__section--timeline"
           aria-labelledby="why-timeline"
         >
           <h2 id="why-timeline" className="fv-why__h2">
@@ -256,23 +239,33 @@ export default function WhyFairviewPage() {
             cycle.
           </p>
 
-          <figure className="fv-why__media fv-why__media--full">
-            <div className="fv-why__media-plane" aria-hidden />
-          </figure>
-
-          <ol className="fv-why__timeline">
+          <ol className="fv-why__rail">
             {WHY_TIMELINE.map((entry) => (
-              <li key={entry.when} className="fv-why__time">
-                <div className="fv-why__time-when">
-                  <span className="fv-why__time-year fv-nums">{entry.when}</span>
-                  {entry.era ? (
-                    <span className="fv-why__time-era">{entry.era}</span>
-                  ) : null}
-                </div>
-                <div className="fv-why__time-marker" aria-hidden>
-                  <span className="fv-why__time-dot" />
-                </div>
-                <p className="fv-why__time-what">{entry.what}</p>
+              <li key={entry.when} className="fv-why__card">
+                <figure className="fv-why__card-figure">
+                  <div className="fv-why__card-plate">
+                    <img
+                      src={entry.photo}
+                      alt=""
+                      width={1600}
+                      height={2000}
+                      className="fv-why__card-art"
+                      decoding="async"
+                      loading="lazy"
+                    />
+                  </div>
+                  <figcaption className="fv-why__card-copy">
+                    <p className="fv-why__card-when">
+                      <span className="fv-why__card-year fv-nums">
+                        {entry.when}
+                      </span>
+                      {entry.era ? (
+                        <span className="fv-why__card-era">{entry.era}</span>
+                      ) : null}
+                    </p>
+                    <p className="fv-why__card-what">{entry.what}</p>
+                  </figcaption>
+                </figure>
               </li>
             ))}
           </ol>

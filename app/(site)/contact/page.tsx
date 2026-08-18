@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ContactForm from "@/app/(site)/contact/ContactForm";
 import ContinueBar from "@/components/ContinueBar";
 import PageEnter from "@/components/PageEnter";
+import TeamRail from "@/components/TeamRail";
 import { FIRM } from "@/lib/firm";
-import { HEROES } from "@/lib/heroes";
 
 export const metadata: Metadata = {
   title: "Contact | Fairview Capital",
@@ -67,17 +67,9 @@ export default function ContactPage() {
             </div>
           </aside>
 
-          <figure className="fv-contact__media" data-enter="3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={HEROES.community.desktop}
-              alt={HEROES.community.alt}
-              width={2400}
-              height={1200}
-              className="fv-contact__img"
-              decoding="async"
-            />
-          </figure>
+          <div className="fv-contact__rail" data-enter="3">
+            <TeamRail />
+          </div>
 
           <div data-enter="4">
             <ContinueBar

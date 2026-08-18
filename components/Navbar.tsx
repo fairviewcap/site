@@ -345,8 +345,8 @@ export default function Navbar() {
           aria-label={mega?.label}
           onMouseEnter={clearCloseTimer}
         >
-          {mega ? (
-            <ul className={`fv-mega__grid fv-mega__grid--${shownMenu}`}>
+          {mega && shownMenu === "work" ? (
+            <ul className="fv-mega__grid fv-mega__grid--work">
               {mega.items.map((item) => {
                 const hero = HEROES[item.hero];
                 return (
@@ -372,6 +372,28 @@ export default function Navbar() {
                   </li>
                 );
               })}
+            </ul>
+          ) : null}
+
+          {mega && shownMenu === "firm" ? (
+            <ul className="fv-mega__grid fv-mega__grid--firm">
+              {mega.items.map((item) => (
+                <li key={item.href} role="none">
+                  <Link
+                    href={item.href}
+                    role="menuitem"
+                    className="fv-mega__card"
+                    onClick={() => setOpenMenu(null)}
+                  >
+                    <span className="fv-mega__plate">
+                      <span className="fv-mega__plate-name">{item.label}</span>
+                      {item.line ? (
+                        <span className="fv-mega__plate-line">{item.line}</span>
+                      ) : null}
+                    </span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           ) : null}
         </div>

@@ -279,12 +279,12 @@ function WorldProto({ className }: DiagramProps) {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const greens = [
-      "#b7c4b8",
-      "#9aab9b",
-      "#7a8b7b",
-      "#657766",
-      "#516252",
-      "#3e4e3f",
+      "#b8f0d4",
+      "#8ee4b8",
+      "#49cc8a",
+      "#2fb36f",
+      "#1e8f56",
+      "#146b40",
     ];
     const n = 6;
     const cols = 12;
@@ -402,7 +402,7 @@ function WorldProto({ className }: DiagramProps) {
       const hh = padH / 2;
       ctx.beginPath();
       ctx.roundRect(x - hw, y - hh, padW, padH, hh);
-      ctx.fillStyle = "#7a8b7b";
+      ctx.fillStyle = "#49cc8a";
       ctx.fill();
     };
 
