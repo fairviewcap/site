@@ -10378,12 +10378,39 @@ a.fv-portals__door-go:hover {
 }
 
 .fv-mega__shot {
+  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: var(--fv-radius-media);
   background: var(--fv-green);
+}
+
+.fv-mega__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.58) 0%,
+    rgba(10, 10, 10, 0.18) 42%,
+    rgba(10, 10, 10, 0.04) 100%
+  );
+  pointer-events: none;
+}
+
+.fv-mega__onshot {
+  position: absolute;
+  top: 0.95rem;
+  left: 1.05rem;
+  right: 1.15rem;
+  z-index: 1;
+  font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
 }
 
 .fv-mega__img {
@@ -10430,16 +10457,23 @@ a.fv-portals__door-go:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  opacity: 0.12;
-  mix-blend-mode: overlay;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.16) 0.55px,
+    transparent 0.65px
+  );
+  background-size: 9px 9px;
   pointer-events: none;
 }
 
+.fv-mega__plate-icon,
 .fv-mega__plate-name,
 .fv-mega__plate-line {
   position: relative;
+}
+
+.fv-mega__plate-icon {
+  margin-bottom: 0.35rem;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .fv-mega__plate-name {

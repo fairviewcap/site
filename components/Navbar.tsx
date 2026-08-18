@@ -2,12 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Cpu,
+  Hash,
+  Lock,
+  Smartphone,
+  Trees,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { FIRM } from "@/lib/firm";
 import { HEROES } from "@/lib/heroes";
 import { MENUS, PRIMARY_LINKS, type MenuKey } from "@/lib/nav";
+
+const FIRM_ICONS: Record<string, LucideIcon> = {
+  "/firm/why-fairview": Zap,
+  "/team": Smartphone,
+  "/firm/fees": Hash,
+  "/firm/privacy": Lock,
+  "/firm/technology": Cpu,
+  "/firm/community": Trees,
+};
 
 const SCROLL_PX = 16;
 
@@ -366,8 +385,9 @@ export default function Navbar() {
                           height={1200}
                           className="fv-mega__img"
                         />
+                        <span className="fv-mega__shade" aria-hidden />
+                        <span className="fv-mega__onshot">{item.label}</span>
                       </span>
-                      <span className="fv-mega__name">{item.label}</span>
                     </Link>
                   </li>
                 );
@@ -377,23 +397,34 @@ export default function Navbar() {
 
           {mega && shownMenu === "firm" ? (
             <ul className="fv-mega__grid fv-mega__grid--firm">
-              {mega.items.map((item) => (
-                <li key={item.href} role="none">
-                  <Link
-                    href={item.href}
-                    role="menuitem"
-                    className="fv-mega__card"
-                    onClick={() => setOpenMenu(null)}
-                  >
-                    <span className="fv-mega__plate">
-                      <span className="fv-mega__plate-name">{item.label}</span>
-                      {item.line ? (
-                        <span className="fv-mega__plate-line">{item.line}</span>
-                      ) : null}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              {mega.items.map((item) => {
+                const Icon = FIRM_ICONS[item.href];
+                return (
+                  <li key={item.href} role="none">
+                    <Link
+                      href={item.href}
+                      role="menuitem"
+                      className="fv-mega__card"
+                      onClick={() => setOpenMenu(null)}
+                    >
+                      <span className="fv-mega__plate">
+                        {Icon ? (
+                          <Icon
+                            className="fv-mega__plate-icon"
+                            size={16}
+                            strokeWidth={1.5}
+                            aria-hidden
+                          />
+                        ) : null}
+                        <span className="fv-mega__plate-name">{item.label}</span>
+                        {item.line ? (
+                          <span className="fv-mega__plate-line">{item.line}</span>
+                        ) : null}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           ) : null}
         </div>
