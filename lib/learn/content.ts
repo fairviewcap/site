@@ -15,7 +15,7 @@ export const LEARN_CHANNELS: LearnChannel[] = [
     slug: "insights",
     label: "Investment Insights",
     title: "Investment Insights",
-    headline: "A ticker is just a string of letters.",
+    headline: "Investment Insights",
     dek: "We buy what’s underneath — research, risk, and the work we show.",
     summary:
       "Investment insights from Fairview Capital’s research team — how we evaluate businesses, manage risk, and show our work.",
@@ -25,7 +25,7 @@ export const LEARN_CHANNELS: LearnChannel[] = [
     slug: "planning",
     label: "Planning",
     title: "Planning",
-    headline: "A balance sheet is a snapshot. We turn it into a plan.",
+    headline: "Planning",
     dek: "Cash flow, tax, family, and legacy — the arithmetic you actually live.",
     summary:
       "Wealth planning content from Fairview Capital — decisions families face around cash flow, taxes, real estate, and preparing the next generation.",
@@ -210,6 +210,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Cash Flow Before Complexity",
     date: "2025-10-20",
+    image: "/photography/5x7-cards/fv-retirement.avif",
     excerpt:
       "Most planning anxiety is cash-flow anxiety in costume. We start with the arithmetic you actually live.",
     body: [
@@ -225,6 +226,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Preparing Heirs Without the Speech",
     date: "2025-06-18",
+    image: "/photography/5x7-cards/fv-family.avif",
     excerpt:
       "Wealth transitions fail quietly. The fix is rarely a thicker binder — it is smaller, honest conversations timed to the family.",
     body: [
@@ -241,6 +243,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Taxes Are a Cost. Treat Them Like One.",
     date: "2024-08-20",
+    image: "/photography/5x7-cards/fv-taxes.avif",
     excerpt:
       "We do not chase every deduction. We look at your income, assets, and goals — then use the tax code where it actually helps the plan.",
     body: [
@@ -257,6 +260,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Choosing a Trustee Is the Hard Part",
     date: "2023-08-10",
+    image: "/photography/5x7-cards/fv-estate-planning.avif",
     excerpt:
       "A trust is only as good as the person or institution asked to run it. Pick for judgment, not for flattery.",
     body: [
@@ -273,6 +277,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Legacy Is a Practice, Not a Slogan",
     date: "2023-06-05",
+    image: "/photography/life-paths/legacy-v.avif",
     excerpt:
       "Assets transfer on paper. Judgment transfers only if you teach it — on purpose, while there is still time.",
     body: [
@@ -289,6 +294,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     channel: "planning",
     title: "Helping Adult Children Without Breaking the Plan",
     date: "2023-04-01",
+    image: "/photography/life-paths/adult-children-v.avif",
     excerpt:
       "Most parents help somehow. The question is whether the help builds independence — and whether your own retirement still works afterward.",
     body: [

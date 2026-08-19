@@ -5,19 +5,9 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import { FIRM } from "@/lib/firm";
 
-const REEL = [
-  "Fire",
-  "Wheel",
-  "Writing",
-  "The Press",
-  "Steam",
-  "Electricity",
-  "Radio",
-  "Silicon",
-  "AI",
-] as const;
+const REEL = ["Computers", "Internet", "Cloud", "Mobile", "AI"] as const;
 
-const DWELL_MS = [420, 140, 180, 180, 180, 180, 180, 380] as const;
+const DWELL_MS = [420, 180, 180, 380] as const;
 
 type Phase = "reel" | "headline" | "line2" | "hero" | "rest";
 

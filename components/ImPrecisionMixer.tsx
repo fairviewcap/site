@@ -16,11 +16,12 @@ function clamp(n: number) {
   return Math.min(1, Math.max(0, n));
 }
 
-function useOnceInView<T extends HTMLElement>() {
+function useOnceInView<T extends HTMLElement>(enabled = true) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
     const el = ref.current;
     if (!el) return;
 
@@ -41,17 +42,21 @@ function useOnceInView<T extends HTMLElement>() {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [enabled]);
 
   return { ref, inView };
 }
 
 export default function ImPrecisionMixer({
   compact = false,
+  play,
 }: {
   compact?: boolean;
+  play?: boolean;
 }) {
-  const { ref, inView } = useOnceInView<HTMLDivElement>();
+  const own = useOnceInView<HTMLDivElement>(play === undefined);
+  const ref = own.ref;
+  const inView = play ?? own.inView;
   const [levels, setLevels] = useState(() => [...FLAT]);
   const [held, setHeld] = useState<number | null>(null);
   const [live, setLive] = useState(false);

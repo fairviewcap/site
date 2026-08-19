@@ -1,15 +1,45 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import ImPrecisionMixer from "@/components/ImPrecisionMixer";
 
 export type EquityStepId = "assess" | "project" | "research" | "value";
 
-export default function ImEquityStep({ id }: { id: EquityStepId }) {
-  if (id === "project") return <ProjectPlate />;
-  if (id === "research") return <ResearchPlate />;
-  if (id === "value") return <ValuePlate />;
-  return <AssessPlate />;
+const BEAT_MS = 480;
+
+const EquityPlay = createContext(false);
+
+export function ImEquitySteps({ children }: { children: ReactNode }) {
+  const { ref, inView } = useOnceInView<HTMLOListElement>();
+
+  return (
+    <ol ref={ref} className="fv-im-steps">
+      <EquityPlay.Provider value={inView}>{children}</EquityPlay.Provider>
+    </ol>
+  );
+}
+
+export default function ImEquityStep({
+  id,
+  index = 0,
+}: {
+  id: EquityStepId;
+  index?: number;
+}) {
+  const play = useStaggeredPlay(index);
+  if (id === "project") return <ProjectPlate play={play} />;
+  if (id === "research") return <ResearchPlate play={play} />;
+  if (id === "value") return <ValuePlate play={play} />;
+  return <AssessPlate play={play} />;
 }
 
 function useOnceInView<T extends HTMLElement>() {
@@ -33,7 +63,7 @@ function useOnceInView<T extends HTMLElement>() {
           io.disconnect();
         }
       },
-      { threshold: 0.35, rootMargin: "0px 0px -18% 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -16% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -42,16 +72,33 @@ function useOnceInView<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-function AssessPlate() {
+function useStaggeredPlay(index: number) {
+  const rowIn = useContext(EquityPlay);
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    if (!rowIn) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setPlay(true);
+      return;
+    }
+    const t = window.setTimeout(() => setPlay(true), index * BEAT_MS);
+    return () => window.clearTimeout(t);
+  }, [rowIn, index]);
+
+  return play;
+}
+
+function AssessPlate({ play }: { play: boolean }) {
   return (
     <div className="fv-im-eq fv-im-eq--assess">
-      <ImPrecisionMixer compact />
+      <ImPrecisionMixer compact play={play} />
     </div>
   );
 }
 
-function ProjectPlate() {
-  const { ref, inView } = useOnceInView<HTMLDivElement>();
+function ProjectPlate({ play }: { play: boolean }) {
   const clipId = useId().replace(/:/g, "");
 
   const W = 320;
@@ -78,8 +125,7 @@ function ProjectPlate() {
 
   return (
     <div
-      ref={ref}
-      className={["fv-im-eq", "fv-im-eq--project", inView ? "is-in" : ""]
+      className={["fv-im-eq", "fv-im-eq--project", play ? "is-in" : ""]
         .filter(Boolean)
         .join(" ")}
       aria-hidden
@@ -121,13 +167,10 @@ function ProjectPlate() {
   );
 }
 
-function ResearchPlate() {
-  const { ref, inView } = useOnceInView<HTMLDivElement>();
-
+function ResearchPlate({ play }: { play: boolean }) {
   return (
     <div
-      ref={ref}
-      className={["fv-im-eq", "fv-im-eq--research", inView ? "is-in" : ""]
+      className={["fv-im-eq", "fv-im-eq--research", play ? "is-in" : ""]
         .filter(Boolean)
         .join(" ")}
       aria-hidden
@@ -149,13 +192,10 @@ const GATE_DOTS = [
   { x: 84, y: 52 },
 ] as const;
 
-function ValuePlate() {
-  const { ref, inView } = useOnceInView<HTMLDivElement>();
-
+function ValuePlate({ play }: { play: boolean }) {
   return (
     <div
-      ref={ref}
-      className={["fv-im-eq", "fv-im-eq--value", inView ? "is-in" : ""]
+      className={["fv-im-eq", "fv-im-eq--value", play ? "is-in" : ""]
         .filter(Boolean)
         .join(" ")}
       aria-hidden

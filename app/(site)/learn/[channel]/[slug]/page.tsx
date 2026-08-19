@@ -207,7 +207,13 @@ function EssayArticle({
   const note = isLearnNote(article);
 
   return (
-    <article className="fv-essay">
+    <article
+      className={
+        channel.slug === "insights" || channel.slug === "planning"
+          ? `fv-essay fv-essay--${channel.slug}`
+          : "fv-essay"
+      }
+    >
       <nav className="fv-learn-index__crumb fv-essay__crumb" aria-label="Breadcrumb">
         <Link href="/learn">Learn</Link>
         <span aria-hidden>/</span>

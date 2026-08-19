@@ -3,7 +3,10 @@ import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import ImBookSleeves from "@/components/ImBookSleeves";
-import ImEquityStep, { type EquityStepId } from "@/components/ImEquityStep";
+import ImEquityStep, {
+  ImEquitySteps,
+  type EquityStepId,
+} from "@/components/ImEquityStep";
 import PageEnter from "@/components/PageEnter";
 import { FIRM } from "@/lib/firm";
 
@@ -128,12 +131,12 @@ export default function InvestmentManagementPage() {
               </p>
             </div>
 
-            <ol className="fv-im-steps">
-              {EQUITY_PROCESS.map((step) => (
+            <ImEquitySteps>
+              {EQUITY_PROCESS.map((step, i) => (
                 <li key={step.index} className="fv-im-step">
                   <figure className="fv-im-step__media">
                     <div className="fv-im-step__plane">
-                      <ImEquityStep id={step.diagram} />
+                      <ImEquityStep id={step.diagram} index={i} />
                     </div>
                   </figure>
                   <div className="fv-im-step__copy">
@@ -145,7 +148,7 @@ export default function InvestmentManagementPage() {
                   </div>
                 </li>
               ))}
-            </ol>
+            </ImEquitySteps>
           </section>
 
           <section

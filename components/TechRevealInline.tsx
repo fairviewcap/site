@@ -5,23 +5,21 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import { FIRM } from "@/lib/firm";
 
-/** Historical stepping stones → final lock. Periods added in render. */
+/** Contemporary tools → final lock. Periods added in render. */
 const REEL = [
-  "Fire",
-  "Wheel",
-  "The Press",
-  "Electricity",
-  "Radio",
-  "Silicon",
+  "Computers",
+  "Internet",
+  "Cloud",
+  "Mobile",
   "AI",
   "Change",
 ] as const;
 
 /**
  * Dwell before advancing to the next word (ms). Last word locks.
- * Fire reads; mid-arc breathes; AI pauses; Change holds longer before line two.
+ * First word reads; mid-arc snaps; AI pauses; Change holds before line two.
  */
-const DWELL_MS = [420, 140, 180, 180, 180, 200, 380] as const;
+const DWELL_MS = [420, 180, 180, 200, 380] as const;
 
 type Phase = "reel" | "line2" | "hero" | "rest";
 
@@ -78,7 +76,7 @@ export default function TechRevealInline() {
               <span className="fv-tech__reel-fixed">Tools:</span>{" "}
               <span className="fv-tech__reel-slot">
                 <span className="fv-tech__reel-sizer" aria-hidden>
-                  Electricity.
+                  Computers.
                 </span>
                 <span className="fv-tech__reel-word" key={word}>
                   <span className="fv-tech__reel-ghost fv-tech__reel-ghost--a">

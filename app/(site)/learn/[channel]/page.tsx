@@ -89,33 +89,31 @@ function InsightsIndex({
         {articles.map((article, i) => {
           const issueNo = String(i + 1).padStart(2, "0");
           const minutes = estimateReadMinutes(article.body);
-          const longTitle = article.title.length > 42;
           return (
             <li key={article.slug} className="fv-insights__card">
               <Link
                 href={`/learn/${channel.slug}/${article.slug}`}
                 className="fv-insights__link"
               >
-                <div
-                  className={
-                    longTitle
-                      ? "fv-insights__plate fv-insights__plate--long"
-                      : "fv-insights__plate"
-                  }
-                >
+                <div className="fv-insights__plate">
                   <span className="fv-insights__issue" aria-hidden>
                     {issueNo}
                   </span>
-                  <h2 className="fv-insights__headline">{article.title}</h2>
-                  <div className="fv-insights__plate-foot">
-                    <span className="fv-insights__mins">{minutes} min</span>
+                  <div className="fv-insights__copy">
+                    <h2 className="fv-insights__headline">{article.title}</h2>
+                    {article.excerpt ? (
+                      <p className="fv-insights__tease">{article.excerpt}</p>
+                    ) : null}
                   </div>
-                </div>
-                <div className="fv-insights__below">
-                  <p className="fv-insights__excerpt">{article.excerpt}</p>
-                  {isLearnNote(article) ? (
-                    <span className="fv-insights__tier">Note</span>
-                  ) : null}
+                  <div className="fv-insights__plate-foot">
+                    <time dateTime={article.date} className="fv-insights__date">
+                      {formatLearnDate(article.date)}
+                    </time>
+                    <span className="fv-insights__mins">{minutes} min</span>
+                    {isLearnNote(article) ? (
+                      <span className="fv-insights__tier">Note</span>
+                    ) : null}
+                  </div>
                 </div>
               </Link>
             </li>
@@ -150,29 +148,43 @@ function PlanningIndex({
         <p className="fv-planning__lede">{channel.dek}</p>
       </header>
 
-      <ol className="fv-planning__list">
-        {articles.map((article) => {
-          const minutes = estimateReadMinutes(article.body);
-          return (
-            <li key={article.slug} className="fv-planning__row">
-              <Link
-                href={`/learn/${channel.slug}/${article.slug}`}
-                className="fv-planning__link"
-              >
-                <div className="fv-planning__meta">
-                  <span className="fv-planning__read">{minutes} min read</span>
-                </div>
-                <div className="fv-planning__copy">
-                  <h2 className="fv-planning__headline">{article.title}</h2>
-                  <p className="fv-planning__excerpt">{article.excerpt}</p>
+      <ol className="fv-planning__grid">
+        {articles.map((article, i) => (
+          <li key={article.slug} className="fv-planning__card">
+            <Link
+              href={`/learn/${channel.slug}/${article.slug}`}
+              className="fv-planning__poster"
+            >
+              <div className="fv-planning__plate">
+                {article.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={article.image}
+                    alt=""
+                    className="fv-planning__art"
+                  />
+                ) : null}
+              </div>
+              <div className="fv-planning__copy">
+                <span className="fv-planning__idx fv-nums" aria-hidden>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h2 className="fv-planning__headline">{article.title}</h2>
+                {article.excerpt ? (
+                  <p className="fv-planning__tease">{article.excerpt}</p>
+                ) : null}
+                <p className="fv-planning__foot">
+                  <time dateTime={article.date} className="fv-planning__date">
+                    {formatLearnDate(article.date)}
+                  </time>
                   {isLearnNote(article) ? (
                     <span className="fv-planning__tier">Note</span>
                   ) : null}
-                </div>
-              </Link>
-            </li>
-          );
-        })}
+                </p>
+              </div>
+            </Link>
+          </li>
+        ))}
       </ol>
 
       {articles.length === 0 ? (
