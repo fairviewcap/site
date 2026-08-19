@@ -289,9 +289,7 @@ export function adjacentClip(
 }
 
 export function reviewMediaSrc(clip: ReviewClip): string {
-  return clip.kind === "video"
-    ? `/review/${clip.id}.mp4`
-    : `/review/${clip.id}.m4a`;
+  return `/api/review/${clip.id}`;
 }
 
 export function isReviewHeroClip(clip: ReviewClip | null | undefined): boolean {
