@@ -188,7 +188,16 @@ export default function WhyOneFee() {
     let target = 0;
     let raf = 0;
     let last = performance.now();
-    const world = PEBBLE_RESTS.map((rest, i) => ({
+    const world: {
+      rest: number;
+      x: number;
+      v: number;
+      hit: boolean;
+      mass: number;
+      e: number;
+      mu: number;
+      drive: number;
+    }[] = PEBBLE_RESTS.map((rest, i) => ({
       rest,
       x: rest,
       v: 0,

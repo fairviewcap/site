@@ -2757,6 +2757,11 @@ html[data-shell="why"] .fv-shell__main {
   background: var(--fv-green);
 }
 
+html[data-shell="why"][data-why-field="paper"] .fv-shell--rail,
+html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
+  background: var(--fv-bg);
+}
+
 .fv-why-cine {
   height: 380vh;
 }

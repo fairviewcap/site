@@ -35,6 +35,11 @@ function navOnDark(pathname: string) {
   return pathname === "/firm/privacy" || pathname === "/firm/why-fairview";
 }
 
+function whyCineLeft() {
+  const cine = document.querySelector(".fv-why-cine");
+  return cine instanceof HTMLElement && cine.getBoundingClientRect().bottom <= 72;
+}
+
 type MobilePane = "root" | MenuKey;
 
 /**
@@ -44,7 +49,7 @@ type MobilePane = "root" | MenuKey;
  */
 export default function Navbar() {
   const pathname = usePathname();
-  const onDark = navOnDark(pathname);
+  const [onDark, setOnDark] = useState(() => navOnDark(pathname));
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobilePane, setMobilePane] = useState<MobilePane>("root");
@@ -83,21 +88,24 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const glassAt = () => {
+    const update = () => {
       if (pathname === "/firm/why-fairview") {
-        const cine = document.querySelector(".fv-why-cine");
-        if (cine instanceof HTMLElement) {
-          return window.scrollY >= cine.offsetHeight - window.innerHeight * 0.2;
-        }
-        return false;
+        const paper = whyCineLeft();
+        setOnDark(!paper);
+        setScrolled(paper);
+        return;
       }
-      return window.scrollY > SCROLL_PX;
+      setOnDark(navOnDark(pathname));
+      setScrolled(window.scrollY > SCROLL_PX);
     };
 
-    const onScroll = () => setScrolled(glassAt());
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, [pathname]);
 
   useEffect(() => {
