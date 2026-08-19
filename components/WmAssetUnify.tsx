@@ -32,8 +32,11 @@ const PILL_RX = PILL_H / 2;
 const PILL_W_IDLE = STEP * (MANAGED_N - 1) + (R + PAD) * 2;
 const PILL_W_FULL = STEP * (TOTAL - 1) + (R + PAD) * 2;
 const VIEW_W = PILL_X + PILL_W_FULL + 12;
-const Y_PAD = Math.max(...ASSETS.map((a) => Math.abs(a.dy)));
-const VIEW_H = PILL_Y + PILL_H + Y_PAD + 12;
+const MAX_EXTENT = Math.max(
+  R + PAD,
+  ...ASSETS.map((a) => R * a.scale + Math.abs(a.dy)),
+);
+const VIEW_H = RAIL_Y + MAX_EXTENT + 10;
 
 /** When the extending pill edge reaches each outside dot (0–1 of extend duration). */
 function hitAt(outsideIndex: number) {
@@ -256,11 +259,12 @@ export default function WmAssetUnify() {
               className="fv-wm-unify__dot fv-wm-unify__dot--outside"
               cx={a.x}
               cy={RAIL_Y + a.dy}
-              r={R}
+              r={R * a.scale}
               style={
                 {
                   "--fv-unify-color": a.color,
-                  "--fv-unify-scale": `${a.scale}`,
+                  "--fv-unify-r0": `${R * a.scale}`,
+                  "--fv-unify-r1": `${R}`,
                   "--fv-unify-y0": RAIL_Y + a.dy,
                   "--fv-unify-y1": RAIL_Y,
                   "--fv-unify-hit": `${timeForProgress(hitAt(a.i - MANAGED_N), EXTEND_EASE)}`,

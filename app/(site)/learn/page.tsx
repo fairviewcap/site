@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LearnTheme from "@/components/LearnTheme";
-import { formatLearnDate } from "@/lib/learn/content";
-import { listArticles, listChannels } from "@/lib/learn/store";
-import type { LearnArticle } from "@/lib/learn/types";
+import { listChannels } from "@/lib/learn/store";
 
 export const revalidate = 3600;
 
@@ -19,17 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LearnPage() {
-  const [channels, articles] = await Promise.all([
-    listChannels(),
-    listArticles({ publishedOnly: true }),
-  ]);
-
-  const latestByChannel = new Map<string, LearnArticle>();
-  for (const article of articles) {
-    if (!latestByChannel.has(article.channel)) {
-      latestByChannel.set(article.channel, article);
-    }
-  }
+  const channels = await listChannels();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -71,35 +59,34 @@ export default async function LearnPage() {
       </header>
 
       <ol className="fv-learn__posters">
-        {channels.map((channel) => {
-          const latest = latestByChannel.get(channel.slug);
-          return (
-            <li
-              key={channel.slug}
-              className={`fv-learn__poster fv-learn__poster--${channel.tone}`}
+        {channels.map((channel) => (
+          <li
+            key={channel.slug}
+            className={`fv-learn__poster fv-learn__poster--${channel.tone}`}
+          >
+            <Link
+              href={`/learn/${channel.slug}`}
+              className="fv-learn__poster-link"
             >
-              <Link
-                href={`/learn/${channel.slug}`}
-                className="fv-learn__poster-link"
-              >
+              {channel.poster ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={channel.poster}
+                  alt=""
+                  className="fv-learn__poster-art"
+                />
+              ) : (
                 <span className="fv-learn__poster-ph" aria-hidden>
                   Photograph
                 </span>
-                <span className="fv-learn__poster-copy">
-                  {latest ? (
-                    <span className="fv-learn__poster-idx">
-                      {latest.issue ?? formatLearnDate(latest.date)}
-                    </span>
-                  ) : (
-                    <span className="fv-learn__poster-idx">{channel.label}</span>
-                  )}
-                  <h2 className="fv-learn__poster-title">{channel.label}</h2>
-                  <p className="fv-learn__poster-dek">{channel.dek}</p>
-                </span>
-              </Link>
-            </li>
-          );
-        })}
+              )}
+              <span className="fv-learn__poster-copy">
+                <h2 className="fv-learn__poster-title">{channel.label}</h2>
+                <p className="fv-learn__poster-dek">{channel.dek}</p>
+              </span>
+            </Link>
+          </li>
+        ))}
       </ol>
     </main>
   );

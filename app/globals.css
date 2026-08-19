@@ -6248,7 +6248,7 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .fv-wm-unify__svg {
@@ -6256,7 +6256,7 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   width: 100%;
   max-width: 100%;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .fv-wm-unify__rail-wrap {
@@ -6309,18 +6309,22 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
 
 .fv-wm-unify.is-done .fv-wm-unify__dot--outside {
   fill: var(--fv-unify-ink);
-  cy: var(--fv-unify-y1);
+  cy: calc(var(--fv-unify-y1) * 1px);
+  r: calc(var(--fv-unify-r1) * 1px);
   animation: none;
-  transform: scale(1);
 }
 
 .fv-wm-unify__dot--outside {
   fill: var(--fv-unify-color);
   stroke: none;
-  cy: var(--fv-unify-y0);
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(var(--fv-unify-scale, 1));
+  cy: calc(var(--fv-unify-y0) * 1px);
+  r: calc(var(--fv-unify-r0) * 1px);
+}
+
+@media (max-width: 719px) {
+  .fv-wm-unify__dot--outside {
+    cy: calc(var(--fv-unify-y1) * 1px);
+  }
 }
 
 .fv-wm-unify.is-playing .fv-wm-unify__dot--outside {
@@ -6398,16 +6402,33 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
 
 @keyframes fv-wm-unify-settle {
   0% {
-    cy: var(--fv-unify-y0);
-    transform: scale(var(--fv-unify-scale, 1));
+    cy: calc(var(--fv-unify-y0) * 1px);
+    r: calc(var(--fv-unify-r0) * 1px);
   }
   62% {
-    cy: var(--fv-unify-y1);
-    transform: scale(1.045);
+    cy: calc(var(--fv-unify-y1) * 1px);
+    r: calc(var(--fv-unify-r1) * 1.045px);
   }
   100% {
-    cy: var(--fv-unify-y1);
-    transform: scale(1);
+    cy: calc(var(--fv-unify-y1) * 1px);
+    r: calc(var(--fv-unify-r1) * 1px);
+  }
+}
+
+@media (max-width: 719px) {
+  @keyframes fv-wm-unify-settle {
+    0% {
+      cy: calc(var(--fv-unify-y1) * 1px);
+      r: calc(var(--fv-unify-r0) * 1px);
+    }
+    62% {
+      cy: calc(var(--fv-unify-y1) * 1px);
+      r: calc(var(--fv-unify-r1) * 1.045px);
+    }
+    100% {
+      cy: calc(var(--fv-unify-y1) * 1px);
+      r: calc(var(--fv-unify-r1) * 1px);
+    }
   }
 }
 
@@ -6444,8 +6465,8 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   .fv-wm-unify__dot--outside {
     animation: none !important;
     fill: var(--fv-unify-ink);
-    cy: var(--fv-unify-y1);
-    transform: scale(1);
+    cy: calc(var(--fv-unify-y1) * 1px);
+    r: calc(var(--fv-unify-r1) * 1px);
   }
 
   .fv-wm-unify__status {
@@ -6644,6 +6665,8 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-padding-left: 0;
+  width: calc(100% + var(--fv-page-x));
+  max-width: none;
   padding: 0.15rem 0 0.35rem;
   -webkit-overflow-scrolling: touch;
 }
@@ -6668,6 +6691,7 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   .fv-wm-posters__rail {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: 100%;
     overflow: visible;
     scroll-snap-type: none;
   }
@@ -9317,10 +9341,21 @@ html[data-shell="learn"] #main {
   text-wrap: pretty;
 }
 
+.fv-learn-page {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .fv-learn-page {
+    padding-bottom: 7rem;
+  }
+}
+
 .fv-learn__posters {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   display: grid;
@@ -9336,23 +9371,19 @@ html[data-shell="learn"] #main {
 }
 
 .fv-learn__poster {
-  height: 34rem;
+  position: relative;
+  aspect-ratio: 4 / 7;
   overflow: hidden;
-  background: #2a2a28;
+  border-radius: var(--fv-radius-media);
+  background: #141414;
 }
 
 .fv-learn__poster--green {
-  background: #3a4038;
+  background: #f2f1ef;
 }
 
 .fv-learn__poster--paper {
-  background: #4a4e48;
-}
-
-@media (min-width: 900px) {
-  .fv-learn__poster {
-    height: 44rem;
-  }
+  background: #d8d6d2;
 }
 
 .fv-learn__poster-link {
@@ -9368,10 +9399,32 @@ html[data-shell="learn"] #main {
   color: #f2f1ef;
 }
 
+.fv-learn__poster--green .fv-learn__poster-link {
+  color: var(--fv-fg);
+}
+
+.fv-learn__poster--green .fv-learn__poster-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--fv-sage) 78%, #141414);
+  mix-blend-mode: darken;
+  pointer-events: none;
+}
+
 @media (min-width: 900px) {
   .fv-learn__poster-link {
     padding: 2.35rem 2.15rem 2.5rem;
   }
+}
+
+.fv-learn__poster-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 .fv-learn__poster-ph {
@@ -9401,7 +9454,8 @@ html[data-shell="learn"] #main {
   font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.08em;
-  color: #49cc8a;
+  color: inherit;
+  opacity: 0.62;
 }
 
 .fv-learn__poster-title {
@@ -9420,6 +9474,10 @@ html[data-shell="learn"] #main {
   line-height: 1.45;
   letter-spacing: -0.01em;
   color: rgba(242, 241, 239, 0.72);
+}
+
+.fv-learn__poster--green .fv-learn__poster-dek {
+  color: var(--fv-muted);
 }
 
 .fv-learn__poster-link:hover .fv-learn__poster-title {
@@ -9836,13 +9894,23 @@ html[data-shell="learn"] #main {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 359px) {
+  .fv-insights__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 640px) {
   .fv-insights__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .fv-insights__plate {
+    padding: 1.35rem 1.25rem 1.4rem;
   }
 }
 
@@ -9875,7 +9943,7 @@ html[data-shell="learn"] #main {
   width: 100%;
   aspect-ratio: 5 / 7;
   min-height: 0;
-  padding: 1.35rem 1.25rem 1.4rem;
+  padding: 1.1rem 1rem 1.15rem;
   border: 0;
   border-radius: 12px;
   overflow: hidden;
@@ -9928,7 +9996,7 @@ html[data-shell="learn"] #main {
 .fv-insights__headline {
   margin: 0;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
-  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-size: clamp(1.15rem, 3.6vw, 1.95rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.12;

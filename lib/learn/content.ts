@@ -10,6 +10,7 @@ export const LEARN_CHANNELS: LearnChannel[] = [
     summary:
       "Fairview Capital quarterly letters to clients — market commentary, portfolio context, and how we’re thinking about the months ahead.",
     tone: "ink",
+    poster: "/photography/learn/quarterly.avif",
   },
   {
     slug: "insights",
@@ -20,6 +21,7 @@ export const LEARN_CHANNELS: LearnChannel[] = [
     summary:
       "Investment insights from Fairview Capital’s research team — how we evaluate businesses, manage risk, and show our work.",
     tone: "green",
+    poster: "/photography/learn/insights.avif",
   },
   {
     slug: "planning",
@@ -30,6 +32,7 @@ export const LEARN_CHANNELS: LearnChannel[] = [
     summary:
       "Wealth planning content from Fairview Capital — decisions families face around cash flow, taxes, real estate, and preparing the next generation.",
     tone: "paper",
+    poster: "/photography/learn/planning.avif",
   },
 ];
 

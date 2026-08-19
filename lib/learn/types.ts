@@ -14,6 +14,8 @@ export type LearnChannel = {
   summary: string;
   /** Visual tone for the hub plate */
   tone: "ink" | "green" | "paper";
+  /** Hub poster — 4:7 AVIF in /photography/learn */
+  poster?: string;
 };
 
 export type LearnArticle = {

@@ -57,6 +57,7 @@ function channelFromRow(row: ChannelRow): LearnChannel {
     dek: row.dek,
     summary: row.summary,
     tone: row.tone,
+    poster: fallback?.poster,
   };
 }
 
