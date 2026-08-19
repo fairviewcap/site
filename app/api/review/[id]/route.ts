@@ -23,7 +23,7 @@ export async function GET(
         access: "private",
         headers: range ? { Range: range } : undefined,
       });
-      if (result.statusCode !== 200 || !result.stream) continue;
+      if (!result || result.statusCode !== 200 || !result.stream) continue;
 
       const headers = new Headers();
       headers.set("Content-Type", result.blob.contentType || "video/mp4");
