@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { isAdminAuthed } from "@/lib/team/auth";
+
+export const metadata: Metadata = {
+  title: "Admin | Fairview Capital",
+  description: "Fairview Capital admin",
+};
 
 const NAV = [
   { href: "/admin/team", label: "Team" },

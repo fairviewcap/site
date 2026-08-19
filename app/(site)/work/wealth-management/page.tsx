@@ -5,6 +5,7 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import LinkArrow from "@/components/LinkArrow";
 import PageEnter from "@/components/PageEnter";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import WmPillarVisual, {
   type PillarDiagramId,
 } from "@/components/WmPillarVisual";
@@ -39,7 +40,7 @@ const PILLARS: {
     index: "02",
     title: "Your Portfolio",
     diagram: "portfolio",
-    body: "The plan comes first; the portfolio follows — a mix of stocks, bonds, alternative investments, and cash built around your plan, not a model. Every trade we make accounts for taxes, every company or fund we select is researched by our own team, and every account is reviewed by real people—never left on autopilot.",
+    body: "The plan comes first; the portfolio follows — a mix of stocks, bonds, alternative investments, and cash built around your plan, not a model. Trades are made with taxes in mind. Companies and funds we select are researched here. Accounts are reviewed by people — not left on autopilot.",
   },
   {
     index: "03",
@@ -122,6 +123,7 @@ export default function WealthManagementPage() {
       <PageEnter>
         <header className="fv-wm-hero">
           <div className="fv-wm-hero__mast">
+            <ReviewSpot id="wealth" />
             <p className="fv-wm__eyebrow" data-enter="0">
               Wealth Management
             </p>
@@ -192,7 +194,7 @@ export default function WealthManagementPage() {
                 id="wm-domains"
                 className="fv-wm__section-title fv-wm__section-title--center"
               >
-                Wealth planning is complex — and unique to every family.
+                Wealth planning is complex — and unique to the family in front of us.
               </h2>
               <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
                 We guide the questions and the coordination that help a family
@@ -240,7 +242,7 @@ export default function WealthManagementPage() {
                     to sell — to ensure smooth transitions across decades.
                     Sometimes that means months of quiet research; sometimes
                     it&apos;s a five-minute phone call. Either way, you&apos;ll
-                    always know where you stand.
+                    know where you stand.
                   </p>
                 </div>
               </div>

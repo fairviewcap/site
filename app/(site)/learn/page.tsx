@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LearnTheme from "@/components/LearnTheme";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import { listChannels } from "@/lib/learn/store";
 
 export const revalidate = 3600;
@@ -49,6 +50,7 @@ export default async function LearnPage() {
 
       <header className="fv-learn-hero">
         <div className="fv-learn-hero__mast">
+          <ReviewSpot id="learn" />
           <p className="fv-learn__folio">Learn</p>
           <h1 className="fv-learn__title">What we think.</h1>
           <p className="fv-learn__lede">

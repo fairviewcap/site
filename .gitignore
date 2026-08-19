@@ -44,6 +44,10 @@ yarn-error.log*
 /working/
 .tmp-hero-preview/
 
+# Review tour media — keep local, do not commit
+/public/review/*
+!/public/review/.gitkeep
+
 # vercel
 .vercel
 

@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import { FIRM } from "@/lib/firm";
 
 const REEL = ["Computers", "Internet", "Cloud", "Mobile", "AI"] as const;
@@ -141,6 +142,7 @@ export default function TechReveal() {
         aria-hidden={!headlineIn}
       >
         <div className="fv-tech-hero__mast">
+          <ReviewSpot id="technology" />
           <p className="fv-tech__eyebrow">Technology</p>
           <h1
             className="fv-tech__title"

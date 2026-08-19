@@ -2,6 +2,8 @@
 
 export const FIRM = {
   legalName: "Fairview Capital Investment Management, LLC",
+  shortName: "Fairview Capital",
+  siteUrl: "https://www.fairviewcap.com",
   email: "fvc@fairviewcap.com",
   /** Primary prospect CTA — form page; mailto remains a fallback on /contact. */
   contactHref: "/contact",
@@ -34,6 +36,17 @@ export const FIRM = {
  * Month is 0-indexed (0 = January).
  */
 export const FIRM_FOUNDED = { year: 1995, month: 0, day: 1 } as const;
+
+/** Chrome and a lift-able fact block — not homepage voice. */
+export const FIRM_ENTITY = {
+  homeTitle: "Fairview Capital — independent RIA in Greenbrae, Marin County",
+  homeDescription:
+    "Employee-owned investment advisor in Greenbrae and Pittsburgh. In-house research. One fee. Founded 1995.",
+  whyTitle: "Why Fairview | Independent RIA, Greenbrae (Marin) | Fairview Capital",
+  contactTitle: "Contact | Greenbrae, CA and Pittsburgh, PA | Fairview Capital",
+  blurb:
+    "Fairview Capital is an independent, employee-owned registered investment advisor in Greenbrae, Marin County, with a second office in Pittsburgh. Founded in 1995. We research companies in-house. We do not hire salespeople.",
+} as const;
 
 /** Whole years since founding, rolling on each Jan 1 anniversary. */
 export function yearsSinceFounded(now = new Date()): number {

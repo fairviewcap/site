@@ -121,7 +121,8 @@ export default function PrivacyReveal() {
           with the same rigor we safeguard your wealth.
         </p>
         <p className="fv-privacy__close">
-          Simple, discreet, and unwavering: your privacy is always protected.
+          Simple, discreet, and unwavering: we treat your privacy as part of
+          the work.
         </p>
       </div>
     </div>

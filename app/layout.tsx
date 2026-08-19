@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Inter_Tight, Newsreader } from "next/font/google";
+import { FIRM, FIRM_ENTITY } from "@/lib/firm";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,8 +24,9 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Fairview Capital",
-  description: "Fairview Capital",
+  metadataBase: new URL(FIRM.siteUrl),
+  title: FIRM_ENTITY.homeTitle,
+  description: FIRM_ENTITY.homeDescription,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

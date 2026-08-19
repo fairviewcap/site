@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AnswersExplorer from "@/components/AnswersExplorer";
 import ContinueBar from "@/components/ContinueBar";
 import PageEnter from "@/components/PageEnter";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import {
   allAnswerItems,
   getAnswerCategories,
@@ -53,6 +54,7 @@ export default async function AnswersPage({ searchParams }: AnswersPageProps) {
       <PageEnter>
         <div className="fv-answers">
           <header className="fv-answers__intro" data-enter="0">
+            <ReviewSpot id="answers" />
             <p className="fv-answers__eyebrow">Straight Answers</p>
             <h1 className="fv-answers__title">
               Quick answers to all kinds of questions.

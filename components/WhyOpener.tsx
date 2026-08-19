@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import LinkArrow from "@/components/LinkArrow";
+import ReviewSpot from "@/components/review/ReviewSpot";
 
 type WhyOpenerProps = {
   title: string;
@@ -121,6 +122,7 @@ export default function WhyOpener({ title, lede, children }: WhyOpenerProps) {
               : undefined
           }
         >
+          <ReviewSpot id="why-fairview" tone="dark" />
           <p className="fv-why-cine__folio">Why Fairview</p>
           <h1 className="fv-why-cine__title">{title}</h1>
           <p className="fv-why-cine__lede">{lede}</p>

@@ -3,11 +3,11 @@ import ContactForm from "@/app/(site)/contact/ContactForm";
 import ContinueBar from "@/components/ContinueBar";
 import PageEnter from "@/components/PageEnter";
 import TeamRail from "@/components/TeamRail";
-import { FIRM } from "@/lib/firm";
+import { FIRM, FIRM_ENTITY } from "@/lib/firm";
 
 export const metadata: Metadata = {
-  title: "Contact | Fairview Capital",
-  description: "Get in touch with Fairview Capital.",
+  title: FIRM_ENTITY.contactTitle,
+  description: FIRM_ENTITY.blurb,
 };
 
 export default function ContactPage() {
@@ -41,9 +41,7 @@ export default function ContactPage() {
             </a>
 
             <div className="fv-contact__office">
-              <h2 className="fv-contact__office-name">
-                San Francisco Bay Area
-              </h2>
+              <h2 className="fv-contact__office-name">{bay.label}</h2>
               <p className="fv-contact__address">
                 {bay.lines[0]}
                 <br />
@@ -65,6 +63,8 @@ export default function ContactPage() {
                 {pit.phone}
               </a>
             </div>
+
+            <p className="fv-contact__entity">{FIRM_ENTITY.blurb}</p>
           </aside>
 
           <div className="fv-contact__rail" data-enter="3">

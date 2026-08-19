@@ -7,7 +7,7 @@ import { FIRM } from "@/lib/firm";
 export const metadata: Metadata = {
   title: "Fees | Fairview Capital",
   description:
-    "A hidden fee is a fee with something to hide. Ours aren't. Every fee we charge is fully disclosed.",
+    "A hidden fee is a fee with something to hide. Ours aren't. The advisory fee we charge is clear, simple, and disclosed right here.",
 };
 
 export default function FeesPage() {

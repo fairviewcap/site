@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import HeroPhoto from "@/components/HeroPhoto";
+import ReviewSpot from "@/components/review/ReviewSpot";
 
 type Phase = "boot" | "neighbors" | "converge" | "first" | "rest";
 
@@ -46,6 +47,7 @@ export default function CommunityHero() {
   return (
     <header className="fv-community-hero">
       <div className="fv-community-hero__mast">
+        <ReviewSpot id="community" />
         <p
           className={
             eyebrowIn

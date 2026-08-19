@@ -8,6 +8,7 @@ import ImEquityStep, {
   type EquityStepId,
 } from "@/components/ImEquityStep";
 import PageEnter from "@/components/PageEnter";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ const EQUITY_PROCESS: {
     index: "02",
     title: "Five-year projections",
     diagram: "project",
-    body: "We build detailed five-year financial projections for every holding. We continuously monitor and update them, aiming to understand how the company will be competing and performing far into the future.",
+    body: "We build detailed five-year financial projections for the companies we own. We continuously monitor and update them, aiming to understand how the company will be competing and performing far into the future.",
   },
   {
     index: "03",
@@ -81,6 +82,7 @@ export default function InvestmentManagementPage() {
       <PageEnter>
         <header className="fv-wm-hero">
           <div className="fv-wm-hero__mast">
+            <ReviewSpot id="investment" />
             <p className="fv-wm__eyebrow" data-enter="0">
               Investment Management
             </p>
@@ -120,9 +122,8 @@ export default function InvestmentManagementPage() {
                 Our objective is simple: grow and preserve capital by generating
                 long-term compounded returns that exceed broad equity market
                 averages. We do this by participating in rising markets and
-                outperforming when markets decline. Every account is
-                custom-tailored to align with your time horizon, risk profile,
-                and unique circumstances and needs.
+                outperforming when markets decline. Accounts are built around
+                your time horizon, risk, and circumstances.
               </p>
               <p>
                 Our model equity portfolio is a diversified collection of

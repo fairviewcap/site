@@ -2,6 +2,7 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import HomeAnswersSearch from "@/components/HomeAnswersSearch";
 import PageEnter from "@/components/PageEnter";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import TeamRail from "@/components/TeamRail";
 import { FIGURES } from "@/lib/figures";
 import { FIRM } from "@/lib/firm";
@@ -15,6 +16,11 @@ export default function Home() {
       <PageEnter>
       <section className="fv-hero">
         <div className="fv-hero__mast">
+          <div className="fv-review-spots">
+            <ReviewSpot id="argument" align="center" />
+            <ReviewSpot id="voice-and-tone" align="center" />
+            <ReviewSpot id="home" align="center" />
+          </div>
           <h1 className="fv-hero__title" data-enter="0">
             Most firms answer to a board, a bank, or a buyer. Ours answers to
             the phone&nbsp;ringing.
@@ -46,6 +52,7 @@ export default function Home() {
         </dl>
 
         <div className="fv-hero__media" data-enter="3">
+          <ReviewSpot id="photography" />
           <HeroPhoto id="grandma" priority imgClassName="fv-hero__img" />
         </div>
       </section>

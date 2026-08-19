@@ -28,7 +28,7 @@ export default function WhyResearchBook() {
         </div>
       </div>
       <figcaption className="fv-why__book-cap">
-        We can name every one.
+        We can name what we own.
       </figcaption>
     </figure>
   );

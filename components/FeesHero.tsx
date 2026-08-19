@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FeeSchedule from "@/components/FeeSchedule";
+import ReviewSpot from "@/components/review/ReviewSpot";
 import { FEE_INCLUDES } from "@/lib/fees";
 
 type Phase =
@@ -62,6 +63,7 @@ export default function FeesHero() {
       <div className="fv-frame">
         <div className="fv-fees">
           <header className="fv-fees__intro">
+            <ReviewSpot id="fees" />
             <p
               className={
                 titleIn
@@ -89,8 +91,8 @@ export default function FeesHero() {
                   : "fv-fees__lede fv-fees__fade"
               }
             >
-              Ours aren&apos;t. Every fee we charge is clear, simple, and fully
-              disclosed, right here.
+              Ours aren&apos;t. The advisory fee we charge is clear, simple,
+              and disclosed right here.
             </p>
           </header>
         </div>

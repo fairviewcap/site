@@ -10,7 +10,7 @@ import WhyOpener from "@/components/WhyOpener";
 import WhyTheme from "@/components/WhyTheme";
 import {
   FIRM,
-  firmTenureLine,
+  FIRM_ENTITY,
   firmYearsLabel,
   yearsSinceFoundedWords,
 } from "@/lib/firm";
@@ -19,8 +19,8 @@ import { whyTimeline } from "@/lib/why-fairview";
 
 export function generateMetadata(): Metadata {
   return {
-    title: "Why Fairview | Fairview Capital",
-    description: `${firmTenureLine()} We've never hired a salesperson, made a cold call, or sold out to private equity.`,
+    title: FIRM_ENTITY.whyTitle,
+    description: FIRM_ENTITY.blurb,
   };
 }
 
@@ -65,9 +65,9 @@ export default function WhyFairviewPage() {
         lede={
           <>
             We&apos;ve never hired a salesperson, made a cold call, or sold out
-            to private equity. Every family at Fairview came because another
-            client sent them—building a $2.14 billion firm owned entirely by the
-            advisors who pick up when you call.
+            to private equity. The families at Fairview tend to arrive the same
+            way: another client sent them—building a $2.14 billion firm owned
+            entirely by the advisors who pick up when you call.
           </>
         }
       >
@@ -91,15 +91,14 @@ export default function WhyFairviewPage() {
             <p>
               Over {yearsSinceFoundedWords()} years, as Fairview grew, the
               offers came—private equity firms and aggregators wanting to
-              buy us out. We turned them down every single time. And just
+              buy us out. We turned those offers down. And just
               last year, rather than cashing out to an outside buyer, we
               helped our long-time team members become partners and buy
               equity in the firm.
             </p>
             <p>
-              Fairview is—and will always be—100% independent,
-              advisor-owned, and built on the belief that we only succeed
-              when our clients do.
+              Fairview is 100% independent and advisor-owned — and we
+              intend to keep it that way.
             </p>
             <p className="fv-why__signoff">
               — Andrew F. Mathieson, Founder
@@ -121,7 +120,7 @@ export default function WhyFairviewPage() {
             <br />
             don&apos;t know what they own.
             <br />
-            We can name every one.
+            We can name what we own.
           </h2>
 
           <WhyKnowDots />
@@ -167,8 +166,8 @@ export default function WhyFairviewPage() {
           </h2>
           <p className="fv-why__timeline-lede">
             Markets move, headlines change, and Wall Street invents new ways to
-            charge fees. Our principles have remained identical through every
-            cycle.
+            charge fees. Our principles have stayed the same through the
+            cycles we have lived.
           </p>
 
           <WhyCrisisRail timeline={timeline} />
