@@ -30,11 +30,12 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             aria-label="Fairview Capital admin"
           >
             <Image
-              src="/fairview-capital-black.png"
+              src="/logos/fairview-logo.svg"
               alt="Fairview Capital"
               width={165}
               height={15}
               priority
+              unoptimized
               className="h-[13px] w-auto"
             />
           </Link>

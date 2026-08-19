@@ -583,16 +583,8 @@ body {
   user-select: none;
 }
 
-.fv-nav-chip__logo--paper {
-  display: none;
-}
-
-.fv-nav-shell--on-dark .fv-nav-chip__logo--ink {
-  display: none;
-}
-
-.fv-nav-shell--on-dark .fv-nav-chip__logo--paper {
-  display: block;
+.fv-nav-shell--on-dark .fv-nav-chip__logo {
+  filter: brightness(0) invert(1);
 }
 
 .fv-nav-shell--on-dark.is-scrolled .fv-nav-chip,
