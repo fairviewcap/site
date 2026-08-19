@@ -1,5 +1,7 @@
 /** Content for /firm/why-fairview — keep claims aligned with Form ADV / figures. */
 
+import { currentCalendarYear } from "@/lib/firm";
+
 export type WhyFigure = {
   value: string;
   label: string;
@@ -18,7 +20,7 @@ export type WhyTimelineEntry = {
 
 const crisisPhoto = (when: string) => `/photography/crises/${when}.avif`;
 
-/** Instrument readout — omit unverified retention until confirmed. */
+/** Instrument readout — the three that change the mind. */
 export const WHY_FIGURES: WhyFigure[] = [
   {
     value: "1995",
@@ -33,6 +35,10 @@ export const WHY_FIGURES: WhyFigure[] = [
     value: "100%",
     label: "Owned by the advisors working here",
   },
+];
+
+/** The rest of the record — quiet row after the pin. */
+export const WHY_FIGURES_QUIET: WhyFigure[] = [
   {
     value: "$2M",
     label: "Typical minimum account size",
@@ -47,8 +53,8 @@ export const WHY_FIGURES: WhyFigure[] = [
   },
 ];
 
-/** Cycle markers — card rail, one photograph per year. */
-export const WHY_TIMELINE: WhyTimelineEntry[] = [
+/** Historical cycle markers — last card is appended in whyTimeline(). */
+const WHY_TIMELINE_PAST: WhyTimelineEntry[] = [
   {
     when: "1995",
     era: "Marin County",
@@ -88,9 +94,19 @@ export const WHY_TIMELINE: WhyTimelineEntry[] = [
     what: "Private equity buys up independent RIAs. Fairview doesn’t sell",
     photo: crisisPhoto("2023–25"),
   },
-  {
-    when: "2026",
-    what: "$2.14B under management. Same firm since 1995",
-    photo: crisisPhoto("2026"),
-  },
 ];
+
+/** Present-day still — year label is the calendar year; swap the file when reshot. */
+const PRESENT_STILL = crisisPhoto("2026");
+
+/** Cycle markers — last card year rolls on Jan 1. */
+export function whyTimeline(now = new Date()): WhyTimelineEntry[] {
+  return [
+    ...WHY_TIMELINE_PAST,
+    {
+      when: String(currentCalendarYear(now)),
+      what: "$2.14B under management. Same firm since 1995",
+      photo: PRESENT_STILL,
+    },
+  ];
+}

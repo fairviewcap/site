@@ -87,7 +87,7 @@ export default function FeeEstimator() {
             <span className="fv-fee-est__stat-label">
               Illustrative annual fee
             </span>
-            <span className="fv-fee-est__stat-value fv-nums">
+            <span className="fv-fee-est__stat-value fv-fee-est__stat-value--hit fv-nums">
               {formatUsd(estimate.annual)}
             </span>
           </div>

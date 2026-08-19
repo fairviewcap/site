@@ -2,21 +2,29 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
-import LinkArrow from "@/components/LinkArrow";
-import OwnershipDiagram from "@/components/OwnershipDiagram";
-import WhyResearchBook from "@/components/WhyResearchBook";
-import { FIGURES, formatAsOf } from "@/lib/figures";
-import { FIRM } from "@/lib/firm";
+import WhyFigures from "@/components/WhyFigures";
+import WhyKnowDots from "@/components/WhyKnowDots";
+import WhyOneFee from "@/components/WhyOneFee";
+import WhyCrisisRail from "@/components/WhyCrisisRail";
+import WhyOpener from "@/components/WhyOpener";
+import WhyTheme from "@/components/WhyTheme";
+import {
+  FIRM,
+  firmTenureLine,
+  firmYearsLabel,
+  yearsSinceFoundedWords,
+} from "@/lib/firm";
 import type { HeroId } from "@/lib/heroes";
-import { WHY_FIGURES, WHY_TIMELINE } from "@/lib/why-fairview";
+import { whyTimeline } from "@/lib/why-fairview";
 
-export const metadata: Metadata = {
-  title: "Why Fairview | Fairview Capital",
-  description:
-    "Thirty years of doing it the long way. We've never hired a salesperson, made a cold call, or sold out to private equity.",
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: "Why Fairview | Fairview Capital",
+    description: `${firmTenureLine()} We've never hired a salesperson, made a cold call, or sold out to private equity.`,
+  };
+}
 
-type MediaRatio = "wide" | "tall" | "square";
+type MediaRatio = "wide" | "tall" | "square" | "bleed" | "full";
 
 function WhyMedia({
   hero,
@@ -24,7 +32,7 @@ function WhyMedia({
   ratio = "wide",
 }: {
   hero: HeroId;
-  label: string;
+  label?: string;
   ratio?: MediaRatio;
 }) {
   return (
@@ -36,194 +44,116 @@ function WhyMedia({
           imgClassName="fv-hero-photo"
         />
       </div>
-      <figcaption className="fv-why__media-cap">
-        <span className="fv-why__media-label">{label}</span>
-      </figcaption>
+      {label ? (
+        <figcaption className="fv-why__media-cap">
+          <span className="fv-why__media-label">{label}</span>
+        </figcaption>
+      ) : null}
     </figure>
   );
 }
 
 export default function WhyFairviewPage() {
+  const tenure = `${firmYearsLabel()} years of earning it.`;
+  const timeline = whyTimeline();
+
   return (
-    <main className="bg-[var(--fv-bg)] pt-0">
-      <header className="fv-why-hero">
-        <div className="fv-why-hero__mast">
-          <p className="fv-why__eyebrow">Why Fairview</p>
-          <h1 className="fv-why__title">
-            Thirty years of doing it the long way.
-          </h1>
-          <p className="fv-why__lede">
+    <main className="fv-why-page pt-0">
+      <WhyTheme />
+      <WhyOpener
+        title={tenure}
+        lede={
+          <>
             We&apos;ve never hired a salesperson, made a cold call, or sold out
             to private equity. Every family at Fairview came because another
             client sent them—building a $2.14 billion firm owned entirely by the
             advisors who pick up when you call.
-          </p>
-          <a className="fv-why__readon" href="#letter">
-            Read on
-            <LinkArrow direction="down" size={14} />
-          </a>
+          </>
+        }
+      >
+        <div className="fv-why-cine__letter-pair">
+          <figure className="fv-why-cine__letter-photo">
+            <img
+              src="/photography/founder/founder.avif"
+              alt="Andrew F. Mathieson, Founder"
+              width={228}
+              height={286}
+              className="fv-hero-photo"
+            />
+          </figure>
+          <div className="fv-why__prose">
+            <p>
+              In March 1995, with young children, a big mortgage, and a
+              belief in a better way, I started Fairview Capital. The
+              premise was simple: do our own deep research, give honest
+              advice, and put clients first.
+            </p>
+            <p>
+              Over {yearsSinceFoundedWords()} years, as Fairview grew, the
+              offers came—private equity firms and aggregators wanting to
+              buy us out. We turned them down every single time. And just
+              last year, rather than cashing out to an outside buyer, we
+              helped our long-time team members become partners and buy
+              equity in the firm.
+            </p>
+            <p>
+              Fairview is—and will always be—100% independent,
+              advisor-owned, and built on the belief that we only succeed
+              when our clients do.
+            </p>
+            <p className="fv-why__signoff">
+              — Andrew F. Mathieson, Founder
+            </p>
+          </div>
         </div>
+      </WhyOpener>
 
-        <figure className="fv-why-hero__media">
-          <div className="fv-why-hero__plane">
-            <HeroPhoto id="acceptance" priority imgClassName="fv-hero-photo" />
-          </div>
-        </figure>
-      </header>
-
-      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
-        <article className="fv-why">
-          <section
-            id="letter"
-            className="fv-why__section fv-why__section--first"
-            aria-labelledby="why-letter"
-          >
-          <h2 id="why-letter" className="fv-why__h2">
-            Every firm has a founding story. Most of them are marketing.
-          </h2>
-
-          <div className="fv-why__letter">
-            <WhyMedia hero="firsthome" label="Starting out" ratio="tall" />
-            <div className="fv-why__prose">
-              <p>
-                In March 1995, with young children, a big mortgage, and a
-                conviction that Wall Street was charging too much for bad
-                advice, I started Fairview Capital in Marin County.
-              </p>
-              <p>
-                We&apos;ve never hired a salesperson, and we&apos;ve never made
-                a cold call. Every family at Fairview came because another
-                client sent them. Thirty years of doing things that way got us
-                to $2.14 billion.
-              </p>
-              <p>
-                A few years ago, as large conglomerates began buying up
-                independent advisory firms across the country, we faced a
-                choice. We could have sold out for a large check and let a
-                remote board decide how to treat our clients. Instead, I did
-                the opposite. I handed ownership of the firm over to the
-                advisors working right here in our office—the same people who
-                answer your calls and know your family&apos;s goals.
-              </p>
-              <p>
-                The sign on the door didn&apos;t change, and neither did the
-                way we manage money. That was the whole point.
-              </p>
-              <p className="fv-why__signoff">
-                — Andrew F. Mathieson, Founder
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="ownership"
-          className="fv-why__section"
-          aria-labelledby="why-ownership"
-        >
-          <h2 id="why-ownership" className="fv-why__h2">
-            One fee.
-            <br />
-            One boss.
-          </h2>
-          <div className="fv-why__prose">
-            <p>
-              We charge one fee based on the assets we manage for you. No
-              commissions for steering you into specific investments, no
-              shareholders asking why margins weren&apos;t higher this quarter.
-            </p>
-            <p>
-              That&apos;s not corporate altruism—it&apos;s simple arithmetic.
-              When the people managing your money own the firm, they don&apos;t
-              need to squeeze the client to hit a quarterly target.
-            </p>
-          </div>
-
-          <OwnershipDiagram />
-
-          <div className="fv-why__prose">
-            <p>
-              It also means the advisor who builds your portfolio today is
-              often the same one reviewing it with your kids fifteen years from
-              now — and that your whole family&apos;s assets sit under one fee,
-              not billed account by account like six separate relationships.
-            </p>
-          </div>
-        </section>
+      <article className="fv-why">
+        <WhyOneFee />
 
         <section
           id="research"
-          className="fv-why__section"
+          className="fv-why__section fv-why__section--know"
           aria-labelledby="why-research"
         >
           <h2 id="why-research" className="fv-why__h2">
-            Most wealth managers don&apos;t know what they own. We do.
+            Most wealth managers
+            <br />
+            don&apos;t know what they own.
+            <br />
+            We can name every one.
           </h2>
 
-          <WhyMedia
-            hero="sellbusiness"
-            label="The underlying business"
-            ratio="wide"
-          />
+          <WhyKnowDots />
 
-          <div className="fv-why__research">
-            <div className="fv-why__prose">
-              <p>
-                Most wealth managers are middlemen. They collect a fee to hand
-                your capital over to third-party fund managers or computer
-                algorithms. We built an in-house research team to do the work
-                the old-fashioned way instead.
-              </p>
-              <p>
-                Before we commit a single dollar of your capital, someone in
-                this building studies the underlying business: its balance
-                sheet, its competitive moat, its management, and what it&apos;s
-                actually worth compared to its ticker price. We often track a
-                company for years, waiting for the price to make sense.
-              </p>
-              <p>
-                It&apos;s a much slower way to operate than chasing whatever is
-                fashionable on Wall Street, but it&apos;s the only way we know
-                how to be sure of what we own.
-              </p>
-              <p>
-                We take the same approach to our client list. We limit the
-                number of families we work with so we can actually know
-                them—not just bill them.
-              </p>
-            </div>
-            <WhyResearchBook />
+          <div className="fv-why__prose">
+            <p>
+              Most wealth managers are middlemen. They collect a fee to hand
+              your capital over to third-party fund managers or computer
+              algorithms. We built an in-house research team to do the work
+              the old-fashioned way instead.
+            </p>
+            <p>
+              Before we commit a single dollar of your capital, someone in
+              this building studies the underlying business: its balance
+              sheet, its competitive moat, its management, and what it&apos;s
+              actually worth compared to its ticker price. We often track a
+              company for years, waiting for the price to make sense.
+            </p>
+            <p>
+              It&apos;s a much slower way to operate than chasing whatever is
+              fashionable on Wall Street, but it&apos;s the only way we know
+              how to be sure of what we own.
+            </p>
+            <p>
+              We take the same approach to our client list. We limit the
+              number of families we work with so we can actually know
+              them—not just bill them.
+            </p>
           </div>
         </section>
 
-        <section
-          id="numbers"
-          className="fv-why__section fv-why__section--figures"
-          aria-labelledby="why-numbers"
-        >
-          <header className="fv-why__figures-mast">
-            <p className="fv-why__figures-eyebrow">The record</p>
-            <h2 id="why-numbers" className="fv-why__h2">
-              The numbers, not the adjectives.
-            </h2>
-            {FIGURES.aum.asOf ? (
-              <p className="fv-why__figures-asof">
-                {formatAsOf(FIGURES.aum.asOf)}
-              </p>
-            ) : null}
-          </header>
-          <dl className="fv-why__figures">
-            {WHY_FIGURES.map((fig, i) => (
-              <div key={fig.label} className="fv-why__figure">
-                <span className="fv-why__figure-idx" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <dt className="fv-why__figure-value fv-nums">{fig.value}</dt>
-                <dd className="fv-why__figure-label">{fig.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        <WhyFigures />
 
         <section
           id="timeline"
@@ -231,7 +161,9 @@ export default function WhyFairviewPage() {
           aria-labelledby="why-timeline"
         >
           <h2 id="why-timeline" className="fv-why__h2">
-            Crises come and go. We don&apos;t.
+            Crises come and go.
+            <br />
+            We don&apos;t.
           </h2>
           <p className="fv-why__timeline-lede">
             Markets move, headlines change, and Wall Street invents new ways to
@@ -239,36 +171,7 @@ export default function WhyFairviewPage() {
             cycle.
           </p>
 
-          <ol className="fv-why__rail">
-            {WHY_TIMELINE.map((entry) => (
-              <li key={entry.when} className="fv-why__card">
-                <figure className="fv-why__card-figure">
-                  <div className="fv-why__card-plate">
-                    <img
-                      src={entry.photo}
-                      alt=""
-                      width={1600}
-                      height={2000}
-                      className="fv-why__card-art"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <figcaption className="fv-why__card-copy">
-                    <p className="fv-why__card-when">
-                      <span className="fv-why__card-year fv-nums">
-                        {entry.when}
-                      </span>
-                      {entry.era ? (
-                        <span className="fv-why__card-era">{entry.era}</span>
-                      ) : null}
-                    </p>
-                    <p className="fv-why__card-what">{entry.what}</p>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ol>
+          <WhyCrisisRail timeline={timeline} />
         </section>
 
         <section
@@ -280,16 +183,13 @@ export default function WhyFairviewPage() {
             We aren&apos;t the right firm for everyone.
           </h2>
 
+          <WhyMedia hero="acceptance" ratio="full" />
+
           <div className="fv-why__prose">
             <p>
               If you want market predictions, exotic products, or a firm that
               might belong to someone else in five years—there are plenty of
               places for that. We aren&apos;t one of them.
-            </p>
-            <p>
-              If you want one fee, one boss, and an advisor who plans to still
-              answer when your children inherit the account—we&apos;re easy to
-              reach.
             </p>
           </div>
           <Link href={FIRM.contactHref} className="fv-why__cta">
@@ -313,8 +213,7 @@ export default function WhyFairviewPage() {
             },
           ]}
         />
-        </article>
-      </div>
+      </article>
     </main>
   );
 }

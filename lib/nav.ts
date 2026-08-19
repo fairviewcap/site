@@ -1,5 +1,6 @@
 /** Primary navigation — top bar + desktop mega. */
 
+import { firmTenureLine } from "@/lib/firm";
 import type { HeroId } from "@/lib/heroes";
 
 export type MenuKey = "work" | "firm";
@@ -84,3 +85,9 @@ export const PRIMARY_LINKS = [
   { href: "/answers", label: "Answers" },
   { href: "/learn", label: "Learn" },
 ] as const;
+
+/** Live menu copy — Why Fairview tenure rolls on Jan 1. */
+export function menuItemLine(item: MenuItem, now = new Date()): string | undefined {
+  if (item.href === "/firm/why-fairview") return firmTenureLine(now);
+  return item.line;
+}

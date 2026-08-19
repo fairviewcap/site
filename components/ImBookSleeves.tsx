@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-const CORE = 28;
+const TICKS = 30;
+const HIT_THROUGH = 25;
 
 const SLEEVES = [
-  { label: "Domestic equity ETFs", weight: 0.78 },
-  { label: "International ETFs", weight: 0.62 },
-  { label: "Fixed income ETFs", weight: 0.5 },
-  { label: "Alternative assets", weight: 0.34 },
+  { name: "Domestic equity", kind: "ETFs" },
+  { name: "International", kind: "ETFs" },
+  { name: "Fixed income", kind: "ETFs" },
+  { name: "Alternative assets", kind: "" },
 ] as const;
 
 function useOnceInView<T extends HTMLElement>() {
@@ -32,7 +33,7 @@ function useOnceInView<T extends HTMLElement>() {
           io.disconnect();
         }
       },
-      { threshold: 0.35, rootMargin: "0px 0px -18% 0px" },
+      { threshold: 0.35, rootMargin: "0px 0px -16% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -42,7 +43,7 @@ function useOnceInView<T extends HTMLElement>() {
 }
 
 /**
- * Published book (25–30) plus the four sleeves — weight by size, not invented %.
+ * Implementation instrument — same grammar as The record on Why Fairview.
  */
 export default function ImBookSleeves() {
   const { ref, inView } = useOnceInView<HTMLElement>();
@@ -50,42 +51,54 @@ export default function ImBookSleeves() {
   return (
     <figure
       ref={ref}
-      className={["fv-im-book", inView ? "is-in" : ""].filter(Boolean).join(" ")}
+      className={["fv-im-instrument", inView ? "is-in" : ""]
+        .filter(Boolean)
+        .join(" ")}
     >
-      <div className="fv-im-book__core">
-        <p className="fv-im-book__kicker">
-          <span className="fv-im-book__num fv-nums">25–30</span>
-          Our core stock holdings
+      <header className="fv-im-instrument__mast">
+        <p className="fv-im-instrument__lede">
+          Depending on your profile, needs, and objectives, we allocate funds
+          across:
         </p>
-        <div className="fv-im-book__grid" aria-hidden>
-          {Array.from({ length: CORE }, (_, i) => (
+        <p className="fv-im-instrument__book">
+          <span className="fv-im-instrument__num fv-nums">
+            25<span className="fv-im-instrument__dash">–</span>30
+          </span>
+          <span className="fv-im-instrument__name">Our core stock holdings</span>
+        </p>
+        <div className="fv-im-instrument__dots" aria-hidden>
+          {Array.from({ length: TICKS }, (_, i) => (
             <span
               key={i}
-              className="fv-im-book__dot"
-              style={{ "--fv-book-i": i } as CSSProperties}
+              className={[
+                "fv-im-instrument__dot",
+                i < HIT_THROUGH ? "is-hit" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={{ "--fv-dial-i": i } as CSSProperties}
             />
           ))}
         </div>
+      </header>
+      <div className="fv-im-instrument__panel">
+        <ul className="fv-im-instrument__sleeves">
+          {SLEEVES.map((sleeve, i) => (
+            <li
+              key={sleeve.name}
+              style={{ "--fv-eq-i": i } as CSSProperties}
+            >
+              <span className="fv-im-instrument__idx" aria-hidden>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="fv-im-instrument__name">{sleeve.name}</span>
+              {sleeve.kind ? (
+                <span className="fv-im-instrument__kind">{sleeve.kind}</span>
+              ) : null}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="fv-im-book__sleeves">
-        {SLEEVES.map((sleeve, i) => (
-          <li
-            key={sleeve.label}
-            className="fv-im-book__sleeve"
-            style={
-              {
-                "--fv-eq-i": i,
-                "--fv-sleeve-w": sleeve.weight,
-              } as CSSProperties
-            }
-          >
-            <span className="fv-im-book__sleeve-lab">{sleeve.label}</span>
-            <span className="fv-im-book__sleeve-track">
-              <span className="fv-im-book__sleeve-fill" />
-            </span>
-          </li>
-        ))}
-      </ul>
     </figure>
   );
 }

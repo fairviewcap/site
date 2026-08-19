@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ChevronLeft,
   ChevronRight,
@@ -17,7 +18,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { FIRM } from "@/lib/firm";
 import { HEROES } from "@/lib/heroes";
-import { MENUS, PRIMARY_LINKS, type MenuKey } from "@/lib/nav";
+import { MENUS, PRIMARY_LINKS, menuItemLine, type MenuKey } from "@/lib/nav";
 
 const FIRM_ICONS: Record<string, LucideIcon> = {
   "/firm/why-fairview": Zap,
@@ -30,6 +31,10 @@ const FIRM_ICONS: Record<string, LucideIcon> = {
 
 const SCROLL_PX = 16;
 
+function navOnDark(pathname: string) {
+  return pathname === "/firm/privacy" || pathname === "/firm/why-fairview";
+}
+
 type MobilePane = "root" | MenuKey;
 
 /**
@@ -38,6 +43,8 @@ type MobilePane = "root" | MenuKey;
  * Mobile: Apple-style full-screen sheet + drill-down (ported to body).
  */
 export default function Navbar() {
+  const pathname = usePathname();
+  const onDark = navOnDark(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobilePane, setMobilePane] = useState<MobilePane>("root");
@@ -76,11 +83,22 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SCROLL_PX);
+    const glassAt = () => {
+      if (pathname === "/firm/why-fairview") {
+        const cine = document.querySelector(".fv-why-cine");
+        if (cine instanceof HTMLElement) {
+          return window.scrollY >= cine.offsetHeight - window.innerHeight * 0.2;
+        }
+        return false;
+      }
+      return window.scrollY > SCROLL_PX;
+    };
+
+    const onScroll = () => setScrolled(glassAt());
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!mobileOpen && !openMenu) return;
@@ -132,9 +150,13 @@ export default function Navbar() {
 
   const linkClass = (active?: boolean) =>
     `font-sans text-[13px] font-medium tracking-[-0.015em] transition-colors ${
-      active
-        ? "text-[var(--fv-fg)]"
-        : "text-[var(--fv-fg)]/75 hover:text-[var(--fv-fg)]"
+      onDark
+        ? active
+          ? "text-[#f2f1ef]"
+          : "text-[#f2f1ef]/75 hover:text-[#f2f1ef]"
+        : active
+          ? "text-[var(--fv-fg)]"
+          : "text-[var(--fv-fg)]/75 hover:text-[var(--fv-fg)]"
     }`;
 
   const mega = shownMenu ? MENUS[shownMenu] : null;
@@ -255,7 +277,7 @@ export default function Navbar() {
       onMouseLeave={scheduleClose}
     >
       <div
-        className={`fv-nav-shell${openMenu || mobileOpen ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}
+        className={`fv-nav-shell${onDark ? " fv-nav-shell--on-dark" : ""}${openMenu || mobileOpen ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}
       >
       <div className="fv-nav-chip">
         <Link
@@ -273,7 +295,15 @@ export default function Navbar() {
             width={165}
             height={15}
             priority
-            className="fv-nav-chip__logo"
+            className="fv-nav-chip__logo fv-nav-chip__logo--ink"
+          />
+          <Image
+            src="/fairview-capital-white.png"
+            alt=""
+            width={165}
+            height={15}
+            priority
+            className="fv-nav-chip__logo fv-nav-chip__logo--paper"
           />
         </Link>
 
@@ -399,6 +429,7 @@ export default function Navbar() {
             <ul className="fv-mega__grid fv-mega__grid--firm">
               {mega.items.map((item) => {
                 const Icon = FIRM_ICONS[item.href];
+                const line = menuItemLine(item);
                 return (
                   <li key={item.href} role="none">
                     <Link
@@ -417,8 +448,8 @@ export default function Navbar() {
                           />
                         ) : null}
                         <span className="fv-mega__plate-name">{item.label}</span>
-                        {item.line ? (
-                          <span className="fv-mega__plate-line">{item.line}</span>
+                        {line ? (
+                          <span className="fv-mega__plate-line">{line}</span>
                         ) : null}
                       </span>
                     </Link>

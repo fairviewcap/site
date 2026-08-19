@@ -260,6 +260,8 @@ export default function WmTwoFutures() {
     },
   ];
 
+  const yearNow = new Date().getFullYear();
+
   return (
     <div
       ref={wrapRef}
@@ -393,9 +395,9 @@ export default function WmTwoFutures() {
       </div>
 
       <div className="fv-wm-mc__x">
-        <span className="is-now">2026</span>
-        <span>2044</span>
-        <span>2061</span>
+        <span className="is-now">{yearNow}</span>
+        <span>{yearNow + 18}</span>
+        <span>{yearNow + 35}</span>
       </div>
 
       <div className="fv-wm-mc__foot">

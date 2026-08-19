@@ -45,3 +45,71 @@ export function yearsSinceFounded(now = new Date()): number {
   );
   return Math.max(0, now < anniversary ? years - 1 : years);
 }
+
+const ONES = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+] as const;
+const TEENS = [
+  "ten",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
+] as const;
+const TENS = [
+  "",
+  "",
+  "twenty",
+  "thirty",
+  "forty",
+  "fifty",
+  "sixty",
+  "seventy",
+  "eighty",
+  "ninety",
+] as const;
+
+/** Spelled-out 0–99 for tenure copy (“thirty-one”). */
+export function wholeNumberWords(n: number): string {
+  if (!Number.isInteger(n) || n < 0 || n > 99) return String(n);
+  if (n < 10) return ONES[n];
+  if (n < 20) return TEENS[n - 10];
+  const tens = Math.floor(n / 10);
+  const ones = n % 10;
+  return ones ? `${TENS[tens]}-${ONES[ones]}` : TENS[tens];
+}
+
+export function yearsSinceFoundedWords(now = new Date()): string {
+  return wholeNumberWords(yearsSinceFounded(now));
+}
+
+function capFirst(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+export function firmYearsLabel(now = new Date()): string {
+  return capFirst(yearsSinceFoundedWords(now));
+}
+
+/** Hero / nav line — rolls on Jan 1 with the founding anniversary. */
+export function firmTenureLine(now = new Date()): string {
+  return `${firmYearsLabel(now)} years of doing it the long way.`;
+}
+
+export function currentCalendarYear(now = new Date()): number {
+  return now.getFullYear();
+}

@@ -4,13 +4,13 @@ import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import ImBookSleeves from "@/components/ImBookSleeves";
 import ImEquityStep, { type EquityStepId } from "@/components/ImEquityStep";
-import ImSourcesRail from "@/components/ImSourcesRail";
+import PageEnter from "@/components/PageEnter";
 import { FIRM } from "@/lib/firm";
 
 export const metadata: Metadata = {
   title: "Investment Management | Fairview Capital",
   description:
-    "We don't predict the future. We prepare for several of them — 25 to 30 deeply researched companies built on five-year models, direct due diligence, and simple arithmetic.",
+    "A ticker is just a string of letters. We buy what's underneath it — 25 to 30 deeply researched companies built on five-year models, direct due diligence, and simple arithmetic.",
 };
 
 const EQUITY_PROCESS: {
@@ -23,7 +23,7 @@ const EQUITY_PROCESS: {
     index: "01",
     title: "In-house assessment",
     diagram: "assess",
-    body: "Before investing, we conduct extensive assessments of each company’s business, management, and markets.",
+    body: "Before investing, we conduct extensive assessments of each company's business, management, and markets.",
   },
   {
     index: "02",
@@ -47,7 +47,7 @@ const EQUITY_PROCESS: {
 
 const THEMES: { title: string; photo: string }[] = [
   {
-    title: "Artificial Intelligence (AI)",
+    title: "Artificial Intelligence",
     photo: "/photography/investment-themes/artificial-intelligence.avif",
   },
   {
@@ -75,37 +75,42 @@ const THEMES: { title: string; photo: string }[] = [
 export default function InvestmentManagementPage() {
   return (
     <main className="fv-im-page bg-[var(--fv-bg)] pt-0">
-      <header className="fv-wm-hero">
-        <div className="fv-wm-hero__mast">
-          <p className="fv-wm__eyebrow">Investment Management</p>
-          <h1 className="fv-wm__title">
-            We don&apos;t predict the future. We prepare for several of them.
-          </h1>
-          <p className="fv-wm__lede">
-            25 to 30 deeply researched companies—built on five-year financial
-            models, direct due diligence, and simple arithmetic, not short-term
-            market guesses.
-          </p>
-        </div>
-
-        <figure className="fv-wm-hero__media">
-          <div className="fv-wm-hero__plane">
-            <HeroPhoto id="piano" priority imgClassName="fv-hero-photo" />
+      <PageEnter>
+        <header className="fv-wm-hero">
+          <div className="fv-wm-hero__mast">
+            <p className="fv-wm__eyebrow" data-enter="0">
+              Investment Management
+            </p>
+            <h1 className="fv-wm__title" data-enter="1">
+              A ticker is just a string of letters. We buy what&apos;s
+              underneath it.
+            </h1>
+            <p className="fv-wm__lede" data-enter="2">
+              25 to 30 deeply researched companies—built on five-year financial
+              models, direct due diligence, and simple arithmetic, not
+              short-term market guesses.
+            </p>
           </div>
-        </figure>
-      </header>
 
-      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
-        <article className="fv-wm">
-          <section
-            className="fv-wm__section fv-wm__section--first"
-            aria-labelledby="im-how"
-          >
+          <figure className="fv-wm-hero__media" data-enter="3">
+            <div className="fv-wm-hero__plane">
+              <HeroPhoto id="piano" priority imgClassName="fv-hero-photo" />
+            </div>
+          </figure>
+        </header>
+
+        <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-28">
+          <article className="fv-wm">
+            <section
+              className="fv-wm__section fv-wm__section--first fv-wm__section--center"
+              aria-labelledby="im-equity"
+              data-enter="4"
+            >
             <h2
-              id="im-how"
+              id="im-equity"
               className="fv-wm__section-title fv-wm__section-title--center"
             >
-              How we invest
+              Our core equity strategy
             </h2>
             <div className="fv-wm__prose">
               <p>
@@ -116,21 +121,6 @@ export default function InvestmentManagementPage() {
                 custom-tailored to align with your time horizon, risk profile,
                 and unique circumstances and needs.
               </p>
-            </div>
-          </section>
-
-          <section className="fv-wm__section" aria-labelledby="im-equity">
-            <h2
-              id="im-equity"
-              className="fv-wm__section-title fv-wm__section-title--center"
-            >
-              Our core equity strategy
-            </h2>
-            <p className="fv-im-equity__lede fv-im-equity__lede--center">
-              A ticker is just a string of letters. We buy what&apos;s
-              underneath it.
-            </p>
-            <div className="fv-wm__prose">
               <p>
                 Our model equity portfolio is a diversified collection of
                 deeply researched, best-in-class businesses with visible and
@@ -158,7 +148,10 @@ export default function InvestmentManagementPage() {
             </ol>
           </section>
 
-          <section className="fv-wm__section" aria-labelledby="im-macro">
+          <section
+            className="fv-wm__section fv-wm__section--center"
+            aria-labelledby="im-macro"
+          >
             <h2
               id="im-macro"
               className="fv-wm__section-title fv-wm__section-title--center"
@@ -182,10 +175,34 @@ export default function InvestmentManagementPage() {
               </p>
             </div>
 
-            <ImSourcesRail />
+            <figure className="fv-im-macro__media">
+              <div className="fv-im-macro__plane">
+                <picture>
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet="/photography/investment-management/macro-h.avif"
+                    type="image/avif"
+                    width={2400}
+                    height={1200}
+                  />
+                  <img
+                    src="/photography/investment-management/macro-v.avif"
+                    alt="A cargo ship on open water, storm to one side and light to the other."
+                    width={1600}
+                    height={2000}
+                    className="fv-hero-photo"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                </picture>
+              </div>
+            </figure>
           </section>
 
-          <section className="fv-wm__section" aria-labelledby="im-themes">
+          <section
+            className="fv-wm__section fv-wm__section--center"
+            aria-labelledby="im-themes"
+          >
             <h2
               id="im-themes"
               className="fv-wm__section-title fv-wm__section-title--center"
@@ -214,7 +231,7 @@ export default function InvestmentManagementPage() {
                         width={1200}
                         height={1200}
                         className="fv-im-themes__img"
-                        loading={i < 3 ? "eager" : "lazy"}
+                        loading="lazy"
                         decoding="async"
                       />
                       <span className="fv-im-themes__shade" aria-hidden />
@@ -237,18 +254,16 @@ export default function InvestmentManagementPage() {
             </div>
           </section>
 
-          <section className="fv-wm__section" aria-labelledby="im-impl">
+          <section
+            className="fv-wm__section fv-wm__section--center"
+            aria-labelledby="im-impl"
+          >
             <h2
               id="im-impl"
               className="fv-wm__section-title fv-wm__section-title--center"
             >
               Portfolio implementation
             </h2>
-            <figure className="fv-im-impl__media">
-              <div className="fv-wm-hero__plane">
-                <HeroPhoto id="zoom" imgClassName="fv-hero-photo" />
-              </div>
-            </figure>
             <div className="fv-wm__prose">
               <p>
                 Guided by our macro research and relative valuations, we form an
@@ -256,23 +271,13 @@ export default function InvestmentManagementPage() {
                 eleven S&amp;P 500 industry sectors, and many sub-sectors. We
                 then identify and select only the best companies within each
                 sector, based on long-term risk and return profile, for
-                inclusion in our model portfolio.
-              </p>
-              <p>
-                Depending on your profile, needs, and objectives, we allocate
-                funds across:
+                inclusion in our model portfolio. Ultimately, all client
+                portfolios are diversified and positioned to generate
+                attractive, risk-adjusted returns over the long term.
               </p>
             </div>
 
             <ImBookSleeves />
-
-            <div className="fv-wm__prose fv-wm__prose--follow">
-              <p>
-                Ultimately, all client portfolios are diversified and positioned
-                to generate attractive, risk-adjusted returns over the long
-                term.
-              </p>
-            </div>
           </section>
 
           <section
@@ -283,9 +288,16 @@ export default function InvestmentManagementPage() {
               id="im-close"
               className="fv-wm__section-title fv-wm__section-title--center"
             >
-              Several futures. One careful portfolio.
+              Several futures.
+              <br />
+              One careful portfolio.
             </h2>
-            <div className="fv-wm__prose">
+            <figure className="fv-im-impl__media">
+              <div className="fv-wm-hero__plane">
+                <HeroPhoto id="zoom" imgClassName="fv-hero-photo" />
+              </div>
+            </figure>
+            <div className="fv-wm__prose fv-im-impl__close">
               <p>
                 If you want research that prepares for more than one
                 outcome—we&apos;re easy to reach.
@@ -312,8 +324,9 @@ export default function InvestmentManagementPage() {
               },
             ]}
           />
-        </article>
-      </div>
+          </article>
+        </div>
+      </PageEnter>
     </main>
   );
 }

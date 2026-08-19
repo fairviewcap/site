@@ -72,7 +72,7 @@ export default function PrivacyReveal() {
   const showRest = phase === "rest" || phase === "done";
 
   return (
-    <>
+    <div className="fv-privacy__stack">
       <header className="fv-privacy__intro">
         <p className="fv-privacy__eyebrow">Confidentiality</p>
         <h1 className="fv-privacy__title">
@@ -124,6 +124,6 @@ export default function PrivacyReveal() {
           Simple, discreet, and unwavering: your privacy is always protected.
         </p>
       </div>
-    </>
+    </div>
   );
 }
