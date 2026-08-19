@@ -298,20 +298,13 @@ export default function Navbar() {
           aria-label="Fairview Capital home"
         >
           <Image
-            src="/fairview-capital.png"
+            src="/logos/fairview-logo.svg"
             alt="Fairview Capital"
             width={165}
             height={15}
             priority
-            className="fv-nav-chip__logo fv-nav-chip__logo--ink"
-          />
-          <Image
-            src="/fairview-capital-white.png"
-            alt=""
-            width={165}
-            height={15}
-            priority
-            className="fv-nav-chip__logo fv-nav-chip__logo--paper"
+            unoptimized
+            className="fv-nav-chip__logo"
           />
         </Link>
 
