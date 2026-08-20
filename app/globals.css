@@ -7210,6 +7210,7 @@ html[data-shell="why"][data-why-field="paper"] .fv-shell__main {
   }
 }
 
+.fv-im-eq-host,
 .fv-im-eq {
   position: absolute;
   inset: 0;

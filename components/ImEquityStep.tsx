@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  createContext,
-  useContext,
   useEffect,
   useId,
   useRef,
@@ -16,16 +14,8 @@ export type EquityStepId = "assess" | "project" | "research" | "value";
 
 const BEAT_MS = 480;
 
-const EquityPlay = createContext(false);
-
 export function ImEquitySteps({ children }: { children: ReactNode }) {
-  const { ref, inView } = useOnceInView<HTMLOListElement>();
-
-  return (
-    <ol ref={ref} className="fv-im-steps">
-      <EquityPlay.Provider value={inView}>{children}</EquityPlay.Provider>
-    </ol>
-  );
+  return <ol className="fv-im-steps">{children}</ol>;
 }
 
 export default function ImEquityStep({
@@ -35,16 +25,25 @@ export default function ImEquityStep({
   id: EquityStepId;
   index?: number;
 }) {
-  const play = useStaggeredPlay(index);
-  if (id === "project") return <ProjectPlate play={play} />;
-  if (id === "research") return <ResearchPlate play={play} />;
-  if (id === "value") return <ValuePlate play={play} />;
-  return <AssessPlate play={play} />;
+  const { ref, play } = usePlayWhenVisible(index);
+  return (
+    <div ref={ref} className="fv-im-eq-host">
+      {id === "project" ? (
+        <ProjectPlate play={play} />
+      ) : id === "research" ? (
+        <ResearchPlate play={play} />
+      ) : id === "value" ? (
+        <ValuePlate play={play} />
+      ) : (
+        <AssessPlate play={play} />
+      )}
+    </div>
+  );
 }
 
-function useOnceInView<T extends HTMLElement>() {
-  const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
+function usePlayWhenVisible(index: number) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [play, setPlay] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -52,42 +51,32 @@ function useOnceInView<T extends HTMLElement>() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      setInView(true);
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setInView(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -16% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return { ref, inView };
-}
-
-function useStaggeredPlay(index: number) {
-  const rowIn = useContext(EquityPlay);
-  const [play, setPlay] = useState(false);
-
-  useEffect(() => {
-    if (!rowIn) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
       setPlay(true);
       return;
     }
-    const t = window.setTimeout(() => setPlay(true), index * BEAT_MS);
-    return () => window.clearTimeout(t);
-  }, [rowIn, index]);
 
-  return play;
+    let delay: number | undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        io.disconnect();
+        const wide = window.matchMedia("(min-width: 720px)").matches;
+        if (!wide) {
+          setPlay(true);
+          return;
+        }
+        delay = window.setTimeout(() => setPlay(true), index * BEAT_MS);
+      },
+      { threshold: 0.45, rootMargin: "0px 0px -18% 0px" },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      if (delay !== undefined) window.clearTimeout(delay);
+    };
+  }, [index]);
+
+  return { ref, play };
 }
 
 function AssessPlate({ play }: { play: boolean }) {
