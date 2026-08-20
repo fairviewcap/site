@@ -72,11 +72,7 @@ export default async function TeamMemberPage({ params }: Props) {
 
         <div className="fv-team-bio__body">
           <p className="fv-team-bio__eyebrow">
-            {member.board
-              ? "Board of Advisors"
-              : member.leadership
-                ? "Leadership"
-                : "Team"}
+            {member.leadership ? "Leadership" : "Team"}
           </p>
           <h1 className="fv-team-bio__name">{member.name}</h1>
           <p className="fv-team-bio__role">{tenureCaption(member)}</p>
