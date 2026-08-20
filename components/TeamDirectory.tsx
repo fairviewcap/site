@@ -6,12 +6,11 @@ import { useMemo, useTransition, type CSSProperties } from "react";
 import type { TeamMember } from "@/lib/team/types";
 import { tenureCaption } from "@/lib/team/types";
 
-export type TeamFilterKey = "all" | "leadership" | "board";
+export type TeamFilterKey = "all" | "leadership";
 
 const FILTERS: { key: TeamFilterKey; label: string }[] = [
   { key: "all", label: "All" },
   { key: "leadership", label: "Leadership" },
-  { key: "board", label: "Board of Advisors" },
 ];
 
 type Props = {
@@ -20,7 +19,6 @@ type Props = {
 
 function matchesFilter(member: TeamMember, filter: TeamFilterKey): boolean {
   if (filter === "leadership") return member.leadership;
-  if (filter === "board") return member.board;
   return true;
 }
 
@@ -30,8 +28,7 @@ export default function TeamDirectory({ members }: Props) {
   const [pending, startTransition] = useTransition();
 
   const raw = searchParams.get("filter");
-  const filter: TeamFilterKey =
-    raw === "leadership" || raw === "board" ? raw : "all";
+  const filter: TeamFilterKey = raw === "leadership" ? raw : "all";
 
   const visible = useMemo(
     () => members.filter((m) => matchesFilter(m, filter)),
@@ -74,11 +71,7 @@ export default function TeamDirectory({ members }: Props) {
       </div>
 
       {visible.length === 0 ? (
-        <p className="fv-team__empty">
-          {filter === "board"
-            ? "Board of Advisors will appear here when listed."
-            : "No people in this view."}
-        </p>
+        <p className="fv-team__empty">No people in this view.</p>
       ) : (
         <ul className="fv-team__list">
           {visible.map((member, i) => (
