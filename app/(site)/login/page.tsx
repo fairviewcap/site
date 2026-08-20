@@ -21,7 +21,7 @@ export default function LoginPage() {
               Pick one.
             </h1>
             <p className="fv-portals__lede">
-              Planning, investments, and custodian records — each in its own
+              Planning, investments, and custodian — each in its own
               secure place.
             </p>
             <p className="fv-portals__trust">
