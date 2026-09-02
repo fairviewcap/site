@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withVercelToolbar from "@vercel/toolbar/plugins/next";
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -17,4 +18,7 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+/** Toolbar powers Vercel Comments on preview + local; optional on production via env. */
+export default withVercelToolbar({
+  enableInProduction: process.env.FAIRVIEW_CLIENT_REVIEW === "1",
+})(nextConfig);

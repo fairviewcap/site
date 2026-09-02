@@ -1,4 +1,5 @@
 # Strategic Messaging Migration & Content Audit
+
 **Client:** Fairview Capital  
 **Scope:** Brand Position, Copywriting Evolution, Compliance Defense, and Information Architecture  
 **Core Premise:** *Facts did not change. Voice did.*
@@ -18,6 +19,8 @@ Quotes are from the live WordPress site as of 19 Aug 2026 (home, Our Firm, Diffe
 
 ---
 
+
+
 ## Table of Contents
 
 1. [The Strategic Argument](#1-the-strategic-argument)
@@ -29,18 +32,24 @@ Quotes are from the live WordPress site as of 19 Aug 2026 (home, Our Firm, Diffe
 
 ---
 
+
+
 ## 1. The Strategic Argument
+
+
 
 ### The Category Landscape
 
 Modern high-net-worth families evaluating advisors typically open three to four browser tabs. Every firm in the category makes identical claims, making true differentiation difficult to parse on the surface:
 
-| Firm Category | Typical Operational Reality | Typical Marketing Language |
-| :--- | :--- | :--- |
-| **Wirehouse / Bank** | Product sales, sales quotas, corporate parent to feed | *“Holistic advice. Your goals come first.”* |
-| **PE Aggregator** | Acquired firm, rebranded, high advisor turnover risk | *“Independent. Local. Fiduciary commitment.”* |
-| **Robo / Model Shop** | Automated portfolios, third-party model funds, no human judgment | *“Sophisticated. Personalized. Low cost.”* |
-| **Typical Indie RIA** | Outsources stock research; uses standard industry template copy | *“Boutique. In-house expertise. Best interests.”* |
+
+| Firm Category         | Typical Operational Reality                                      | Typical Marketing Language                        |
+| --------------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| **Wirehouse / Bank**  | Product sales, sales quotas, corporate parent to feed            | *“Holistic advice. Your goals come first.”*       |
+| **PE Aggregator**     | Acquired firm, rebranded, high advisor turnover risk             | *“Independent. Local. Fiduciary commitment.”*     |
+| **Robo / Model Shop** | Automated portfolios, third-party model funds, no human judgment | *“Sophisticated. Personalized. Low cost.”*        |
+| **Typical Indie RIA** | Outsources stock research; uses standard industry template copy  | *“Boutique. In-house expertise. Best interests.”* |
+
 
 Fairview is in this category. The site does not invent a difference. It makes the real one visible in the first screen — so a family comparing tabs can tell which shop this is.
 
@@ -59,16 +68,18 @@ These were already true. The old site listed the work as capabilities and the pe
 
 ### How Fairview Demonstrates Truth Over Claims
 
-| What Most RIAs Claim | What Fairview Demonstrates |
-| :--- | :--- |
-| **Fiduciary** *(Required by law)* | **One Boss:** Employee-owned; PE buyouts actively turned down. |
-| **“In-House Research”** | **Direct Ownership:** A research team that names all 25–30 companies in the book. |
-| **Growth & Scale** | **Organic Referrals:** Zero salespeople; zero cold calls; growth driven by client referrals. |
-| **“Transparent Fees”** | **Public Schedule:** Full fee schedule and interactive estimator on the page, labeled illustrative. |
-| **Personalized Service** | **Specific Work:** Direct planning, custom tax management, coordination with outside CPAs/attorneys. |
-| **“You’ll like us”** | **A room you would trust:** The letter, no salesperson, a polite no, Saturday goalie. |
-| **Long-Term Partner** | **Proven History:** Founded in 1995; 17 team members; partner equity buy-in. |
-| **For affluent families in [metro]** | **A clear no:** For families who want *this* shop — not every investor. |
+
+| What Most RIAs Claim                 | What Fairview Demonstrates                                                                           |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| **Fiduciary** *(Required by law)*    | **One Boss:** Employee-owned; PE buyouts actively turned down.                                       |
+| **“In-House Research”**              | **Direct Ownership:** A research team that names all 25–30 companies in the book.                    |
+| **Growth & Scale**                   | **Organic Referrals:** Zero salespeople; zero cold calls; growth driven by client referrals.         |
+| **“Transparent Fees”**               | **Public Schedule:** Full fee schedule and interactive estimator on the page, labeled illustrative.  |
+| **Personalized Service**             | **Specific Work:** Direct planning, custom tax management, coordination with outside CPAs/attorneys. |
+| **“You’ll like us”**                 | **A room you would trust:** The letter, no salesperson, a polite no, Saturday goalie.                |
+| **Long-Term Partner**                | **Proven History:** Founded in 1995; 17 team members; partner equity buy-in.                         |
+| **For affluent families in [metro]** | **A clear no:** For families who want *this* shop — not every investor.                              |
+
 
 **The position, in one line:** Fairview is the independent, advisor-owned firm that still does its own research and still picks up the phone — for families who want their money managed the long way, and do not need a product. That is the test for every page, not a slogan.
 
@@ -77,30 +88,36 @@ These were already true. The old site listed the work as capabilities and the pe
 - **Culture:** The copy reflects a real operational shop—17 people, a short client list, in-house research, and zero sales personnel. It reflects an advisor-owned firm where equity was passed to long-time team members rather than cashed out to an outside buyer. Andy and Marcia still run it. The site has to sound like that room, or the position is a poster.
 - **Voice:** Modeled on the plainspoken, unhurried, and intellectually honest tone of Andy Mathieson talking across a kitchen table. It avoids closer's urgency, buzzwords, and marketing fluff in favor of clarity and character. Intelligence is assumed; character is the point. This is Andy’s voice: modest, moral, specific, and unwilling to pretend. It is not written in anyone else’s.
 
-| Operating principle | What it means on the page |
-| :--- | :--- |
-| Character before close | No salesperson. The job is to be worth a referral. |
-| Enough families to know them | The book is limited on purpose. |
-| The work is done here | Someone in the building reads the business. Slow is allowed. |
-| Say the no | If you are a poor fit, you say so. |
-| Owners, not a product | The partner buy-in made that visible. Andy did not extract. |
-| Neighbors, not a program | Coaching, puppies, Saturday goalie — not a CSR pillar. |
+
+| Operating principle          | What it means on the page                                    |
+| ---------------------------- | ------------------------------------------------------------ |
+| Character before close       | No salesperson. The job is to be worth a referral.           |
+| Enough families to know them | The book is limited on purpose.                              |
+| The work is done here        | Someone in the building reads the business. Slow is allowed. |
+| Say the no                   | If you are a poor fit, you say so.                           |
+| Owners, not a product        | The partner buy-in made that visible. Andy did not extract.  |
+| Neighbors, not a program     | Coaching, puppies, Saturday goalie — not a CSR pillar.       |
+
 
 A family buying a thirty-year relationship is buying this culture, not Andy’s calendar. The copy is a transcript of the shop, not a tribute to him.
 
-| The industry default | What the new copy does instead |
-| :--- | :--- |
-| Stacked adjectives (*expert, ethical, effective*) | One true sentence |
-| “Holistic / personalized / boutique” | Named work: plan, portfolio, the other professionals |
-| “We believe…” | A number, a refusal, or a picture |
-| Superlatives (*outstanding, exceptional, best possible*) | As-of dates, Form ADV, “illustrative, not a quote” |
-| A closer’s urgency | A filter: *we aren’t for everyone* |
-| Certainty about markets | “Most economists are more often wrong than right” |
-| “Let’s start a conversation” | “Let’s talk” / “if we can’t help, we’ll say so” |
+
+| The industry default                                     | What the new copy does instead                       |
+| -------------------------------------------------------- | ---------------------------------------------------- |
+| Stacked adjectives (*expert, ethical, effective*)        | One true sentence                                    |
+| “Holistic / personalized / boutique”                     | Named work: plan, portfolio, the other professionals |
+| “We believe…”                                            | A number, a refusal, or a picture                    |
+| Superlatives (*outstanding, exceptional, best possible*) | As-of dates, Form ADV, “illustrative, not a quote”   |
+| A closer’s urgency                                       | A filter: *we aren’t for everyone*                   |
+| Certainty about markets                                  | “Most economists are more often wrong than right”    |
+| “Let’s start a conversation”                             | “Let’s talk” / “if we can’t help, we’ll say so”      |
+
 
 The old site was not dishonest. It was generic. Andy is not. That is faster honesty, not louder marketing. It also filters — predictions, exotic products, a shop that might belong to someone else in five years. That protects the book.
 
 ---
+
+
 
 ## 2. Compliance & Legal Rationale
 
@@ -108,15 +125,17 @@ This industry does not forgive sloppy adjectives. **Counsel still reviews.** The
 
 The Marketing Rule cares about unsubstantiated claims, superlatives, implied results, and performance. Brochure English is full of those.
 
-| Retired language | Why it came out |
-| :--- | :--- |
-| *Expert, Ethical, Effective* | Alliteration is not a standard. “Ethical” is a life, not a headline. |
-| *the highest level of…* / *strives to provide* | Superlative. Highest compared to whom? Striving is weaker than doing. |
-| *exceptional client retention* | A results claim with no number, no period, no backup. |
-| *outstanding advice* / *best possible experience* | Self-grade. A lawyer hedges it; a family skips it. |
-| *optimize client outcomes* | Sounds like a performance promise. |
-| *holistic advice* / *constituencies* / *We believe that…* | Category words. Plan, one boss, a number, or a refusal instead. |
+
+| Retired language                                                   | Why it came out                                                       |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| *Expert, Ethical, Effective*                                       | Alliteration is not a standard. “Ethical” is a life, not a headline.  |
+| *the highest level of…* / *strives to provide*                     | Superlative. Highest compared to whom? Striving is weaker than doing. |
+| *exceptional client retention*                                     | A results claim with no number, no period, no backup.                 |
+| *outstanding advice* / *best possible experience*                  | Self-grade. A lawyer hedges it; a family skips it.                    |
+| *optimize client outcomes*                                         | Sounds like a performance promise.                                    |
+| *holistic advice* / *constituencies* / *We believe that…*          | Category words. Plan, one boss, a number, or a refusal instead.       |
 | SEO titles about *affluent families in the San Francisco Bay Area* | Marketing inventory. Can look like a testimonial you did not collect. |
+
 
 **Plain speech is tighter compliance.** The rewrite stopped saying things you cannot put a binder under. The facts below were already true. They are no longer buried.
 
@@ -143,7 +162,11 @@ Counsel is being asked to bless fewer claims, dated numbers, a labeled estimator
 
 ---
 
+
+
 ## 3. Page-by-Page Copy Comparison
+
+
 
 ### Home — `/`
 
@@ -215,7 +238,7 @@ Tiers on the page. Estimator labeled **illustrative, not a quote.** ADV governs.
 
 Was three pages. Now one.
 
-**Original**
+**learnOriginal**
 
 > We Do More Than Manage Your Assets – We Help You Achieve Your Financial and Life Goals.
 >
@@ -295,7 +318,11 @@ A closer would never write that last clause. Andy would. That is the filter, in 
 
 ---
 
+
+
 ## 4. SEO, Local Search & Content Strategy
+
+
 
 ### What Learn is now — `/learn` (was `/our-firm/insights`)
 
@@ -303,11 +330,13 @@ A closer would never write that last clause. Andy would. That is the filter, in 
 >
 > Not content. Not noise. Just thoughtful reporting on wealth, markets, and life.
 
-| Channel | Line |
-| :--- | :--- |
-| Quarterly Letters | We write what we saw. Not what sells. |
-| Investment Insights | We buy what’s underneath — research, risk, and the work we show. |
-| Planning | Cash flow, tax, family, and legacy — the arithmetic you actually live. |
+
+| Channel             | Line                                                                   |
+| ------------------- | ---------------------------------------------------------------------- |
+| Quarterly Letters   | We write what we saw. Not what sells.                                  |
+| Investment Insights | We buy what’s underneath — research, risk, and the work we show.       |
+| Planning            | Cash flow, tax, family, and legacy — the arithmetic you actually live. |
+
 
 A marketing blog became a publishing desk. They can judge the mind before they sit down.
 
@@ -325,10 +354,12 @@ The money is a sunk cost. What it *did* prove is that place matters. Place stays
 
 They are not the same, and they do not need two voices.
 
-| Job | What someone types or asks | What “winning” looks like |
-| :--- | :--- | :--- |
-| **Brand** | *Fairview Capital*, *Andy Mathieson advisor* | This site, the Profile, the ADV — not a namesake fund |
-| **Category** | *RIA Marin*, *wealth manager Marin County* | In the map pack, on the first organic screen, named in the AI summary as Fairview |
+
+| Job          | What someone types or asks                   | What “winning” looks like                                                         |
+| ------------ | -------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Brand**    | *Fairview Capital*, *Andy Mathieson advisor* | This site, the Profile, the ADV — not a namesake fund                             |
+| **Category** | *RIA Marin*, *wealth manager Marin County*   | In the map pack, on the first organic screen, named in the AI summary as Fairview |
+
 
 The paid posts targeted the first kind of query and hoped the second would follow. It rarely does. Search rewards a clear **entity** — who you are, where you are, what kind of firm.
 
@@ -347,11 +378,13 @@ Claim and check Marin, fix the category, add real photos, add Pittsburgh once Br
 
 ### Real letters vs listicles
 
-| | Real Learn pieces | Old Marin listicles |
-| :--- | :--- | :--- |
-| *Fairview Capital* | Helps. A body of work attaches to the name. | Dilutes the name into “generic Marin advisor.” |
+
+|                                  | Real Learn pieces                                   | Old Marin listicles                                       |
+| -------------------------------- | --------------------------------------------------- | --------------------------------------------------------- |
+| *Fairview Capital*               | Helps. A body of work attaches to the name.         | Dilutes the name into “generic Marin advisor.”            |
 | AI (“what does Fairview think…”) | Helps a lot. Dated, quotable, sounds like a person. | Almost useless. The model already knows that boilerplate. |
-| *RIA Marin* map pack | Almost none. Pins come from the Profile. | Almost none — and they cost more. |
+| *RIA Marin* map pack             | Almost none. Pins come from the Profile.            | Almost none — and they cost more.                         |
+
 
 Four letters a year plus a few notes the firm already believes is enough. Skip a quarter rather than invent a Marin hook. Do not buy another year of listicles, put *affluent* or *best RIA* in a title, or write for robots in Andy’s mouth.
 
@@ -359,20 +392,26 @@ It is working when *Fairview Capital* returns this site, this Profile, this ADV 
 
 ---
 
+
+
 ## 5. URL Architecture & Redirect Mapping
 
-| Original | New |
-| :--- | :--- |
-| `/our-firm` + difference + founder’s note | `/firm/why-fairview` |
-| `/pricing` | `/firm/fees` |
-| Wealth (three pages) | `/work/wealth-management` |
-| `/investment-research-process` + philosophy + risk | `/work/investment-management` |
-| `/our-team` | `/team` |
-| `/our-firm/insights` | `/learn` |
-| Contact / offices | `/contact` |
-| — | `/firm/community`, `/firm/technology`, `/answers` |
+
+| Original                                           | New                                               |
+| -------------------------------------------------- | ------------------------------------------------- |
+| `/our-firm` + difference + founder’s note          | `/firm/why-fairview`                              |
+| `/pricing`                                         | `/firm/fees`                                      |
+| Wealth (three pages)                               | `/work/wealth-management`                         |
+| `/investment-research-process` + philosophy + risk | `/work/investment-management`                     |
+| `/our-team`                                        | `/team`                                           |
+| `/our-firm/insights`                               | `/learn`                                          |
+| Contact / offices                                  | `/contact`                                        |
+| —                                                  | `/firm/community`, `/firm/technology`, `/answers` |
+
 
 ---
+
+
 
 ## 6. Action Items & Next Steps
 
