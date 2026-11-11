@@ -53,7 +53,7 @@ async function fetchCategoriesFromDb(
     .order("sort_order", { ascending: true });
 
   if (catErr) {
-    console.error("answer_categories:", catErr.message);
+    console.warn("answer_categories:", catErr.message);
     return null;
   }
   if (!cats?.length) return null;
@@ -71,7 +71,7 @@ async function fetchCategoriesFromDb(
 
   const { data: items, error: itemErr } = await itemQuery;
   if (itemErr) {
-    console.error("answer_items:", itemErr.message);
+    console.warn("answer_items:", itemErr.message);
     return null;
   }
 

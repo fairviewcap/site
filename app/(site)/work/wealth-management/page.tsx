@@ -21,7 +21,7 @@ const WmTwoFutures = dynamic(() => import("@/components/WmTwoFutures"));
 export const metadata: Metadata = {
   title: "Wealth Management | Fairview Capital",
   description:
-    "Wealth used to mean well-being. Somewhere along the way, Wall Street redefined it to mean casino. Managing wealth isn't a series of bets and fees.",
+    "Wealth is more than a portfolio. Managing it well means your business, your taxes, your family, and your philanthropic legacy all pulling in the same direction.",
 };
 
 const PILLARS: {
@@ -34,13 +34,13 @@ const PILLARS: {
     index: "01",
     title: "Your Plan",
     diagram: "plan",
-    body: "We start with your actual arithmetic: what you own, what you owe, what comes in, what goes out, what you give away, and what you intend to leave behind. That covers insurance, account titling, retirement, and education funding along the way — not separate projects, just part of the same picture. We don't use cookie-cutter templates. We build a practical blueprint, and we adjust it as your life changes.",
+    body: "We start with your actual arithmetic: what you own, what you owe, what comes in, what goes out, what you give away, and what you intend to leave behind. That covers insurance, account titling, retirement, and education funding along the way. Not separate projects, just part of the same picture. We don't use cookie-cutter templates. We build a practical blueprint, and we adjust it as your life changes.",
   },
   {
     index: "02",
     title: "Your Portfolio",
     diagram: "portfolio",
-    body: "The plan comes first; the portfolio follows — a mix of stocks, bonds, alternative investments, and cash built around your plan, not a model. Trades are made with taxes in mind. Companies and funds we select are researched here. Accounts are reviewed by people — not left on autopilot.",
+    body: "The plan comes first; the portfolio follows. A mix of stocks, bonds, alternative investments, and cash built around your plan, not a model. Trades are made with taxes in mind. Companies and ETFs we select are researched here. Accounts are reviewed by people. Not left on autopilot.",
   },
   {
     index: "03",
@@ -128,13 +128,11 @@ export default function WealthManagementPage() {
               Wealth Management
             </p>
             <h1 className="fv-wm__title" data-enter="1">
-              Wealth used to mean well-being. Somewhere along the way, Wall Street
-              redefined it to mean casino.
+              Wealth is more than a portfolio.
             </h1>
             <p className="fv-wm__lede" data-enter="2">
-              Managing wealth isn&apos;t a series of bets and fees. It&apos;s your
-              entire financial life—your business, your taxes, your family, and
-              your philanthropic legacy—all pulling in the same direction.
+              Managing it well means your business, your taxes, your family, and
+              your philanthropic legacy all pulling in the same direction.
             </p>
           </div>
 
@@ -159,7 +157,7 @@ export default function WealthManagementPage() {
                 A balance sheet is a snapshot. We turn it into a plan.
               </h2>
               <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
-                Planning, portfolios, and coordination — one picture, not three
+                Planning, portfolios, and coordination. One picture, not three
                 separate products.
               </p>
 
@@ -194,11 +192,11 @@ export default function WealthManagementPage() {
                 id="wm-domains"
                 className="fv-wm__section-title fv-wm__section-title--center"
               >
-                Wealth planning is complex — and unique to the family in front of us.
+                Wealth planning is complex. And unique to the family in front of us.
               </h2>
               <p className="fv-wm__domains-lede fv-wm__domains-lede--center">
                 We guide the questions and the coordination that help a family
-                reach its goals — across investments, taxes, estate, and the
+                reach its goals. Across investments, taxes, estate, and the
                 people in the middle.
               </p>
               <WmDomainsRail domains={PLANNING_DOMAINS} />
@@ -226,7 +224,7 @@ export default function WealthManagementPage() {
                     When you join Fairview, we take the paperwork, account
                     transfers, and administrative mess off your plate first. If
                     you arrive with existing holdings, we audit them
-                    carefully—unwinding positions over time so you aren&apos;t
+                    carefully. Unwinding positions over time so you aren&apos;t
                     hit with an unnecessary tax bill. Our job is to give you
                     immediate clarity, not another chore to manage.
                   </p>
@@ -237,9 +235,9 @@ export default function WealthManagementPage() {
                     After that, our job is staying close. As markets fluctuate,
                     families grow, and priorities shift, we keep track of the
                     details so you don&apos;t have to. We work with multiple
-                    generations of your family — inheritance decisions, tax
+                    generations of your family. Inheritance decisions, tax
                     strategy, a piece of real estate nobody wants to be the one
-                    to sell — to ensure smooth transitions across decades.
+                    to sell, to ensure smooth transitions across decades.
                     Sometimes that means months of quiet research; sometimes
                     it&apos;s a five-minute phone call. Either way, you&apos;ll
                     know where you stand.
@@ -260,9 +258,9 @@ export default function WealthManagementPage() {
                   <div className="fv-wm__prose">
                     <p>
                       We use software to stress-test your plan against bad
-                      markets, rising taxes, and unexpected events—not to draw
+                      markets, rising taxes, and unexpected events. Not to draw
                       straight lines pointing upward. Through a secure portal,
-                      you can view — and update — your entire financial picture
+                      you can view, and update, your entire financial picture
                       in real time, including the assets we don&apos;t manage.
                     </p>
                     <p>
@@ -290,16 +288,14 @@ export default function WealthManagementPage() {
                 id="wm-outside"
                 className="fv-wm__section-title fv-wm__section-title--center"
               >
-                If it affects your financial life, we advise on it—whether we bill
-                on it or not.
+                If it affects your financial life, we advise on it.
               </h2>
               <div className="fv-wm__prose">
                 <p>
-                  Real estate, a concentrated business stake, an old 401(k),
-                  private holdings, or a racehorse—if you own assets outside of
-                  Fairview, we include them in your overall plan at no extra
-                  charge. You have one financial life; you shouldn&apos;t have six
-                  disconnected plans.
+                  Real estate, a concentrated business stake, a current 401(k),
+                  private holdings, or a vineyard: if you own assets outside of
+                  Fairview, we include them in your overall plan. You have one
+                  financial life; you shouldn&apos;t have six disconnected plans.
                 </p>
               </div>
 
@@ -320,10 +316,10 @@ export default function WealthManagementPage() {
                 <div className="fv-wm__prose">
                   <p>
                     We review your progress regularly, but we are available
-                    whenever life happens—by phone, email, video, or in person.
+                    whenever life happens. By phone, email, video, or in person.
                     Some of our most productive conversations happen over lunch or
                     at a kitchen table, not across a corporate boardroom. If
-                    it&apos;s easier for you, we&apos;ll come to you.
+                    it&apos;s easier, we&apos;ll come to you.
                   </p>
                 </div>
               </div>
@@ -350,7 +346,7 @@ export default function WealthManagementPage() {
                 <p>
                   Cash flow needs this year. Estate planning the next. A business
                   sale, a move, or a child stepping into the family business.
-                  Whatever changes, your plan adapts with it—and so do we.
+                  Whatever changes, your plan adapts with it. And so do we.
                 </p>
               </div>
               <Link href={FIRM.contactHref} className="fv-wm__cta">

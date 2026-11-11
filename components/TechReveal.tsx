@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
 import ReviewSpot from "@/components/review/ReviewSpot";
@@ -12,36 +12,14 @@ const DWELL_MS = [420, 180, 180, 380] as const;
 
 type Phase = "reel" | "headline" | "line2" | "hero" | "rest";
 
-function fitFontSize(
-  measure: HTMLElement,
-  maxW: number,
-  maxH: number,
-): number {
-  let lo = 12;
-  let hi = Math.min(Math.max(maxW, maxH) * 1.35, 520);
-  for (let i = 0; i < 20; i++) {
-    const mid = (lo + hi) / 2;
-    measure.style.fontSize = `${mid}px`;
-    if (measure.scrollWidth <= maxW && measure.scrollHeight <= maxH) {
-      lo = mid;
-    } else {
-      hi = mid;
-    }
-  }
-  return lo;
-}
-
 /**
- * Full-bleed tool reel → Tools change. → Relationships last. → hero → body.
+ * Quiet tool reel → Tools change. → Relationships last. → hero → body.
+ * The words stay near headline size so the screen stays mostly open.
  */
 export default function TechReveal() {
   const [wordIndex, setWordIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("reel");
   const [reelOut, setReelOut] = useState(false);
-  const [fontSize, setFontSize] = useState(48);
-
-  const stageRef = useRef<HTMLDivElement | null>(null);
-  const measureRef = useRef<HTMLSpanElement | null>(null);
 
   const word = REEL[wordIndex];
   const label = `${word}.`;
@@ -73,32 +51,6 @@ export default function TechReveal() {
     return () => timers.forEach((id) => window.clearTimeout(id));
   }, []);
 
-  useLayoutEffect(() => {
-    const stage = stageRef.current;
-    const measure = measureRef.current;
-    if (!stage || !measure || reelOut) return;
-
-    const run = () => {
-      const styles = getComputedStyle(stage);
-      const maxW =
-        stage.clientWidth -
-        parseFloat(styles.paddingLeft) -
-        parseFloat(styles.paddingRight);
-      const maxH =
-        stage.clientHeight -
-        parseFloat(styles.paddingTop) -
-        parseFloat(styles.paddingBottom);
-      if (maxW < 8 || maxH < 8) return;
-      measure.textContent = label;
-      setFontSize(fitFontSize(measure, maxW, maxH));
-    };
-
-    run();
-    const ro = new ResizeObserver(run);
-    ro.observe(stage);
-    return () => ro.disconnect();
-  }, [label, reelOut]);
-
   const showReel = phase === "reel";
   const headlineIn =
     phase === "headline" ||
@@ -112,7 +64,6 @@ export default function TechReveal() {
   return (
     <>
       <div
-        ref={stageRef}
         className={
           reelOut
             ? "fv-tech-b-stage fv-tech-b-stage--out"
@@ -121,12 +72,7 @@ export default function TechReveal() {
         aria-hidden={!showReel}
         {...(!showReel ? { inert: true } : {})}
       >
-        <span ref={measureRef} className="fv-tech-b-measure" aria-hidden />
-        <div
-          className="fv-tech-b-stage__word"
-          key={word}
-          style={{ fontSize: `${fontSize}px` }}
-        >
+        <div className="fv-tech-b-stage__word" key={word}>
           <span className="fv-tech-b-ghost fv-tech-b-ghost--a">{label}</span>
           <span className="fv-tech-b-ghost fv-tech-b-ghost--b">{label}</span>
           <span className="fv-tech-b-main">{label}</span>
@@ -197,7 +143,7 @@ export default function TechReveal() {
             }
           >
             <p>
-              We use technology — including AI — to run deeper analysis,
+              We use technology, including AI, to run deeper analysis,
               stress-test more scenarios, and cut friction that used to slow
               planning down. It helps us see further.
             </p>
@@ -208,8 +154,8 @@ export default function TechReveal() {
               made.
             </p>
             <p className="fv-tech__close">
-              Since 1995: use whatever helps us see further — never let it
-              decide for you.
+              Since 1995, we’ve used the tools that help us see further. The
+              judgment has always been ours, and the decisions yours.
             </p>
           </div>
 

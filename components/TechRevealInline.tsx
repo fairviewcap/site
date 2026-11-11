@@ -137,7 +137,7 @@ export default function TechRevealInline() {
             }
           >
             <p>
-              We use technology — including AI — to run deeper analysis,
+              We use technology, including AI, to run deeper analysis,
               stress-test more scenarios, and cut friction that used to slow
               planning down. It helps us see further.
             </p>
@@ -148,8 +148,8 @@ export default function TechRevealInline() {
               made.
             </p>
             <p className="fv-tech__close">
-              Since 1995: use whatever helps us see further — never let it
-              decide for you.
+              Since 1995, we’ve used the tools that help us see further. The
+              judgment has always been ours, and the decisions yours.
             </p>
           </div>
 

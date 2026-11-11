@@ -268,9 +268,10 @@ export default function WmTwoFutures() {
       className={["fv-wm-mc", drawn ? "is-drawn" : ""].filter(Boolean).join(" ")}
     >
       <div className="fv-wm-mc__head">
-        <p className="fv-wm-mc__title">Projected value over 35 years</p>
+        <p className="fv-wm-mc__title">Monte Carlo Stress Testing</p>
         <p className="fv-wm-mc__cap">
-          A reporting view — the stress test, not just the summary.
+          How we model resilience across decades of market cycles, inflation,
+          and unexpected events.
         </p>
         <div className="fv-wm-mc__bar">
           <div
@@ -423,7 +424,7 @@ export default function WmTwoFutures() {
           </li>
         </ul>
         <p className="fv-wm-mc__note">
-          Illustration only—not a forecast, a guarantee, or anyone&apos;s
+          Illustration only. Not a forecast, a guarantee, or anyone&apos;s
           results. Past performance does not predict future returns.
         </p>
       </div>

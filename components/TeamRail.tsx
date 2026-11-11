@@ -1,17 +1,45 @@
 import Link from "next/link";
 import { listMembers } from "@/lib/team/store";
-import { tenureCaption } from "@/lib/team/types";
+import TeamMeta from "@/components/TeamMeta";
+import type { TeamMember } from "@/lib/team/types";
+import TeamRailScroll from "@/components/TeamRailScroll";
 import TeamVideoReel from "@/components/TeamVideoReel";
+
+/** First faces on the rail. Not labeled. */
+const RAIL_LEAD = [
+  "andrew-f-mathieson",
+  "marcia-nakamura",
+  "jake-miller",
+  "maria-elena-roner",
+  "brian-ahlemeyer",
+  "peter-mathieson",
+] as const;
+
+function orderRail(members: TeamMember[]): TeamMember[] {
+  const rank = new Map<string, number>(RAIL_LEAD.map((slug, i) => [slug, i]));
+  return [...members].sort((a, b) => {
+    const ar = rank.get(a.slug);
+    const br = rank.get(b.slug);
+    if (ar != null && br != null) return ar - br;
+    if (ar != null) return -1;
+    if (br != null) return 1;
+    return a.sortOrder - b.sortOrder;
+  });
+}
 
 /**
  * Horizontal cast rail — faces + tenure, no cards.
  * Optional portrait-video poster opens a modal of short intros.
  */
 export default async function TeamRail() {
-  const members = await listMembers({ publishedOnly: true, railOnly: true });
+  const members = orderRail(
+    await listMembers({ publishedOnly: true, railOnly: true }),
+  );
   const clips = await listMembers({ publishedOnly: true, withVideo: true });
 
   if (members.length === 0) return null;
+
+  const posterImage = "/photography/heroes/fv-hero-ballet-v.avif";
 
   const reelClips = clips
     .filter((m) => !m.board)
@@ -39,17 +67,10 @@ export default async function TeamRail() {
         </Link>
       </div>
 
-      <div
-        className="fv-team-rail mt-6 flex gap-4 overflow-x-auto pb-2 sm:gap-5 lg:gap-6"
-        role="list"
-        aria-label="Team"
-      >
+      <TeamRailScroll>
         {reelClips.length > 0 ? (
           <div role="listitem" className="shrink-0">
-            <TeamVideoReel
-              clips={reelClips}
-              posterImage={reelClips[0]?.image}
-            />
+            <TeamVideoReel clips={reelClips} posterImage={posterImage} />
           </div>
         ) : null}
 
@@ -74,14 +95,15 @@ export default async function TeamRail() {
                 <p className="m-0 font-sans text-[13px] font-medium tracking-[-0.01em] text-[var(--fv-fg)]">
                   {member.name}
                 </p>
-                <p className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] fv-nums">
-                  {tenureCaption(member)}
-                </p>
+                <TeamMeta
+                  member={member}
+                  className="mt-0.5 m-0 font-sans text-[12px] text-[var(--fv-muted)] fv-nums"
+                />
               </figcaption>
             </Link>
           </figure>
         ))}
-      </div>
+      </TeamRailScroll>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import TeamDirectory from "@/components/TeamDirectory";
 import TeamReveal from "@/components/TeamReveal";
 import { listMembers } from "@/lib/team/store";
+import { compareTeamByLastName } from "@/lib/team/types";
 
 export const metadata: Metadata = {
   title: "Team | Fairview Capital",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function TeamPage() {
-  const members = await listMembers({ publishedOnly: true });
+  const members = (await listMembers({ publishedOnly: true })).sort(
+    compareTeamByLastName,
+  );
 
   return (
     <main className="fv-frame bg-[var(--fv-bg)] pt-10 pb-20 sm:pt-14 sm:pb-28">
@@ -25,9 +27,7 @@ export default async function TeamPage() {
           </p>
         </header>
 
-        <Suspense fallback={null}>
-          <TeamDirectory members={members} />
-        </Suspense>
+        <TeamDirectory members={members} />
       </TeamReveal>
     </main>
   );

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import ContinueBar from "@/components/ContinueBar";
+import LearnStage from "@/components/LearnStage";
 import LearnTheme from "@/components/LearnTheme";
 import ReviewSpot from "@/components/review/ReviewSpot";
+import { FIRM } from "@/lib/firm";
 import { listChannels } from "@/lib/learn/store";
 
 export const revalidate = 3600;
@@ -9,11 +11,11 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Learn | Fairview Capital",
   description:
-    "Not content. Not noise. Quarterly letters, investment insights, and planning — thoughtful reporting on wealth, markets, and life.",
+    "Not content. Not noise. Quarterly letters and investment insights. Thoughtful reporting on wealth and markets.",
   openGraph: {
     title: "What we think | Fairview Capital",
     description:
-      "Quarterly letters, investment insights, and planning content from Fairview Capital.",
+      "Quarterly letters and investment insights from Fairview Capital.",
   },
 };
 
@@ -25,7 +27,7 @@ export default async function LearnPage() {
     "@type": "CollectionPage",
     name: "What we think",
     description:
-      "Quarterly letters, investment insights, and planning content from Fairview Capital.",
+      "Quarterly letters and investment insights from Fairview Capital.",
     url: "https://www.fairviewcap.com/learn",
     isPartOf: {
       "@type": "WebSite",
@@ -51,45 +53,35 @@ export default async function LearnPage() {
       <header className="fv-learn-hero">
         <div className="fv-learn-hero__mast">
           <ReviewSpot id="learn" />
-          <p className="fv-learn__folio">Learn</p>
           <h1 className="fv-learn__title">What we think.</h1>
           <p className="fv-learn__lede">
-            Not content. Not noise. Just thoughtful reporting on wealth,
-            markets, and life.
+            Not content. Not noise.
+            <br />
+            Just thoughtful reporting on wealth, markets, and life.
           </p>
         </div>
       </header>
 
-      <ol className="fv-learn__posters">
-        {channels.map((channel) => (
-          <li
-            key={channel.slug}
-            className={`fv-learn__poster fv-learn__poster--${channel.tone}`}
-          >
-            <Link
-              href={`/learn/${channel.slug}`}
-              className="fv-learn__poster-link"
-            >
-              {channel.poster ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={channel.poster}
-                  alt=""
-                  className="fv-learn__poster-art"
-                />
-              ) : (
-                <span className="fv-learn__poster-ph" aria-hidden>
-                  Photograph
-                </span>
-              )}
-              <span className="fv-learn__poster-copy">
-                <h2 className="fv-learn__poster-title">{channel.label}</h2>
-                <p className="fv-learn__poster-dek">{channel.dek}</p>
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ol>
+      <LearnStage channels={channels} />
+
+      <div className="fv-frame pt-12 pb-20 sm:pt-16 sm:pb-24">
+        <ContinueBar
+          items={[
+            {
+              href: "/team",
+              prompt: "Want to meet the people who do the work?",
+            },
+            {
+              href: "/work/wealth-management",
+              prompt: "Curious how the day-to-day work actually runs?",
+            },
+            {
+              href: FIRM.contactHref,
+              prompt: "Ready to talk through your situation?",
+            },
+          ]}
+        />
+      </div>
     </main>
   );
 }

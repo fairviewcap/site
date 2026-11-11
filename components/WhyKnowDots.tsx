@@ -160,16 +160,6 @@ export default function WhyKnowDots() {
           <span className="fv-why-know__chip" aria-hidden />
           <button
             type="button"
-            id={`${id}-ours`}
-            role="tab"
-            aria-selected={ours}
-            className={ours ? "fv-why-know__opt is-on" : "fv-why-know__opt"}
-            onClick={() => setOurs(true)}
-          >
-            Fairview
-          </button>
-          <button
-            type="button"
             id={`${id}-theirs`}
             role="tab"
             aria-selected={!ours}
@@ -177,6 +167,16 @@ export default function WhyKnowDots() {
             onClick={() => setOurs(false)}
           >
             A typical book
+          </button>
+          <button
+            type="button"
+            id={`${id}-ours`}
+            role="tab"
+            aria-selected={ours}
+            className={ours ? "fv-why-know__opt is-on" : "fv-why-know__opt"}
+            onClick={() => setOurs(true)}
+          >
+            Fairview
           </button>
         </div>
       </div>
@@ -199,13 +199,9 @@ export default function WhyKnowDots() {
       </div>
 
       <figcaption className="fv-why-know__cap" aria-live="polite">
-        {ours ? (
-          <>
-            <span className="fv-nums">25–30</span> companies
-          </>
-        ) : (
-          <>Other people&apos;s funds</>
-        )}
+        {ours
+          ? "Companies we research directly"
+          : "Layers of outside funds"}
       </figcaption>
     </figure>
   );

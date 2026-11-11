@@ -128,72 +128,6 @@ function InsightsIndex({
   );
 }
 
-function PlanningIndex({
-  channel,
-  articles,
-}: {
-  channel: LearnChannel;
-  articles: LearnArticle[];
-}) {
-  return (
-    <div className="fv-planning">
-      <nav className="fv-learn-index__crumb" aria-label="Breadcrumb">
-        <Link href="/learn">Learn</Link>
-        <span aria-hidden>/</span>
-        <span>{channel.label}</span>
-      </nav>
-
-      <header className="fv-planning__mast">
-        <h1 className="fv-planning__title">{channel.headline}</h1>
-        <p className="fv-planning__lede">{channel.dek}</p>
-      </header>
-
-      <ol className="fv-planning__grid">
-        {articles.map((article, i) => (
-          <li key={article.slug} className="fv-planning__card">
-            <Link
-              href={`/learn/${channel.slug}/${article.slug}`}
-              className="fv-planning__poster"
-            >
-              <div className="fv-planning__plate">
-                {article.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={article.image}
-                    alt=""
-                    className="fv-planning__art"
-                  />
-                ) : null}
-              </div>
-              <div className="fv-planning__copy">
-                <span className="fv-planning__idx fv-nums" aria-hidden>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h2 className="fv-planning__headline">{article.title}</h2>
-                {article.excerpt ? (
-                  <p className="fv-planning__tease">{article.excerpt}</p>
-                ) : null}
-                <p className="fv-planning__foot">
-                  <time dateTime={article.date} className="fv-planning__date">
-                    {formatLearnDate(article.date)}
-                  </time>
-                  {isLearnNote(article) ? (
-                    <span className="fv-planning__tier">Note</span>
-                  ) : null}
-                </p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ol>
-
-      {articles.length === 0 ? (
-        <p className="fv-learn-index__empty">Pieces are on the way.</p>
-      ) : null}
-    </div>
-  );
-}
-
 function DefaultIndex({
   channel,
   articles,
@@ -289,8 +223,6 @@ export default async function LearnChannelPage({ params }: Props) {
         <LettersIndex channel={channel} articles={articles} />
       ) : channel.slug === "insights" ? (
         <InsightsIndex channel={channel} articles={articles} />
-      ) : channel.slug === "planning" ? (
-        <PlanningIndex channel={channel} articles={articles} />
       ) : (
         <DefaultIndex channel={channel} articles={articles} />
       )}

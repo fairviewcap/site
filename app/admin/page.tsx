@@ -19,7 +19,7 @@ export default async function AdminPage() {
       </p>
       {!supabaseConfigured() ? (
         <p className="mt-3 m-0 text-[13px] text-red-800/80 leading-relaxed">
-          Supabase env vars are missing — content will fall back to local files.
+          Supabase env vars are missing. Content will fall back to local files.
         </p>
       ) : null}
       {adminConfigured() ? <LoginForm /> : null}

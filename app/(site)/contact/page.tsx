@@ -22,8 +22,8 @@ export default function ContactPage() {
             <p className="fv-contact__eyebrow">Contact</p>
             <h1 className="fv-contact__title">Let&apos;s talk.</h1>
             <p className="fv-contact__lede">
-              Tell us where you are. We&apos;ll tell you if we can help — and
-              if we can&apos;t, we&apos;ll say so.
+              Tell us what’s on your mind. If we can help, we’ll say so. If we
+              can’t, we’ll say that too.
             </p>
           </header>
 

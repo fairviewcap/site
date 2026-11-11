@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import ContinueBar from "@/components/ContinueBar";
-import FeeEstimator from "@/components/FeeEstimator";
 import FeesHero from "@/components/FeesHero";
 import { FIRM } from "@/lib/firm";
 
@@ -17,8 +16,6 @@ export default function FeesPage() {
 
       <div className="fv-frame">
         <div className="fv-fees">
-          <FeeEstimator />
-
           <ContinueBar
             items={[
               {

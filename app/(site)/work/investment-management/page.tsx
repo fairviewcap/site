@@ -14,7 +14,7 @@ import { FIRM } from "@/lib/firm";
 export const metadata: Metadata = {
   title: "Investment Management | Fairview Capital",
   description:
-    "A ticker is just a string of letters. We buy what's underneath it — 25 to 30 deeply researched companies built on five-year models, direct due diligence, and simple arithmetic.",
+    "A ticker is just a string of letters. We buy what's underneath it. 25 to 30 deeply researched companies built on five-year models, direct due diligence, and simple arithmetic.",
 };
 
 const EQUITY_PROCESS: {
@@ -91,7 +91,7 @@ export default function InvestmentManagementPage() {
               underneath it.
             </h1>
             <p className="fv-wm__lede" data-enter="2">
-              25 to 30 deeply researched companies—built on five-year financial
+              25 to 30 deeply researched companies. Built on five-year financial
               models, direct due diligence, and simple arithmetic, not
               short-term market guesses.
             </p>
@@ -166,7 +166,7 @@ export default function InvestmentManagementPage() {
               <p>
                 We study and assess the broader economic and geopolitical
                 environment to shape our outlook on key investment
-                factors—including GDP, inflation, employment, interest rates,
+                factors. Including GDP, inflation, employment, interest rates,
                 currency, monetary policy, and fiscal trends.
               </p>
               <p>
@@ -174,7 +174,7 @@ export default function InvestmentManagementPage() {
                 economists are more often wrong than right. At any point in
                 time, divergent outcomes can carry reasonably high
                 probabilities. Accordingly, we seek to identify and understand
-                all possible scenarios—positioning our portfolios to diversify
+                all possible scenarios. Positioning our portfolios to diversify
                 and benefit from opportunities, while also mitigating risks.
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function InvestmentManagementPage() {
             <div className="fv-wm__prose fv-im-impl__close">
               <p>
                 If you want research that prepares for more than one
-                outcome—we&apos;re easy to reach.
+                outcome. We&apos;re easy to reach.
               </p>
             </div>
             <Link href={FIRM.contactHref} className="fv-wm__cta">

@@ -22,7 +22,7 @@ export default function ContactForm() {
     return (
       <div className="fv-contact__form fv-contact__form--done">
         <p className="fv-contact__thanks">
-          Thank you. Your note is ready to send — if your mail client
+          Thank you. Your note is ready to send. If your mail client
           didn&apos;t open, write us at{" "}
           <a href={`mailto:${FIRM.email}`}>{FIRM.email}</a>.
         </p>

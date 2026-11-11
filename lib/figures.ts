@@ -16,7 +16,7 @@ export const FIGURES = {
     key: "AUM",
     value: "$2.14B",
     label: "Assets under management",
-    asOf: "2026-03-29",
+    asOf: "2026-09-30",
   },
   established: {
     key: "Est.",

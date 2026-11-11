@@ -45,7 +45,7 @@ export async function submitContact(
 
   const subject = encodeURIComponent(`Fairview inquiry from ${name}`);
   const body = encodeURIComponent(
-    [message, "", "—", name, email, phone || undefined]
+    [message, "", name, email, phone || undefined]
       .filter(Boolean)
       .join("\n"),
   );

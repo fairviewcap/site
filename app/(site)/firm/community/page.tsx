@@ -6,7 +6,7 @@ import { FIRM } from "@/lib/firm";
 export const metadata: Metadata = {
   title: "Community | Fairview Capital",
   description:
-    "Neighbors first. We don't just write checks in Marin. We live here.",
+    "Invested in Marin. We’ve been part of this community since 1995.",
 };
 
 export default function CommunityPage() {
@@ -18,18 +18,9 @@ export default function CommunityPage() {
         <article className="fv-community">
           <div className="fv-community__body">
             <p>
-              Brian coaches youth soccer. Peter coaches lacrosse in Pittsburgh.
-              Andy raises puppies for Guide Dogs for the Blind. Annie plays
-              goalie in the local women&apos;s soccer league on Saturdays. None
-              of this belongs on a corporate resume—it&apos;s just what we do
-              when we aren&apos;t in the office.
-            </p>
-            <p>
-              As a firm, we back a few local efforts directly: a youth soccer
-              club, a guide-dog training program, and a Marin lecture series
-              that brings thoughtful writers to town. We don&apos;t do it for
-              public relations. We do it because this is where we raise our
-              families, and we like being good neighbors.
+              We give back with both time and money, through local
+              sponsorships, volunteering, and the causes our team cares about.
+              It’s not a marketing program, just part of being here.
             </p>
           </div>
 
@@ -37,7 +28,7 @@ export default function CommunityPage() {
             items={[
               {
                 href: "/team",
-                prompt: "Want to meet the neighbors who do the work?",
+                prompt: "Want to meet the people who do the work?",
               },
               {
                 href: "/firm/why-fairview",

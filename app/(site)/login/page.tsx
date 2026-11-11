@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CustodianDoor from "@/components/CustodianDoor";
 import PageEnter from "@/components/PageEnter";
 import { PORTALS } from "@/lib/portals";
 
@@ -21,12 +22,11 @@ export default function LoginPage() {
               Pick one.
             </h1>
             <p className="fv-portals__lede">
-              Planning, investments, and custodian — each in its own
-              secure place.
+              Your plan. Your portfolio. Your accounts. Each with its own
+              secure login.
             </p>
             <p className="fv-portals__trust">
-              You never enter a password on this site. Each login opens a secure
-              session with the provider.
+              We&apos;ll never ask for your password on our site.
             </p>
           </header>
 
@@ -90,39 +90,7 @@ export default function LoginPage() {
               </span>
             </a>
 
-            <div
-              className="fv-portals__door fv-portals__door--custodians"
-              data-enter="3"
-            >
-              <div className="fv-portals__door-head">
-                <span className="fv-portals__door-index">03</span>
-                <span className="fv-portals__door-seal">Custodian login</span>
-              </div>
-              <div className="fv-portals__door-main">
-                <p className="fv-portals__door-name">
-                  {PORTALS.custodians.label}
-                </p>
-                <p className="fv-portals__door-desc">
-                  {PORTALS.custodians.description}
-                </p>
-              </div>
-              <div className="fv-portals__door-foot">
-                <ul className="fv-portals__door-actions">
-                  {PORTALS.custodians.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="fv-portals__door-go"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <CustodianDoor />
           </nav>
 
           <p className="fv-portals__note" data-enter="4">

@@ -1,7 +1,11 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { createServiceClient } from "@/lib/supabase/server";
-import type { TeamDatabase, TeamMember } from "@/lib/team/types";
+import {
+  displayRole,
+  type TeamDatabase,
+  type TeamMember,
+} from "@/lib/team/types";
 
 const DATA_PATH = path.join(process.cwd(), "data", "team.json");
 
@@ -33,7 +37,7 @@ function fromRow(row: TeamRow): TeamMember {
     name: row.name,
     lastName: row.last_name,
     slug: row.slug,
-    role: row.role,
+    role: displayRole(row.role),
     teaser: row.teaser,
     bioHtml: row.bio_html,
     bioText: row.bio_text,
@@ -102,7 +106,7 @@ async function listFromDb(): Promise<TeamMember[] | null> {
     .order("sort_order", { ascending: true });
 
   if (error) {
-    console.error("team_members:", error.message);
+    console.warn("team_members:", error.message);
     return null;
   }
   if (!data?.length) return null;

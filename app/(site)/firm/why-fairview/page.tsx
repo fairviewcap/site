@@ -11,7 +11,6 @@ import WhyTheme from "@/components/WhyTheme";
 import {
   FIRM,
   FIRM_ENTITY,
-  firmYearsLabel,
   yearsSinceFoundedWords,
 } from "@/lib/firm";
 import type { HeroId } from "@/lib/heroes";
@@ -54,20 +53,19 @@ function WhyMedia({
 }
 
 export default function WhyFairviewPage() {
-  const tenure = `${firmYearsLabel()} years of earning it.`;
   const timeline = whyTimeline();
 
   return (
     <main className="fv-why-page pt-0">
       <WhyTheme />
       <WhyOpener
-        title={tenure}
+        title="Over thirty years of earning trust."
         lede={
           <>
-            We&apos;ve never hired a salesperson, made a cold call, or sold out
-            to private equity. The families at Fairview tend to arrive the same
-            way: another client sent them—building a $2.14 billion firm owned
-            entirely by the advisors who pick up when you call.
+            We&apos;ve always believed our services should be bought, not sold.
+            Families find us in a few familiar ways: through a client, a trusted
+            professional like their attorney or CPA, or someone on our team. And
+            the firm is still owned by the people who run it.
           </>
         }
       >
@@ -90,18 +88,18 @@ export default function WhyFairviewPage() {
             </p>
             <p>
               Over {yearsSinceFoundedWords()} years, as Fairview grew, the
-              offers came—private equity firms and aggregators wanting to
+              offers came. Private equity firms and aggregators wanting to
               buy us out. We turned those offers down. And just
               last year, rather than cashing out to an outside buyer, we
               helped our long-time team members become partners and buy
               equity in the firm.
             </p>
             <p>
-              Fairview is 100% independent and advisor-owned — and we
+              Fairview is 100% independent and advisor-owned. And we
               intend to keep it that way.
             </p>
             <p className="fv-why__signoff">
-              — Andrew F. Mathieson, Founder
+              Andrew F. Mathieson, Founder
             </p>
           </div>
         </div>
@@ -116,11 +114,9 @@ export default function WhyFairviewPage() {
           aria-labelledby="why-research"
         >
           <h2 id="why-research" className="fv-why__h2">
-            Most wealth managers
+            A portfolio you can
             <br />
-            don&apos;t know what they own.
-            <br />
-            We can name what we own.
+            actually understand.
           </h2>
 
           <WhyKnowDots />
@@ -147,7 +143,7 @@ export default function WhyFairviewPage() {
             <p>
               We take the same approach to our client list. We limit the
               number of families we work with so we can actually know
-              them—not just bill them.
+              them. Not just bill them.
             </p>
           </div>
         </section>
@@ -186,9 +182,9 @@ export default function WhyFairviewPage() {
 
           <div className="fv-why__prose">
             <p>
-              If you want market predictions, exotic products, or a firm that
-              might belong to someone else in five years—there are plenty of
-              places for that. We aren&apos;t one of them.
+              And we&apos;d rather tell you that up front. Tell us what
+              you&apos;re looking for. If we&apos;re not the right fit,
+              we&apos;ll say so, and help you find someone who is.
             </p>
           </div>
           <Link href={FIRM.contactHref} className="fv-why__cta">

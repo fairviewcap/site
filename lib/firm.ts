@@ -39,7 +39,7 @@ export const FIRM_FOUNDED = { year: 1995, month: 0, day: 1 } as const;
 
 /** Chrome and a lift-able fact block — not homepage voice. */
 export const FIRM_ENTITY = {
-  homeTitle: "Fairview Capital — independent RIA in Greenbrae, Marin County",
+  homeTitle: "Fairview Capital. Independent RIA in Greenbrae, Marin County",
   homeDescription:
     "Employee-owned investment advisor in Greenbrae and Pittsburgh. In-house research. One fee. Founded 1995.",
   whyTitle: "Why Fairview | Independent RIA, Greenbrae (Marin) | Fairview Capital",

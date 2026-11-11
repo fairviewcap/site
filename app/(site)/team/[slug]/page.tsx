@@ -3,8 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import TeamBioVideo from "@/components/TeamBioVideo";
+import TeamMeta from "@/components/TeamMeta";
 import { getMemberBySlug, listMembers } from "@/lib/team/store";
-import { tenureCaption, type TeamMember } from "@/lib/team/types";
+import {
+  compareTeamByLastName,
+  tenureCaption,
+  type TeamMember,
+} from "@/lib/team/types";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -40,7 +45,9 @@ export default async function TeamMemberPage({ params }: Props) {
   const member = await getMemberBySlug(slug);
   if (!member) notFound();
 
-  const roster = await listMembers({ publishedOnly: true });
+  const roster = (await listMembers({ publishedOnly: true })).sort(
+    compareTeamByLastName,
+  );
   const { prev, next } = neighbors(roster, member);
 
   return (
@@ -75,7 +82,7 @@ export default async function TeamMemberPage({ params }: Props) {
             {member.leadership ? "Leadership" : "Team"}
           </p>
           <h1 className="fv-team-bio__name">{member.name}</h1>
-          <p className="fv-team-bio__role">{tenureCaption(member)}</p>
+          <TeamMeta member={member} className="fv-team-bio__role" />
           {member.teaser ? (
             <p className="fv-team-bio__teaser">{member.teaser}</p>
           ) : null}

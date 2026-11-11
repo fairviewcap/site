@@ -31,11 +31,27 @@ export type TeamDatabase = {
   members: TeamMember[];
 };
 
+/** Public title. Older records say Administrator for this role. */
+export function displayRole(role: string): string {
+  return role
+    .replaceAll("Client Service Administrator", "Client Service Associate")
+    .replaceAll("Client Service Associate (CSA)", "Client Service Associate");
+}
+
+const BY_NAME = new Intl.Collator("en", { sensitivity: "base" });
+
+export function compareTeamByLastName(a: TeamMember, b: TeamMember): number {
+  const last = BY_NAME.compare(a.lastName, b.lastName);
+  if (last !== 0) return last;
+  return BY_NAME.compare(a.name, b.name);
+}
+
 export function tenureCaption(member: TeamMember): string {
+  const role = displayRole(member.role);
   if (member.since) {
-    return `${member.role}, since ${member.since}`;
+    return `${role}. At Fairview since ${member.since}`;
   }
-  return member.role;
+  return role;
 }
 
 export function slugify(input: string): string {

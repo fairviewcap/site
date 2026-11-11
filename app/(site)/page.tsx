@@ -1,6 +1,5 @@
 import ContinueBar from "@/components/ContinueBar";
 import HeroPhoto from "@/components/HeroPhoto";
-import HomeAnswersSearch from "@/components/HomeAnswersSearch";
 import PageEnter from "@/components/PageEnter";
 import ReviewSpot from "@/components/review/ReviewSpot";
 import TeamRail from "@/components/TeamRail";
@@ -22,34 +21,45 @@ export default function Home() {
             <ReviewSpot id="home" align="center" />
           </div>
           <h1 className="fv-hero__title" data-enter="0">
-            Most firms answer to a board, a bank, or a buyer. Ours answers to
-            the phone&nbsp;ringing.
+            We answer only to&nbsp;you.
           </h1>
           <p className="fv-hero__sub" data-enter="1">
-            When a firm serves outside owners, they have two mouths to
-            feed—shareholders, then you. We built Fairview so we only have one
-            boss.&nbsp;You.
+            Most firms answer to a board, a bank, or an investor, so they have
+            two mouths to feed: shareholders, then you. We built Fairview so we
+            only have one boss.&nbsp;You.
           </p>
         </div>
 
-        <dl className="fv-hero__proof" data-enter="2">
-          <div className="fv-hero__proof-item">
-            <dt className="fv-hero__proof-value fv-nums">
-              {FIGURES.established.value}
-            </dt>
-            <dd className="fv-hero__proof-label">Founded</dd>
-          </div>
-          <div className="fv-hero__proof-item">
-            <dt className="fv-hero__proof-value fv-nums">100%</dt>
-            <dd className="fv-hero__proof-label">Employee-owned</dd>
-          </div>
-          <div className="fv-hero__proof-item">
-            <dt className="fv-hero__proof-value fv-nums">
-              {FIGURES.aum.value}
-            </dt>
-            <dd className="fv-hero__proof-label">Client assets</dd>
-          </div>
-        </dl>
+        <div className="fv-hero__metrics" data-enter="2">
+          <dl className="fv-hero__proof">
+            <div className="fv-hero__proof-item">
+              <dt className="fv-hero__proof-value fv-nums">
+                {FIGURES.established.value}
+              </dt>
+              <dd className="fv-hero__proof-label">Founded</dd>
+            </div>
+            <div className="fv-hero__proof-item">
+              <dt className="fv-hero__proof-value fv-nums">100%</dt>
+              <dd className="fv-hero__proof-label">Employee-owned</dd>
+            </div>
+            <div className="fv-hero__proof-item">
+              <dt
+                className="fv-hero__proof-value fv-nums"
+                aria-describedby="hero-aum-note"
+              >
+                {FIGURES.aum.value}
+                <sup className="fv-hero__proof-star" aria-hidden="true">
+                  *
+                </sup>
+              </dt>
+              <dd className="fv-hero__proof-label">Client assets</dd>
+            </div>
+          </dl>
+          <p id="hero-aum-note" className="fv-hero__proof-note">
+            <span aria-hidden="true">* </span>
+            Assets under management as of Sept 30, 2026.
+          </p>
+        </div>
 
         <div className="fv-hero__media" data-enter="3">
           <ReviewSpot id="photography" />
@@ -88,8 +98,6 @@ export default function Home() {
               },
             ]}
           />
-
-          <HomeAnswersSearch />
         </div>
 
         <div className="fv-home-rail">

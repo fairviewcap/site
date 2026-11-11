@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FIRM_ENTITY } from "@/lib/firm";
 import { FIGURES, formatAsOf } from "@/lib/figures";
-import { WHY_FIGURES, WHY_FIGURES_QUIET } from "@/lib/why-fairview";
+import { WHY_FIGURES } from "@/lib/why-fairview";
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
@@ -171,14 +171,6 @@ export default function WhyFigures() {
 function QuietRow() {
   return (
     <div className="fv-why-figs__foot">
-      <dl className="fv-why-figs__quiet">
-        {WHY_FIGURES_QUIET.map((fig) => (
-          <div key={fig.label} className="fv-why-figs__quiet-item">
-            <dt className="fv-why-figs__quiet-value fv-nums">{fig.value}</dt>
-            <dd className="fv-why-figs__quiet-label">{fig.label}</dd>
-          </div>
-        ))}
-      </dl>
       <p className="fv-why-figs__entity">{FIRM_ENTITY.blurb}</p>
     </div>
   );

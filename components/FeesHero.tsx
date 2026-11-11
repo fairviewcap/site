@@ -118,7 +118,7 @@ export default function FeesHero() {
                 : "fv-fees__note fv-fees__note--follow fv-fees__fade"
             }
           >
-            Billed quarterly. As assets increase, the percentage declines — and
+            Billed quarterly. As assets increase, the percentage declines. And
             we combine assets across families, which can further reduce fees. No
             commissions. No separate planning fees. We are a Registered
             Investment Advisor and act as a fiduciary.

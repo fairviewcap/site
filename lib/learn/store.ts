@@ -58,6 +58,8 @@ function channelFromRow(row: ChannelRow): LearnChannel {
     summary: row.summary,
     tone: row.tone,
     poster: fallback?.poster,
+    cover: fallback?.cover,
+    figure: fallback?.figure,
   };
 }
 
@@ -88,11 +90,13 @@ export async function listChannels(): Promise<LearnChannel[]> {
     .order("sort_order", { ascending: true });
 
   if (error) {
-    console.error("learn_channels:", error.message);
+    console.warn("learn_channels:", error.message);
     return FALLBACK_CHANNELS;
   }
   if (!data?.length) return FALLBACK_CHANNELS;
-  return (data as ChannelRow[]).map(channelFromRow);
+  return (data as ChannelRow[])
+    .filter((row) => row.slug !== "planning")
+    .map(channelFromRow);
 }
 
 export async function getChannel(
@@ -108,6 +112,7 @@ export async function listArticles(opts?: {
 }): Promise<LearnArticle[]> {
   const sb = createServiceClient();
   const publishedOnly = opts?.publishedOnly !== false;
+  if (opts?.channel === "planning") return [];
 
   if (!sb) {
     let articles = [...FALLBACK_ARTICLES];
@@ -133,7 +138,7 @@ export async function listArticles(opts?: {
   }
 
   if (error) {
-    console.error("learn_articles:", error.message);
+    console.warn("learn_articles:", error.message);
     return FALLBACK_ARTICLES.filter((a) =>
       opts?.channel ? a.channel === opts.channel : true,
     ).sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -144,7 +149,9 @@ export async function listArticles(opts?: {
     ).sort((a, b) => (a.date < b.date ? 1 : -1));
   }
 
-  return (data as unknown as ArticleRow[]).map(articleFromRow);
+  return (data as unknown as ArticleRow[])
+    .filter((row) => row.channel !== "planning")
+    .map(articleFromRow);
 }
 
 export async function getArticlesByChannel(
@@ -157,6 +164,7 @@ export async function getArticle(
   channel: string,
   slug: string,
 ): Promise<LearnArticle | undefined> {
+  if (channel === "planning") return undefined;
   const sb = createServiceClient();
   if (!sb) {
     return FALLBACK_ARTICLES.find(
@@ -183,7 +191,7 @@ export async function getArticle(
   }
 
   if (error) {
-    console.error("learn_articles get:", error.message);
+    console.warn("learn_articles get:", error.message);
     return FALLBACK_ARTICLES.find(
       (a) => a.channel === channel && a.slug === slug,
     );

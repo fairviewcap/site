@@ -30,7 +30,7 @@ export default function FirmJsonLd() {
       {
         "@type": ["LocalBusiness", "FinancialService"],
         "@id": `${FIRM.siteUrl}/#greenbrae`,
-        name: `${FIRM.shortName} — ${bay.label}`,
+        name: `${FIRM.shortName}, ${bay.label}`,
         parentOrganization: { "@id": orgId },
         url: `${FIRM.siteUrl}/contact`,
         telephone: bay.phoneHref.replace("tel:", ""),
@@ -47,7 +47,7 @@ export default function FirmJsonLd() {
       {
         "@type": ["LocalBusiness", "FinancialService"],
         "@id": `${FIRM.siteUrl}/#pittsburgh`,
-        name: `${FIRM.shortName} — ${pit.label}`,
+        name: `${FIRM.shortName}, ${pit.label}`,
         parentOrganization: { "@id": orgId },
         url: `${FIRM.siteUrl}/contact`,
         telephone: pit.phoneHref.replace("tel:", ""),

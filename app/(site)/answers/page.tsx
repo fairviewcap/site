@@ -15,15 +15,7 @@ export const metadata: Metadata = {
     "Quick answers to all kinds of questions. Direct responses regarding fees, custody, strategy, and operations.",
 };
 
-type AnswersPageProps = {
-  searchParams: Promise<{ q?: string | string[] }>;
-};
-
-export default async function AnswersPage({ searchParams }: AnswersPageProps) {
-  const params = await searchParams;
-  const raw = params.q;
-  const initialQuery = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
-
+export default async function AnswersPage() {
   const categories = await getAnswerCategories();
   const items = await allAnswerItems();
 
@@ -65,12 +57,9 @@ export default async function AnswersPage({ searchParams }: AnswersPageProps) {
             </p>
           </header>
 
-          <AnswersExplorer
-            categories={categories}
-            initialQuery={initialQuery}
-          />
+          <AnswersExplorer categories={categories} />
 
-          <div data-enter="4">
+          <div data-enter="3">
             <ContinueBar
               items={[
                 {

@@ -29,27 +29,11 @@ export const WHY_FIGURES: WhyFigure[] = [
   {
     value: "$2.14B",
     label: "Client assets under management",
-    note: "As of Q1 2026",
+    note: "As of Sept 30, 2026",
   },
   {
     value: "100%",
-    label: "Owned by the advisors working here",
-  },
-];
-
-/** The rest of the record — quiet row after the pin. */
-export const WHY_FIGURES_QUIET: WhyFigure[] = [
-  {
-    value: "$2M",
-    label: "Typical minimum account size",
-  },
-  {
-    value: "17",
-    label: "People running the entire firm",
-  },
-  {
-    value: "0",
-    label: "Salespeople on staff",
+    label: "Owned by the people who run the firm",
   },
 ];
 
@@ -81,7 +65,7 @@ const WHY_TIMELINE_PAST: WhyTimelineEntry[] = [
   {
     when: "2020",
     era: "COVID",
-    what: "Fastest bear market on record — then the fastest recovery",
+    what: "Fastest bear market on record. Then the fastest recovery",
     photo: crisisPhoto("2020"),
   },
   {

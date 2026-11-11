@@ -73,7 +73,7 @@ export const MENUS: Record<
       {
         href: "/firm/community",
         label: "Community",
-        line: "Neighbors first.",
+        line: "Invested in Marin.",
         hero: "community",
       },
     ],

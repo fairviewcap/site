@@ -209,8 +209,8 @@ function EssayArticle({
   return (
     <article
       className={
-        channel.slug === "insights" || channel.slug === "planning"
-          ? `fv-essay fv-essay--${channel.slug}`
+        channel.slug === "insights"
+          ? "fv-essay fv-essay--insights"
           : "fv-essay"
       }
     >

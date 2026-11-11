@@ -1,4 +1,4 @@
-export type LearnChannelSlug = "letters" | "insights" | "planning";
+export type LearnChannelSlug = "letters" | "insights";
 
 export type LearnChannel = {
   slug: LearnChannelSlug;
@@ -14,8 +14,12 @@ export type LearnChannel = {
   summary: string;
   /** Visual tone for the hub plate */
   tone: "ink" | "green" | "paper";
-  /** Hub poster — 4:7 AVIF in /photography/learn */
+  /** Hub poster plate. Letters is the Q4 art; insights is a full-bleed engraving. */
   poster?: string;
+  /** Poster image fills the plate. Otherwise it sits as the mark under the title. */
+  cover?: boolean;
+  /** Figure laid on the poster, between the type and the bottom edge. */
+  figure?: string;
 };
 
 export type LearnArticle = {

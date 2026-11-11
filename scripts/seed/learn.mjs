@@ -25,7 +25,7 @@ const CHANNELS = [
     title: "Quarterly Letters",
     dek: "Plainspoken notes on money, markets, and life.",
     summary:
-      "Fairview Capital quarterly letters to clients — market commentary, portfolio context, and how we’re thinking about the months ahead.",
+      "Fairview Capital quarterly letters to clients. Market commentary, portfolio context, and how we’re thinking about the months ahead.",
     tone: "ink",
     sort_order: 0,
   },
@@ -35,19 +35,9 @@ const CHANNELS = [
     title: "Investment Insights",
     dek: "Transparent thinking on companies, risk, and research.",
     summary:
-      "Investment insights from Fairview Capital’s research team — how we evaluate businesses, manage risk, and show our work.",
+      "Investment insights from Fairview Capital’s research team. How we evaluate businesses, manage risk, and show our work.",
     tone: "green",
     sort_order: 1,
-  },
-  {
-    slug: "planning",
-    label: "Planning",
-    title: "Planning",
-    dek: "Practical guidance for families, cash flow, tax, and legacy.",
-    summary:
-      "Wealth planning content from Fairview Capital — decisions families face around cash flow, taxes, real estate, and preparing the next generation.",
-    tone: "paper",
-    sort_order: 2,
   },
 ];
 

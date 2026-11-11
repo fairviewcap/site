@@ -8,6 +8,10 @@ const BALL_R = 8;
 const RED = "#ef4444";
 const LOGO_GREEN = "#49cc8a";
 const SPEED = 1.35;
+/** Rise over run once Fairview guidance is on. */
+const SLOPE = 0.09;
+/** Share of the red line's swing that remains on the green line. */
+const GREEN_VOL = 0.36;
 
 function mixHex(a: string, b: string, t: number) {
   const n = (hex: string) => [
@@ -23,8 +27,8 @@ function mixHex(a: string, b: string, t: number) {
 }
 
 /** Terrain in world space — same lock as the grid (world = screenX + time). */
-function terrainY(worldX: number, centerY: number, amp: number) {
-  if (amp < 0.001) return centerY;
+function terrainY(worldX: number, centerY: number, vol: number) {
+  if (vol < 0.001) return centerY;
   const w = worldX;
   return (
     centerY +
@@ -34,14 +38,31 @@ function terrainY(worldX: number, centerY: number, amp: number) {
       Math.sin(w * 0.057 + 2.1) * 7 +
       Math.sin(w * 0.091 + 4.2) * 4 +
       Math.sin(w * 0.007 + 0.9) * 10) *
-      amp
+      vol
   );
 }
 
-function pathAt(screenX: number, time: number, centerY: number, amp: number) {
-  const y = terrainY(screenX + time, centerY, amp);
-  const yL = terrainY(screenX + time - 1, centerY, amp);
-  const yR = terrainY(screenX + time + 1, centerY, amp);
+/** Upward tilt around the middle of the frame. Screen Y grows downward. */
+function tiltY(screenX: number, width: number, climb: number) {
+  return -SLOPE * climb * (screenX - width / 2);
+}
+
+function pathAt(
+  screenX: number,
+  time: number,
+  centerY: number,
+  vol: number,
+  climb: number,
+  width: number,
+) {
+  const y =
+    terrainY(screenX + time, centerY, vol) + tiltY(screenX, width, climb);
+  const yL =
+    terrainY(screenX + time - 1, centerY, vol) +
+    tiltY(screenX - 1, width, climb);
+  const yR =
+    terrainY(screenX + time + 1, centerY, vol) +
+    tiltY(screenX + 1, width, climb);
   const slope = (yR - yL) / 2;
   const len = Math.hypot(1, slope);
   return {
@@ -131,6 +152,7 @@ export default function WmHorizonSwitch() {
     };
 
     let width = size();
+    let gridDrop = 0;
 
     const draw = (now: number) => {
       raf = 0;
@@ -157,13 +179,16 @@ export default function WmHorizonSwitch() {
         }
       }
       const amp = ampRef.current;
+      const vol = GREEN_VOL + (1 - GREEN_VOL) * amp;
+      const climb = 1 - amp;
       const tone = mixHex(LOGO_GREEN, RED, amp);
 
       if (animating) {
         time += SPEED * dt;
+        gridDrop += SPEED * dt * SLOPE * climb;
       }
 
-      const path = pathAt(width / 2, time, HEIGHT / 2, amp);
+      const path = pathAt(width / 2, time, HEIGHT / 2, vol, climb, width);
       const targetX = width / 2 + path.nx * BALL_R;
       const targetY = path.y + path.ny * BALL_R;
       if (!seeded) {
@@ -209,7 +234,8 @@ export default function WmHorizonSwitch() {
         ctx.lineTo(sx, HEIGHT);
         ctx.stroke();
       }
-      for (let y = 0; y < HEIGHT; y += grid) {
+      const yShift = ((gridDrop % grid) + grid) % grid;
+      for (let y = yShift - grid; y <= HEIGHT + grid; y += grid) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
@@ -224,7 +250,7 @@ export default function WmHorizonSwitch() {
       ctx.setLineDash([]);
       ctx.strokeStyle = tone;
       for (let x = 0; x <= width; x += 2) {
-        const y = terrainY(x + time, centerY, amp);
+        const y = terrainY(x + time, centerY, vol) + tiltY(x, width, climb);
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }

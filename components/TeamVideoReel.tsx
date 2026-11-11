@@ -11,6 +11,7 @@ import {
 } from "react";
 import type { TeamMember } from "@/lib/team/types";
 import PlayPauseIcon from "@/components/PlayPauseIcon";
+import TeamMeta from "@/components/TeamMeta";
 
 type Clip = Pick<
   TeamMember,
@@ -110,9 +111,6 @@ export default function TeamVideoReel({ clips, posterImage }: Props) {
 
   const clip = clips[index]!;
   const poster = posterImage || clips[0]?.image || "";
-  const roleLine = clip.since
-    ? `${clip.role}, since ${clip.since}`
-    : clip.role;
 
   return (
     <>
@@ -231,7 +229,7 @@ export default function TeamVideoReel({ clips, posterImage }: Props) {
             <Link href={`/team/${clip.slug}`} className="fv-team-reel__name">
               {clip.name}
             </Link>
-            <p className="fv-team-reel__role fv-nums">{roleLine}</p>
+            <TeamMeta member={clip} className="fv-team-reel__role fv-nums" />
           </div>
 
           {clips.length > 1 ? (
